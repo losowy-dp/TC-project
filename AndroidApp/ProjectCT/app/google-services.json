@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "155600910212",
+    "project_id": "car-transp",
+    "storage_bucket": "car-transp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155600910212:android:b084573aa98e1fae0a0fd1",
+        "android_client_info": {
+          "package_name": "com.example.projectct"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155600910212-lhma6msd0d3cifmohkerdg7ahqs03m7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdEofZ0gIY6I8Llnku6mUFoZl_BXL4ZQ4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155600910212-lhma6msd0d3cifmohkerdg7ahqs03m7e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

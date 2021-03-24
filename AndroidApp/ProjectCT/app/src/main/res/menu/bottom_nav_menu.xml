@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title= "@string/list_order_nav_bottom_menu"
+        android:id="@+id/list_order"
+        android:icon="@drawable/select_list_order"/>
+    <item
+        android:title="@string/add_order_nav_bottom_menu"
+        android:id="@+id/add_order"
+        android:icon="@drawable/add_order"
+        />
+    <item
+        android:title="@string/profile_order_nav_bottom_menu"
+        android:id="@+id/profile"
+        android:icon="@drawable/profile_select"/>
+
+</menu>
