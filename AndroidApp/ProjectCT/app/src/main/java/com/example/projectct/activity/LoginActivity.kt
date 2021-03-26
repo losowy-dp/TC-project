@@ -7,17 +7,14 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.Common
-import com.example.projectct.InterfaceAPI.NetworkAPI
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
 import com.example.projectct.helpClass.Token
 import com.example.projectct.helpClass.UserAuth
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.IOException
 import android.util.Pair as UtilPair
 
 class LoginActivity : AppCompatActivity() {
@@ -75,13 +72,11 @@ class LoginActivity : AppCompatActivity() {
             //TODO JSON Request to Django Serwer
 
             val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            //Serwer don't work
-          /*  mService = Common.retrofitService
+            mService = Common.retrofitService
             mService.login(UserAuth(login.text.toString(),pass.text.toString())).enqueue(object : Callback<Token>{
                 override fun onResponse(call: Call<Token?>, response: Response<Token>) {
                   if(response.code()==401){
-                      Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
+                      Toast.makeText(this@LoginActivity,"Error password", Toast.LENGTH_SHORT).show()
                       login.text.clear()
                       pass.text.clear()
                   }
@@ -89,30 +84,13 @@ class LoginActivity : AppCompatActivity() {
                       startActivity(intent)
                   }
                 }
-
                 override fun onFailure(call: Call<Token>, t: Throwable) {
                     Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
                     login.text.clear()
                     pass.text.clear()
                     t.printStackTrace()
                 }
-            })*/
-                    //Bad
-/*                NetworkAPI.getInstance().jsonApi.getIDUser(User(login.text.toString(),pass.text.toString())).enqueue(object: Callback<Int>{
-                    override fun onResponse(call: Call<Int>, response: Response<Int>) {
-
-*//*                        var userID = response.body()
-                        intent.putExtra("id",userID)
-                        startActivity(intent)*//*
-                    }
-
-                    override fun onFailure(call: Call<Int>, t: Throwable) {
-                        Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
-                        login.text.clear()
-                        pass.text.clear()
-                        t.printStackTrace()
-                    }
-                })*/
+            })
         }
         else{
             Toast.makeText(this, R.string.errorLogin, Toast.LENGTH_SHORT).show()

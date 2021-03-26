@@ -6,16 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import com.example.projectct.InterfaceAPI.NetworkAPI
 import com.example.projectct.R
-import com.example.projectct.helpClass.User
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.FirebaseDatabase
-import retrofit2.Call
-import retrofit2.Response
-import javax.security.auth.callback.Callback
 import android.util.Pair as UtilPair
-import kotlin.Int as Int
 
 class RegisterActivity : AppCompatActivity() {
     var rootNode = FirebaseDatabase.getInstance()
@@ -44,27 +38,8 @@ class RegisterActivity : AppCompatActivity() {
         if(username.text.length>0 && phone.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0 && password.text.toString() == pass_rep.text.toString() && CheckUser(email.text.toString())){
             //TODO JSON Request to Django Serwer
                 //TODO add a edit text to Login and do responce Layout
-                    //Work
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
-           /* NetworkAPI.getInstance().jsonApi.getIDUser(User(username.text.toString(),password.text.toString(),username.text.toString(),phone.text.toString(),email.text.toString()))
-                    .enqueue(object: retrofit2.Callback<Int> {
-                override fun onResponse(call: Call<Int>, response: Response<Int>) {
-                    var userID = response.body()
-                    intent.putExtra("id",userID)
-
-                }
-
-                override fun onFailure(call: Call<Int>, t: Throwable) {
-                    Toast.makeText(this@RegisterActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
-                    username.text.clear()
-                    phone.text.clear()
-                    email.text.clear()
-                    password.text.clear()
-                    pass_rep.text.clear()
-                    t.printStackTrace()
-                }
-            })*/
         }
         else{
            username.text.clear()
