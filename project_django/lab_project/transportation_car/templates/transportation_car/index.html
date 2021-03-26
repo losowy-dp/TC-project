@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+    Transporty
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block content %}
+    <div class="col-md-9">
+        {% for item in transportations %}
+
+        <div class="card mb-3">
+          <div class="card-header">
+              {{ item.start_location.city}}-{{item.delivery_location.city}}
+          </div>
+          <div class="card-body">
+                <h5 class="card-title">{{ item.car_owner }}</h5>
+                <p class="card-text">{{ item.price }}</p>
+                <a href="#" class="btn btn-primary">Zobacz</a>
+          </div>
+          <div class="card-footer text-muted">
+            {{ item.data_created|date:"Y-m-d H:i:s"}}
+          </div>
+        </div>
+        {% empty %}
+          Opps..
+        {% endfor %}
+        </div>
+{% endblock %}

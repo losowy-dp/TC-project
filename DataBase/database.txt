@@ -1,6 +1,0 @@
-//TODO 
-Database SQLite Django
-Host????
-
-or Wirebase 
-Model
