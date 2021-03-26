@@ -70,7 +70,7 @@ class LoginActivity : AppCompatActivity() {
         //TODO Check EditText Login and Password
         if(login.text.length>0 && pass.text.length>0){
             //TODO JSON Request to Django Serwer
-
+            //TODO create file token
             val intent = Intent(this, HomeActivity::class.java)
             mService = Common.retrofitService
             mService.login(UserAuth(login.text.toString(),pass.text.toString())).enqueue(object : Callback<Token>{

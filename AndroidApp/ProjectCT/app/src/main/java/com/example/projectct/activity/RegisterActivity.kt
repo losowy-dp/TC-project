@@ -6,9 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.R
+import com.example.projectct.helpClass.Token
+import com.example.projectct.helpClass.User
+import com.example.projectct.helpClass.UserAuth
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.FirebaseDatabase
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 import android.util.Pair as UtilPair
 
 class RegisterActivity : AppCompatActivity() {
@@ -35,11 +42,51 @@ class RegisterActivity : AppCompatActivity() {
         val password = findViewById<EditText>(R.id.passwordReg_editText)
         val pass_rep = findViewById<EditText>(R.id.password_repeat_editText)
         //TODO Add validate phone number must be 1
-        if(username.text.length>0 && phone.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0 && password.text.toString() == pass_rep.text.toString() && CheckUser(email.text.toString())){
+        if(username.text.length>0 && phone.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0 && password.text.toString() == pass_rep.text.toString()){
             //TODO JSON Request to Django Serwer
                 //TODO add a edit text to Login and do responce Layout
+
             val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            var mService = Common.retrofitService
+            mService.register(User(password.text.toString(),email.text.toString())).enqueue(object : retrofit2.Callback<Token> {
+                override fun onResponse(call: Call<Token>, response: Response<Token>) {
+                    if(response.code()==400){
+                        username.text.clear()
+                        phone.text.clear()
+                        email.text.clear()
+                        password.text.clear()
+                        pass_rep.text.clear()
+                        Toast.makeText(this@RegisterActivity,"Error201", Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                            mService.login(UserAuth(email.text.toString(),password.text.toString())).enqueue(object: retrofit2.Callback<Token>{
+                                override fun onResponse(
+                                    call: Call<Token>,
+                                    response: Response<Token>
+                                ) {
+                                   if(response.code()==401){
+                                       Toast.makeText(this@RegisterActivity,"Error206", Toast.LENGTH_SHORT).show()
+                                   }
+                                    else{
+                                       startActivity(intent)
+                                   }
+                                }
+
+                                override fun onFailure(call: Call<Token>, t: Throwable) {
+                                    Toast.makeText(this@RegisterActivity,"Error202", Toast.LENGTH_SHORT).show()
+                                }
+                            })
+                        }
+                    }
+                override fun onFailure(call: Call<Token>, t: Throwable) {
+                    username.text.clear()
+                    phone.text.clear()
+                    email.text.clear()
+                    password.text.clear()
+                    pass_rep.text.clear()
+                    Toast.makeText(this@RegisterActivity,"Error202", Toast.LENGTH_SHORT).show()
+                }
+            })
         }
         else{
            username.text.clear()
@@ -47,15 +94,10 @@ class RegisterActivity : AppCompatActivity() {
             email.text.clear()
             password.text.clear()
             pass_rep.text.clear()
-            Toast.makeText(this,R.string.errorLogin, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,"Error203", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun CheckUser(toString: String): Boolean {
-        var reference = rootNode.getReference("users")
-        var checkUser = reference
-        return false
-    }
 
     private fun loginActivity()
     {
