@@ -14,5 +14,5 @@ interface RetrofitService {
 
     @POST("/auth/users/")
     fun register(@Body data: User): Call<Token>
-    
+
 }

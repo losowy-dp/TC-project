@@ -15,11 +15,17 @@ import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Response
+import java.util.regex.Pattern
 import javax.security.auth.callback.Callback
 import android.util.Pair as UtilPair
 
 class RegisterActivity : AppCompatActivity() {
-    var rootNode = FirebaseDatabase.getInstance()
+    val username = findViewById<EditText>(R.id.username_number_editText)
+    val fullname = findViewById<EditText>(R.id.reg_name_editText)
+    val email = findViewById<EditText>(R.id.email_editText)
+    val password = findViewById<EditText>(R.id.passwordReg_editText)
+    val pass_rep = findViewById<EditText>(R.id.password_repeat_editText)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -36,36 +42,36 @@ class RegisterActivity : AppCompatActivity() {
     private val backActivityListener = View.OnClickListener { loginActivity() }
 
     private fun homeActivity(){
-        val username = findViewById<EditText>(R.id.reg_name_editText)
-        val phone = findViewById<EditText>(R.id.phone_number_editText)
-        val email  = findViewById<EditText>(R.id.email_editText)
-        val password = findViewById<EditText>(R.id.passwordReg_editText)
-        val pass_rep = findViewById<EditText>(R.id.password_repeat_editText)
         //TODO Add validate phone number must be 1
-        if(username.text.length>0 && phone.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0 && password.text.toString() == pass_rep.text.toString()){
+        if(CheckData()){
             //TODO JSON Request to Django Serwer
                 //TODO add a edit text to Login and do responce Layout
 
             val intent = Intent(this, HomeActivity::class.java)
             var mService = Common.retrofitService
-            mService.register(User(password.text.toString(),email.text.toString())).enqueue(object : retrofit2.Callback<Token> {
+            mService.register(User(password.text.toString(),username.text.toString(),email.text.toString())).enqueue(object : retrofit2.Callback<Token> {
                 override fun onResponse(call: Call<Token>, response: Response<Token>) {
                     if(response.code()==400){
                         username.text.clear()
-                        phone.text.clear()
+                        fullname.text.clear()
                         email.text.clear()
                         password.text.clear()
                         pass_rep.text.clear()
-                        Toast.makeText(this@RegisterActivity,"Error201", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegisterActivity,R.string.errorRegEmailIsUse, Toast.LENGTH_SHORT).show()
                     }
                     else{
-                            mService.login(UserAuth(email.text.toString(),password.text.toString())).enqueue(object: retrofit2.Callback<Token>{
+                            mService.login(UserAuth(username.text.toString(),password.text.toString())).enqueue(object: retrofit2.Callback<Token>{
                                 override fun onResponse(
                                     call: Call<Token>,
                                     response: Response<Token>
                                 ) {
                                    if(response.code()==401){
-                                       Toast.makeText(this@RegisterActivity,"Error206", Toast.LENGTH_SHORT).show()
+                                       username.text.clear()
+                                       fullname.text.clear()
+                                       email.text.clear()
+                                       password.text.clear()
+                                       pass_rep.text.clear()
+                                       Toast.makeText(this@RegisterActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                                    }
                                     else{
                                        startActivity(intent)
@@ -73,31 +79,45 @@ class RegisterActivity : AppCompatActivity() {
                                 }
 
                                 override fun onFailure(call: Call<Token>, t: Throwable) {
-                                    Toast.makeText(this@RegisterActivity,"Error202", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@RegisterActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                                 }
                             })
                         }
                     }
                 override fun onFailure(call: Call<Token>, t: Throwable) {
+                    fullname.text.clear()
                     username.text.clear()
-                    phone.text.clear()
                     email.text.clear()
                     password.text.clear()
                     pass_rep.text.clear()
-                    Toast.makeText(this@RegisterActivity,"Error202", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                 }
             })
         }
         else{
            username.text.clear()
-            phone.text.clear()
             email.text.clear()
             password.text.clear()
             pass_rep.text.clear()
-            Toast.makeText(this,"Error203", Toast.LENGTH_SHORT).show()
+            fullname.text.clear()
         }
     }
-
+    private fun CheckData(): Boolean{
+        if(username.text.length>0 && fullname.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0){
+            Toast.makeText(this,R.string.errorRegClear,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        var regex = "^[a-zA-Z0-9]+$"
+        if(Pattern.matches("^[a-zA-Z0-9]+\$",password.text.toString())==false || password.text.length<8){
+            Toast.makeText(this,R.string.errorRegNotGoodPass,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(password.text.toString() == pass_rep.text.toString()){
+            Toast.makeText(this,R.string.errorRegPassNotRepeat,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true;
+    }
 
     private fun loginActivity()
     {

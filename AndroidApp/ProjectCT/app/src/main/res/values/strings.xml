@@ -40,4 +40,10 @@
     <string name="your_email">Your email</string>
     <string name="send_email">Send me password</string>
     <string name="ok">Ok</string>
+    <string name="username">Username</string>
+    <string name="errorRegClear">Not all fields are filed</string>
+    <string name="errorRegNotGoodPass">Not a strong password</string>
+    <string name="errorRegPassNotRepeat">Passwords do not match</string>
+    <string name="errorRegEmailIsUse">This email is already taken</string>
+    <string name="errorInternetConnect">Internet not available</string>
 </resources>
