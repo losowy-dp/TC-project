@@ -101,7 +101,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun CheckData(): Boolean{
-        if(username.text.length>0 && fullname.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0){
+        if(username.text.length==0 || fullname.text.length==0 || email.text.length==0 || password.text.length ==0 || pass_rep.text.length ==0){
             Toast.makeText(this,R.string.errorRegClear,Toast.LENGTH_SHORT).show()
             return false
         }
@@ -110,7 +110,7 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this,R.string.errorRegNotGoodPass,Toast.LENGTH_SHORT).show()
             return false
         }
-        if(password.text.toString() == pass_rep.text.toString()){
+        if(password.text.toString() != pass_rep.text.toString()){
             Toast.makeText(this,R.string.errorRegPassNotRepeat,Toast.LENGTH_SHORT).show()
             return false
         }
