@@ -20,11 +20,11 @@ import javax.security.auth.callback.Callback
 import android.util.Pair as UtilPair
 
 class RegisterActivity : AppCompatActivity() {
-    val username = findViewById<EditText>(R.id.username_number_editText)
-    val fullname = findViewById<EditText>(R.id.reg_name_editText)
-    val email = findViewById<EditText>(R.id.email_editText)
-    val password = findViewById<EditText>(R.id.passwordReg_editText)
-    val pass_rep = findViewById<EditText>(R.id.password_repeat_editText)
+   lateinit var username : EditText
+   lateinit var  fullname : EditText
+   lateinit var  email : EditText
+   lateinit var password : EditText
+   lateinit var pass_rep: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,11 @@ class RegisterActivity : AppCompatActivity() {
         //OnClick
         buttonRegister.setOnClickListener(registerActivityListener)
         buttonBack.setOnClickListener(backActivityListener)
+        username = findViewById<EditText>(R.id.username_number_editText)
+        fullname = findViewById<EditText>(R.id.reg_name_editText)
+        email = findViewById<EditText>(R.id.email_editText)
+        password = findViewById<EditText>(R.id.passwordReg_editText)
+        pass_rep = findViewById<EditText>(R.id.password_repeat_editText)
     }
 
     private val registerActivityListener = View.OnClickListener { homeActivity() }
@@ -52,11 +57,7 @@ class RegisterActivity : AppCompatActivity() {
             mService.register(User(password.text.toString(),username.text.toString(),email.text.toString())).enqueue(object : retrofit2.Callback<Token> {
                 override fun onResponse(call: Call<Token>, response: Response<Token>) {
                     if(response.code()==400){
-                        username.text.clear()
-                        fullname.text.clear()
-                        email.text.clear()
-                        password.text.clear()
-                        pass_rep.text.clear()
+                        ClearData()
                         Toast.makeText(this@RegisterActivity,R.string.errorRegEmailIsUse, Toast.LENGTH_SHORT).show()
                     }
                     else{
@@ -66,11 +67,7 @@ class RegisterActivity : AppCompatActivity() {
                                     response: Response<Token>
                                 ) {
                                    if(response.code()==401){
-                                       username.text.clear()
-                                       fullname.text.clear()
-                                       email.text.clear()
-                                       password.text.clear()
-                                       pass_rep.text.clear()
+                                       ClearData()
                                        Toast.makeText(this@RegisterActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                                    }
                                     else{
@@ -85,23 +82,24 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
                 override fun onFailure(call: Call<Token>, t: Throwable) {
-                    fullname.text.clear()
-                    username.text.clear()
-                    email.text.clear()
-                    password.text.clear()
-                    pass_rep.text.clear()
+                    ClearData()
                     Toast.makeText(this@RegisterActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                 }
             })
         }
         else{
-           username.text.clear()
-            email.text.clear()
-            password.text.clear()
-            pass_rep.text.clear()
-            fullname.text.clear()
+            ClearData()
         }
     }
+
+    private fun ClearData(){
+        username.text.clear()
+        email.text.clear()
+        password.text.clear()
+        pass_rep.text.clear()
+        fullname.text.clear()
+    }
+
     private fun CheckData(): Boolean{
         if(username.text.length>0 && fullname.text.length>0 && email.text.length>0 && password.text.length >0 && pass_rep.text.length >0){
             Toast.makeText(this,R.string.errorRegClear,Toast.LENGTH_SHORT).show()
