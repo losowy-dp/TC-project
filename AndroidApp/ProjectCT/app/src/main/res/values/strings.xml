@@ -46,4 +46,15 @@
     <string name="errorRegPassNotRepeat">Passwords do not match</string>
     <string name="errorRegEmailIsUse">This email or username is already taken</string>
     <string name="errorInternetConnect">Internet not available</string>
+    <string-array name="spinner_valut">
+        <item>EUR</item>
+        <item>BGN</item>
+        <item>DKK</item>
+        <item>PLN</item>
+        <item>RON</item>
+        <item>HRK</item>
+        <item>HUF</item>
+        <item>CZK</item>
+        <item>SEK</item>
+    </string-array>
 </resources>

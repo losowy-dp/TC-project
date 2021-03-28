@@ -47,11 +47,7 @@ class RegisterActivity : AppCompatActivity() {
     private val backActivityListener = View.OnClickListener { loginActivity() }
 
     private fun homeActivity(){
-        //TODO Add validate phone number must be 1
         if(CheckData()){
-            //TODO JSON Request to Django Serwer
-                //TODO add a edit text to Login and do responce Layout
-
             val intent = Intent(this, HomeActivity::class.java)
             var mService = Common.retrofitService
             mService.register(User(password.text.toString(),username.text.toString(),email.text.toString())).enqueue(object : retrofit2.Callback<Token> {

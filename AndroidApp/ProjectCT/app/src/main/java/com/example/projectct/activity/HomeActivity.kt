@@ -3,7 +3,6 @@ package com.example.projectct.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-//TODO Check work with 1 interface
 import android.view.View
 import android.widget.Button
 import androidx.fragment.app.Fragment
