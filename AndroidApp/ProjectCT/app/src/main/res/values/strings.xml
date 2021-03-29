@@ -57,4 +57,7 @@
         <item>CZK</item>
         <item>SEK</item>
     </string-array>
+    <string name="order">Order</string>
+    <string name="back">Back</string>
+    <string name="account_order">Owner order</string>
 </resources>
