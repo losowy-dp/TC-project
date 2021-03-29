@@ -8,7 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import com.example.projectct.InterfaceAPI.Common
+import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
+import com.example.projectct.helpClass.TransportationsPrimary
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 
 /**
@@ -17,6 +23,7 @@ import com.example.projectct.R
  * create an instance of this fragment.
  */
 class All_order_list : Fragment() {
+    lateinit var mService: RetrofitService
     interface OnSelectedButtonListenerAll{
         fun onButtonSelectedAll(button: String)
     }
@@ -38,6 +45,23 @@ class All_order_list : Fragment() {
         val buttonMyOrder = view.findViewById<Button>(R.id.my_order_fragment)
         buttonMyOrder.setOnClickListener(MyOrderFragment)
         var listView = view.findViewById<ListView>(R.id.allOrderList)
+        mService = Common.retrofitService
+        mService.getAll().enqueue(object: retrofit2.Callback<TransportationsPrimary> {
+            override fun onResponse(call: Call<TransportationsPrimary>, response: Response<TransportationsPrimary>) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFailure(call: Call<TransportationsPrimary>, t: Throwable) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
+
+
+
+
+
         val arrayList: ArrayList<HashMap<String, String>> = ArrayList()
         var map: HashMap<String, String>
         //TODO change 20 on count a order in database

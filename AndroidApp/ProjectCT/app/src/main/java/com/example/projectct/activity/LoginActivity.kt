@@ -83,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                   }
                 }
                 override fun onFailure(call: Call<Token>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                     login.text.clear()
                     pass.text.clear()
                     t.printStackTrace()
