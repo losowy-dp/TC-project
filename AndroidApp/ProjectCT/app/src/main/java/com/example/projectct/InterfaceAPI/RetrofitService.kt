@@ -1,9 +1,6 @@
 package com.example.projectct.InterfaceAPI
 
-import com.example.projectct.helpClass.Token
-import com.example.projectct.helpClass.TransportationPrimary
-import com.example.projectct.helpClass.User
-import com.example.projectct.helpClass.UserAuth
+import com.example.projectct.helpClass.*
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,5 +16,6 @@ interface RetrofitService {
     @GET("/transportations/getTransportions/")
     fun getAll(): Call<List<TransportationPrimary>>
 
-    @POST("/transportations/")
+    @POST("/transportations/getTransportions/")
+    fun createTransport(@Body data: CreateTransportations): Call<TransportationPrimary>
 }

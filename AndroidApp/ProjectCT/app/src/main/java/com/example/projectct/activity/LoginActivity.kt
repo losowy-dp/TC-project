@@ -79,7 +79,9 @@ class LoginActivity : AppCompatActivity() {
                       pass.text.clear()
                   }
                     else {
-                      startActivity(intent)
+                        //DEL
+                    intent.putExtra("login",login.text.toString())
+                    startActivity(intent)
                   }
                 }
                 override fun onFailure(call: Call<Token>, t: Throwable) {
