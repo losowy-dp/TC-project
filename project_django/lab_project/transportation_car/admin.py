@@ -10,7 +10,7 @@ class LocationAdmin(admin.ModelAdmin):
 
 
 class TransportationAdmin(admin.ModelAdmin):
-    list_display = ('id', 'data_created', 'start_location', 'delivery_location', 'delivery_date', 'price', 'is_free', 'is_delivery')
+    list_display = ('id', 'data_created', 'start_location', 'delivery_location', 'price', 'currency')
 
 
 admin.site.register(Location, LocationAdmin)
