@@ -4,9 +4,6 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 class CreateTransportations {
-    @SerializedName("car_owner")
-    @Expose
-    private var car_owner: Int
     @SerializedName("start_location")
     @Expose
     private var start_location: String
@@ -16,15 +13,15 @@ class CreateTransportations {
     @SerializedName("delivery_location")
     @Expose
     private var delivery_location: String
-    @SerializedName("cena")
+    @SerializedName("price")
     @Expose
     private var price: String
     @SerializedName("currency")
     @Expose
     private var currency: String
-
-
-
+    @SerializedName("car_owner")
+    @Expose
+    private var car_owner: Int
 
 
     constructor(descriptions: String, price: String, currency: String, car_owner: Int, start_location: String, delivery_location: String) {

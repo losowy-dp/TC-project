@@ -57,7 +57,7 @@ class All_order_list : Fragment() {
                         var map: HashMap<String,String>
                         telo.forEach {
                             map = HashMap()
-                            var nowa: String = it.start_location+"-->"+it.delivery_location
+                            var nowa: String = it.start_location+" --> "+it.delivery_location
                             map.put("citys",nowa)
                             var price: String = it.price+" "+it.currency
                             map.put("value",price)
