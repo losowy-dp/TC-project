@@ -22,11 +22,8 @@ class Transportation(models.Model):
     start_location = models.ForeignKey('Location', on_delete=models.PROTECT, related_name='start_location')
     description = models.CharField(max_length=1000, verbose_name='Opis', blank=True)
     delivery_location = models.ForeignKey('Location', on_delete=models.PROTECT, related_name='delivery_location')
-    delivery_date = models.DateTimeField(verbose_name='Data dostawy')
     price = models.FloatField(verbose_name='Cena')
-    is_free = models.BooleanField(default=True, verbose_name='Czy dostempny')
-    is_delivery = models.BooleanField(default=False, verbose_name='Czy dostarczony')
-    driver = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='kierowca', related_name='driver', blank=True, null=True)
+    currency = models.CharField(max_length=3, verbose_name='Currence')
 
     def __str__(self):
         return str(self.start_location) + ' - ' + str(self.delivery_location)
@@ -34,3 +31,9 @@ class Transportation(models.Model):
     class Meta:
         verbose_name = 'Transportacja'
         verbose_name_plural = 'Transportacji'
+
+
+# class Order(models.Model):
+#     transportations = models.ForeignKey(Transportation, on_delete=models.PROTECT())
+#     driver = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='kierowca', related_name='driver',
+#                                blank=True, null=True)

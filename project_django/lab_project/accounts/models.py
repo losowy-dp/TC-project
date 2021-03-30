@@ -18,7 +18,7 @@ class Car(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
     photo = models.ImageField(upload_to='photos/%y/%m/%d/', verbose_name='Foto', blank=True)
-    number_of_phone = models.CharField(max_length=150, verbose_name='Numer telefonu', blank=True, null=True)
+    number_of_phone = models.CharField(max_length=150, verbose_name='Numer telefonu', blank=True, null=True, unique=True)
     birthday = models.DateField(verbose_name='Dzien narodzin', blank=True, null=True)
     driver = models.OneToOneField('Driver', on_delete=models.CASCADE, null=True)
 
