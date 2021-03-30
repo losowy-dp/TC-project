@@ -67,7 +67,7 @@ class LoginActivity : AppCompatActivity() {
     private fun loginAcitivity(){
         val login = findViewById<EditText>(R.id.username_editText)
         val pass = findViewById<EditText>(R.id.password_editText)
-        if(login.text.length>0 && pass.text.length>0){
+        if(login.text.length>0 && pass.text.length>=8){
             //TODO create file token?? Or how use it
             val intent = Intent(this, HomeActivity::class.java)
             mService = Common.retrofitService
