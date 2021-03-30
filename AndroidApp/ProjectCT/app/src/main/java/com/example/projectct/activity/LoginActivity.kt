@@ -67,16 +67,14 @@ class LoginActivity : AppCompatActivity() {
     private fun loginAcitivity(){
         val login = findViewById<EditText>(R.id.username_editText)
         val pass = findViewById<EditText>(R.id.password_editText)
-        //TODO Check EditText Login and Password
-        if(login.text.length>0 && pass.text.length>0){
-            //TODO JSON Request to Django Serwer
-            //TODO create file token
+        if(login.text.length>0 && pass.text.length>=8){
+            //TODO create file token?? Or how use it
             val intent = Intent(this, HomeActivity::class.java)
             mService = Common.retrofitService
             mService.login(UserAuth(login.text.toString(),pass.text.toString())).enqueue(object : Callback<Token>{
                 override fun onResponse(call: Call<Token?>, response: Response<Token>) {
                   if(response.code()==401){
-                      Toast.makeText(this@LoginActivity,"Error password", Toast.LENGTH_SHORT).show()
+                      Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
                       login.text.clear()
                       pass.text.clear()
                   }
@@ -85,7 +83,7 @@ class LoginActivity : AppCompatActivity() {
                   }
                 }
                 override fun onFailure(call: Call<Token>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                     login.text.clear()
                     pass.text.clear()
                     t.printStackTrace()
@@ -93,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
             })
         }
         else{
-            Toast.makeText(this, R.string.errorLogin, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.errorRegClear, Toast.LENGTH_SHORT).show()
             login.text.clear()
             pass.text.clear()
         }

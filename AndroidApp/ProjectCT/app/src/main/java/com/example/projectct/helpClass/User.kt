@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 class User {
     @SerializedName("email")
     @Expose
-    private var email: String = ""
+    private var email: String
     @SerializedName("username")
     @Expose
     private var username: String
@@ -15,8 +15,9 @@ class User {
     private var password: String
 
 
-    constructor(password: String, username: String) {
+    constructor(password: String, username: String, email: String) {
         this.password = password
         this.username = username
+        this.email = email
     }
 }

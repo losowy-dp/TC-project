@@ -50,9 +50,10 @@
              Filtry
             Dodawanie z bazy danych
         </LinearLayout> -->
-        <FrameLayout
-            android:id="@+id/frameList"
+        <ListView
+            android:id="@+id/allOrderList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"/>
     </LinearLayout>
 </FrameLayout>

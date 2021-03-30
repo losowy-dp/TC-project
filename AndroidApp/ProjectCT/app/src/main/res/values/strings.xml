@@ -40,4 +40,24 @@
     <string name="your_email">Your email</string>
     <string name="send_email">Send me password</string>
     <string name="ok">Ok</string>
+    <string name="username">Username</string>
+    <string name="errorRegClear">Not all fields are filed</string>
+    <string name="errorRegNotGoodPass">Not a strong password</string>
+    <string name="errorRegPassNotRepeat">Passwords do not match</string>
+    <string name="errorRegEmailIsUse">This email or username is already taken</string>
+    <string name="errorInternetConnect">Internet not available</string>
+    <string-array name="spinner_valut">
+        <item>EUR</item>
+        <item>BGN</item>
+        <item>DKK</item>
+        <item>PLN</item>
+        <item>RON</item>
+        <item>HRK</item>
+        <item>HUF</item>
+        <item>CZK</item>
+        <item>SEK</item>
+    </string-array>
+    <string name="order">Order</string>
+    <string name="back">Back</string>
+    <string name="account_order">Owner order</string>
 </resources>
