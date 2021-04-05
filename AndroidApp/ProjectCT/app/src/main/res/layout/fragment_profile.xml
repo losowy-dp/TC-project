@@ -69,12 +69,13 @@
             android:gravity="center|bottom">
 
             <Button
+                android:id="@+id/but_edit_profile"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
                 android:backgroundTint="@color/menuText"
-                android:text="@string/edit_profile"
-                android:layout_marginBottom="20dp"/>
+                android:text="@string/edit_profile" />
             <Button
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
