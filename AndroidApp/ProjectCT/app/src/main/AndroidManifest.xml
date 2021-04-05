@@ -14,6 +14,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activity.Edit"/>
         <activity android:name=".activity.Order"/>
+        <activity android:name=".activity.Change_your_password"/>
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.ForgotActivity" />
         <activity android:name=".activity.RegisterActivity" />
