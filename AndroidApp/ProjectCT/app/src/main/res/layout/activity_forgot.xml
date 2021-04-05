@@ -31,20 +31,23 @@
                 android:layout_marginTop="130dp"
                 android:src="@drawable/check_your_email"
                 android:visibility="invisible"/>
+
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_forgotView"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:id="@+id/email_forgotView"
-                android:hint="@string/your_email"
                 android:layout_marginLeft="50dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/your_email_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/menuText"
-                android:inputType="text"/>
+                android:hint="@string/your_email">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/your_email_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@color/menuText" />
             </com.google.android.material.textfield.TextInputLayout>
+
             <Button
                 android:id="@+id/button_send"
                 android:layout_width="wrap_content"
