@@ -5,11 +5,17 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.R
+import java.util.regex.Pattern
 
 
 class Change_your_password : AppCompatActivity() {
+    lateinit var oldpassword: EditText
+    lateinit var newpassword: EditText
+    lateinit var againpassword: EditText
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_change_your_password)
@@ -24,10 +30,12 @@ class Change_your_password : AppCompatActivity() {
     private val buttonBackToEditProfileListener = View.OnClickListener { backToEditProfileListener() }
 
     private fun saveChange(){
-        val oldpassword = findViewById<EditText>(R.id.old_password_editText)
-        val newpassword = findViewById<EditText>(R.id.new_password_editText)
-        val againpassword = findViewById<EditText>(R.id.again_password_editText)
-        //TODO: Винести if відільною функцією/скоротити код тоаста в 1 лінію/duration не нужна змінна/запрос бази на провірку/регулярне вираження для пароля
+         oldpassword = findViewById<EditText>(R.id.old_password_editText)
+         newpassword = findViewById<EditText>(R.id.new_password_editText)
+         againpassword = findViewById<EditText>(R.id.again_password_editText)
+        if(errorCheck()){
+
+        }
         /*val duration = Toast.LENGTH_LONG
         if(newpassword.text.length < 8) {
             val toast = Toast.makeText(this@Change_your_password, "R.string.errorNewpassSameOldpass", duration)
@@ -44,7 +52,22 @@ class Change_your_password : AppCompatActivity() {
             }
         }*/
     }
-
+    private fun errorCheck(): Boolean{
+        if(newpassword.text.length < 8 && Pattern.matches("^[a-zA-Z0-9]+\$",newpassword.text.toString())==false){
+            Toast.makeText(this,R.string.errorRegNotGoodPass,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(oldpassword.text.equals(newpassword.text)){
+            Toast.makeText(this,R.string.errorNewpassSameOldpass,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(!newpassword.text.equals(againpassword.text)){
+            Toast.makeText(this,R.string.errorNewpassNotSameAgainpass,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        //TODO: Check with database
+        return true
+    }
     private fun backToEditProfileListener(){
         val intent = Intent(this, Edit::class.java)
         startActivity(intent)

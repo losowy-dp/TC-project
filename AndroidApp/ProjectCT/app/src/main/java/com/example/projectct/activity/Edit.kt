@@ -38,30 +38,8 @@ class Edit : AppCompatActivity() {
         val login = findViewById<EditText>(R.id.editTextTextPersonName2)
         val phonenumber = findViewById<EditText>(R.id.editTextTextPersonName3)
         val email = findViewById<EditText>(R.id.editTextTextPersonName4)
-        //TODO:  Refactor 1 if
-        if(fullname.text.length != 0){
+        //TODO:  Refactor 1 if Check
 
-        }else{
-
-        }
-
-        if(login.text.length != 0){
-
-        }else{
-
-        }
-
-        if(phonenumber.text.length != 0){
-
-        }else{
-
-        }
-
-        if(email.text.length != 0){
-
-        }else{
-
-        }
     }
 
     private fun changePassword(){
