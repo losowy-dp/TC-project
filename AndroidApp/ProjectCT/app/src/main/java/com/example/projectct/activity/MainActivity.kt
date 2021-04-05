@@ -2,18 +2,14 @@ package com.example.projectct.activity
 
 import android.app.ActivityOptions
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityOptionsCompat
-
+import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.R
 import android.util.Pair as UtilPair
 

@@ -12,8 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Edit"></activity>
-        <activity android:name=".activity.Order"></activity>
+        <activity android:name=".activity.Edit"/>
+        <activity android:name=".activity.Order"/>
         <activity android:name=".activity.HomeActivity" />
         <activity android:name=".activity.ForgotActivity" />
         <activity android:name=".activity.RegisterActivity" />

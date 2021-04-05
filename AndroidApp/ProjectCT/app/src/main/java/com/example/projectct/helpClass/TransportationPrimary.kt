@@ -1,8 +1,5 @@
 package com.example.projectct.helpClass
 
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-
 data class TransportationPrimary(
         var id: String?=null,
         var car_owner: String?=null,

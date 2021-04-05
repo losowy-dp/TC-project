@@ -79,7 +79,6 @@ class LoginActivity : AppCompatActivity() {
                       pass.text.clear()
                   }
                     else {
-                        //DEL
                     intent.putExtra("login",login.text.toString())
                     startActivity(intent)
                   }

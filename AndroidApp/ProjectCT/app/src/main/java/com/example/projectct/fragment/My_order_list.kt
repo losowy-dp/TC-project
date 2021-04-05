@@ -2,14 +2,13 @@ package com.example.projectct.fragment
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.example.projectct.R
-
 
 
 /**

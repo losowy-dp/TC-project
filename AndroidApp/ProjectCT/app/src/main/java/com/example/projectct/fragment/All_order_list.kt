@@ -2,12 +2,12 @@ package com.example.projectct.fragment
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R

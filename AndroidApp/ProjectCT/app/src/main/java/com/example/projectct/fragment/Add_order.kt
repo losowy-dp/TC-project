@@ -2,14 +2,12 @@ package com.example.projectct.fragment
 
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Spinner
 import android.widget.*
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
@@ -17,7 +15,6 @@ import com.example.projectct.helpClass.CreateTransportations
 import com.example.projectct.helpClass.TransportationPrimary
 import retrofit2.Call
 import retrofit2.Response
-import javax.security.auth.callback.Callback
 
 
 /**

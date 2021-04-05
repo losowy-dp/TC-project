@@ -1,10 +1,7 @@
 package com.example.projectct.activity
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.projectct.R
 import com.example.projectct.fragment.Add_order

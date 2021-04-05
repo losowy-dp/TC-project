@@ -1,7 +1,8 @@
-package com.example.projectct
+package com.example.projectct.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.example.projectct.R
 
 class Edit : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

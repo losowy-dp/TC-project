@@ -2,21 +2,19 @@ package com.example.projectct.activity
 
 import android.app.ActivityOptions
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.R
 import com.example.projectct.helpClass.Token
 import com.example.projectct.helpClass.User
 import com.example.projectct.helpClass.UserAuth
 import com.google.android.material.textfield.TextInputLayout
-import com.google.firebase.database.FirebaseDatabase
 import retrofit2.Call
 import retrofit2.Response
 import java.util.regex.Pattern
-import javax.security.auth.callback.Callback
 import android.util.Pair as UtilPair
 
 class RegisterActivity : AppCompatActivity() {
