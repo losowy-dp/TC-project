@@ -2,6 +2,7 @@ package com.example.projectct.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -31,8 +32,8 @@ class Change_your_password : AppCompatActivity() {
 
     private fun saveChange(){
          oldpassword = findViewById<EditText>(R.id.old_password_editText)
-         newpassword = findViewById<EditText>(R.id.new_password_editText)
-         againpassword = findViewById<EditText>(R.id.again_password_editText)
+         newpassword = findViewById<EditText>(R.id.first_new_password_editText)
+         againpassword = findViewById<EditText>(R.id.second_new_password_editText)
         if(errorCheck()){
 
         }
@@ -62,7 +63,17 @@ class Change_your_password : AppCompatActivity() {
             return false
         }
         if(!newpassword.text.equals(againpassword.text)){
-            Toast.makeText(this,R.string.errorNewpassNotSameAgainpass,Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,R.string.errorRegNotGoodPass,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(TextUtils.isEmpty(oldpassword.getText().toString().trim()))
+        {
+            Toast.makeText(this,R.string.erroremptyoldpassword,Toast.LENGTH_SHORT).show()
+            return false
+        }
+        if(TextUtils.isEmpty(newpassword.getText().toString().trim()) || TextUtils.isEmpty(againpassword.getText().toString().trim()))
+        {
+            Toast.makeText(this,R.string.erroremptynewpassword,Toast.LENGTH_SHORT).show()
             return false
         }
         //TODO: Check with database

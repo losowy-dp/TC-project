@@ -64,10 +64,14 @@
     <string name="addTrans">Add new Transportations</string>
     <string name="new_login">Login</string>
     <string name="save">Save</string>
+    <string name="change_the_data">Change the data</string>
     <string name="change_password">Change your password</string>
     <string name="old_password">Old password</string>
     <string name="new_password">New password</string>
-    <string name="new_password_again">Password again</string>
-    <string name="errorNewpassSameOldpass">Your new password is the same as your new password.</string>
-    <string name="errorNewpassNotSameAgainpass">Your passwords do not match.</string>
+    <string name="new_password_again">New password again</string>
+    <string name="errorNewpassSameOldpass">Old password a same new password</string>
+    <string name="erroremptyoldpassword">Write old password</string>
+    <string name="erroremptynewpassword">Write new password in two lines</string>
+    <string name="erroremptylines">Lines can\'t be empty</string>
+    <string name="errorphonenumber">Phone number don/\'t correct</string>
 </resources>
