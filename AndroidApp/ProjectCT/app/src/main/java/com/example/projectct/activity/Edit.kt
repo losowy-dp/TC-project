@@ -13,6 +13,10 @@ import android.widget.Toast
 
 class Edit : AppCompatActivity() {
     lateinit var buttonSaveChange: Button
+    lateinit var fullname: EditText
+    lateinit var phonenumber: EditText
+    lateinit var email: EditText
+    lateinit var login: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +53,7 @@ class Edit : AppCompatActivity() {
         }
         else
         {
-            if(errors() == false)
-            {}
-            else
+            if(errors())
             {
                 //save data in database
                 fullname.isEnabled = false
@@ -63,10 +65,6 @@ class Edit : AppCompatActivity() {
         }
     }
     private fun errors():Boolean{
-        val fullname = findViewById<EditText>(R.id.editTextTextPersonName)
-        val login = findViewById<EditText>(R.id.editTextTextPersonName2)
-        val phonenumber = findViewById<EditText>(R.id.editTextTextPersonName3)
-        val email = findViewById<EditText>(R.id.editTextTextPersonName4)
         if(TextUtils.isEmpty(fullname.getText().toString().trim()) || TextUtils.isEmpty(login.getText().toString().trim()) || TextUtils.isEmpty(phonenumber.getText().toString().trim()) || TextUtils.isEmpty(email.getText().toString().trim()))
         {
             Toast.makeText(this, R.string.erroremptylines, Toast.LENGTH_SHORT).show()
