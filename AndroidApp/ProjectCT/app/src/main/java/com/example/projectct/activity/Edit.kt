@@ -40,10 +40,10 @@ class Edit : AppCompatActivity() {
     }
     //TODO change phone number with just text on phone
     private fun saveChange(){
-        val fullname = findViewById<EditText>(R.id.editTextTextPersonName)
-        val login = findViewById<EditText>(R.id.editTextTextPersonName2)
-        val phonenumber = findViewById<EditText>(R.id.editTextTextPersonName3)
-        val email = findViewById<EditText>(R.id.editTextTextPersonName4)
+        fullname = findViewById<EditText>(R.id.editTextTextPersonName)
+        login = findViewById<EditText>(R.id.editTextTextPersonName2)
+        phonenumber = findViewById<EditText>(R.id.editTextTextPersonName3)
+        email = findViewById<EditText>(R.id.editTextTextPersonName4)
         if(fullname.isEnabled == false) {
             fullname.isEnabled = true
             login.isEnabled = true
