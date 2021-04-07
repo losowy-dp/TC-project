@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activity.HistoryActivity"/>
         <activity android:name=".activity.Edit"/>
         <activity android:name=".activity.Order"/>
         <activity android:name=".activity.Change_your_password"/>

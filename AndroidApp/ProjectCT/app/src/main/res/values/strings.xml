@@ -74,4 +74,5 @@
     <string name="erroremptynewpassword">Write new password in two lines</string>
     <string name="erroremptylines">Lines can\'t be empty</string>
     <string name="errorphonenumber">Phone number don\'t correct</string>
+    <string name="history_your_order">History your orders</string>
 </resources>

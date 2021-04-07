@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import android.widget.Button
 import androidx.annotation.RequiresApi
 import com.example.projectct.R
+import com.example.projectct.activity.HistoryActivity
 
 class Profile : Fragment() {
     override fun onCreateView(
@@ -29,14 +30,22 @@ class Profile : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val buttonEditProfile = view.findViewById<Button>(R.id.but_edit_profile)
+        val buttonHistoryOrders = view.findViewById<Button>(R.id.but_history_orders)
 
         buttonEditProfile.setOnClickListener(buttonEditProfileListener)
+        buttonHistoryOrders.setOnClickListener(buttonHistoryOrdersListener)
 
         }
     private val buttonEditProfileListener = View.OnClickListener { editProfile() }
+    private val buttonHistoryOrdersListener = View.OnClickListener { historyOrders() }
 
     private fun editProfile(){
         val intent = Intent (activity, Edit::class.java)
+        startActivity(intent)
+    }
+
+    private fun historyOrders(){
+        val intent = Intent (activity, HistoryActivity::class.java)
         startActivity(intent)
     }
 }
