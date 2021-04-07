@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">155600910212-lhma6msd0d3cifmohkerdg7ahqs03m7e.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">155600910212</string>
+    <string name="google_api_key" translatable="false">AIzaSyDdEofZ0gIY6I8Llnku6mUFoZl_BXL4ZQ4</string>
+    <string name="google_app_id" translatable="false">1:155600910212:android:b084573aa98e1fae0a0fd1</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDdEofZ0gIY6I8Llnku6mUFoZl_BXL4ZQ4</string>
+    <string name="google_storage_bucket" translatable="false">car-transp.appspot.com</string>
+    <string name="project_id" translatable="false">car-transp</string>
+</resources>

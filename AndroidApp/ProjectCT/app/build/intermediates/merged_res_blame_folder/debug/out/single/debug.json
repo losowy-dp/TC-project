@@ -1,0 +1,358 @@
+[
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_add_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\add_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\anim_botom_animation.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\anim\\botom_animation.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v24_ic_launcher_foreground.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_select_list_order.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\select_list_order.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_profile.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\profile.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_list_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\list_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_list_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\list_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_avatar_default.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\avatar_default.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_add_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\add_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_images.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\images.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_images.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\images.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_profile.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\profile.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_order.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\activity_order.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_list_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\list_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_check_your_email.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\check_your_email.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_register.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\activity_register.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-hdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_list_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\list_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_profile_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\profile_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_avatar_default.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\avatar_default.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_my_order_list.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\fragment_my_order_list.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-xxhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_check_your_email.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\check_your_email.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_profile.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\profile.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_check_your_email.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\check_your_email.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_profile_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\profile_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_list_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\list_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_add_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\add_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_add_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\add_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_avatar_default.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\avatar_default.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\anim_anim_image.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\anim\\anim_image.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-ldpi_ic_launcher_background.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-ldpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_home.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\activity_home.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_check_your_email.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\check_your_email.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\font_bungee.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\font\\bungee.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_profile_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\profile_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_add_order.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\add_order.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_login.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_add_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\add_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_images.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\images.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_avatar_default.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\avatar_default.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_forgot.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\activity_forgot.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-mdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_all_order_list.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\fragment_all_order_list.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\menu_bottom_nav_menu.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_add_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\add_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_profile_select.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\profile_select.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi_images.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxhdpi\\images.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_avatar_default.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\avatar_default.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_list_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\list_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_list_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\list_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_profile_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\profile_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_add_order.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\fragment_add_order.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_check_your_email.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\check_your_email.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-anydpi-v21_ic_launcher_background.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-anydpi-v21\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_profile_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\profile_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_images.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\images.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_ic_launcher_background.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\generated\\res\\pngs\\debug\\drawable-xhdpi\\ic_launcher_background.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\font_aladin.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\font\\aladin.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_add_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\add_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_list_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\list_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_profile.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\profile.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi_list_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xxxhdpi\\list_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_add_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\add_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi_profile.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-xhdpi\\profile.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\anim_top_animation.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\anim\\top_animation.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_list_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\list_button.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi_add_button_active.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-hdpi\\add_button_active.png"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_profile.xml.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\build\\intermediates\\res\\merged\\debug\\drawable-mdpi_add_button.png.flat",
+        "source": "D:\\Project\\TC-project\\AndroidApp\\ProjectCT\\app\\src\\main\\res\\drawable-mdpi\\add_button.png"
+    }
+]
