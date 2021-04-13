@@ -1,7 +1,7 @@
 package com.example.projectct.helpClass
 
 data class TransportationPrimary(
-        var id: String?=null,
+        var id: String,
         var car_owner: String?=null,
         var data_created: String?=null,
         var start_location: String?=null,

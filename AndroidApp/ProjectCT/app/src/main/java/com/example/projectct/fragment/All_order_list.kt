@@ -1,5 +1,6 @@
 package com.example.projectct.fragment
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
+import com.example.projectct.activity.HomeActivity
+import com.example.projectct.activity.Order
 import com.example.projectct.helpClass.TransportationPrimary
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,10 +27,13 @@ import retrofit2.Response
  */
 class All_order_list : Fragment() {
     lateinit var mService: RetrofitService
+    //Interface
     interface OnSelectedButtonListenerAll{
         fun onButtonSelectedAll(button: String)
     }
-
+    //Lateinit
+    lateinit var arrayList: ArrayList<HashMap<String, String>>
+    lateinit var map: HashMap<String,String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -51,37 +57,37 @@ class All_order_list : Fragment() {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
-                    var telo = response.body();
+                    var telo = response.body()
                     if (telo != null) {
-                        val arrayList: ArrayList<HashMap<String,String>> = ArrayList()
-                        var map: HashMap<String,String>
+                        arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            var nowa: String = it.start_location+" --> "+it.delivery_location
-                            map.put("citys",nowa)
-                            var price: String = it.price+" "+it.currency
-                            map.put("value",price)
+                            var nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            map.put("citys", nowa)
+                            var price: String = it.id
+                            map.put("value", price)
                             arrayList.add(map)
                         }
                         val adapter = SimpleAdapter(
                                 activity,
                                 arrayList,
-                                android.R.layout.simple_list_item_2,
-                                arrayOf("citys", "value"),
-                                intArrayOf(android.R.id.text1, android.R.id.text2)
+                                android.R.layout.simple_list_item_1,
+                                arrayOf("citys"),
+                                intArrayOf(android.R.id.text1)
                         )
                         listView.adapter = adapter
                         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
-                            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long)
-                            {
-                                //remove toast and add pass a new activity
-                                Toast.makeText(activity!!, "on klick", Toast.LENGTH_SHORT).show()
+                            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                                val intent = Intent(activity!!, Order::class.java)
+                                intent.putExtra("id", arrayList.get(position).get("value"))
+                                startActivity(intent)
                             }
                         }
                     }
 
                 }
             }
+
             override fun onFailure(call: Call<List<TransportationPrimary>>, t: Throwable) {
                 Toast.makeText(activity!!, "Failed Connections", Toast.LENGTH_SHORT).show()
             }
@@ -94,4 +100,5 @@ class All_order_list : Fragment() {
         val listener = activity as OnSelectedButtonListenerAll?
         listener?.onButtonSelectedAll("all_order")
     }
+
 }

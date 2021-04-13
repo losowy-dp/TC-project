@@ -5,6 +5,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface RetrofitService {
     @POST("/auth/jwt/create/")
@@ -18,4 +19,7 @@ interface RetrofitService {
 
     @POST("/transportations/getTransportions/")
     fun createTransport(@Body data: CreateTransportations): Call<TransportationPrimary>
+
+    @GET("/transportations/{id}")
+    fun takeTransport(@Path("id")id: String): Call<List<TransportationPrimary>>
 }

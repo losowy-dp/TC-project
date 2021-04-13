@@ -66,7 +66,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/From_oreder"
+                android:id="@+id/from_oreder"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center"

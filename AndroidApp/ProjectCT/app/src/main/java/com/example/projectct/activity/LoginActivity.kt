@@ -16,7 +16,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.util.Pair as UtilPair
-
+//Test login: test15
+//Test password: t123st4567
 class LoginActivity : AppCompatActivity() {
     lateinit var mService: RetrofitService
     override fun onCreate(savedInstanceState: Bundle?) {
