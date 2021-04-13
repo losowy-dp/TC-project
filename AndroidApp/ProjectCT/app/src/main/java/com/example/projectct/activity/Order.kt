@@ -5,12 +5,11 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
-import com.example.projectct.helpClass.TransportationPrimary
+import com.example.projectct.helpClass.Transport.TransportationPrimary
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

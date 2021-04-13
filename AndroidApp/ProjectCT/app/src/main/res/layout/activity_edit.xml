@@ -41,8 +41,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="textPersonName"
-                android:text="%Name_in_database%" />
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
@@ -69,8 +68,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="textPersonName"
-                android:text="%Name_in_database%" />
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
@@ -97,8 +95,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="textPersonName"
-                android:text="%Name_in_database%" />
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
@@ -125,8 +122,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:enabled="false"
-                android:inputType="textEmailAddress"
-                android:text="%Name_in_database%" />
+                android:inputType="textEmailAddress" />
 
         </LinearLayout>
 

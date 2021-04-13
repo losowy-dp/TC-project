@@ -8,9 +8,9 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.R
-import com.example.projectct.helpClass.Token
-import com.example.projectct.helpClass.User
-import com.example.projectct.helpClass.UserAuth
+import com.example.projectct.helpClass.Token.Token
+import com.example.projectct.helpClass.User.User
+import com.example.projectct.helpClass.User.UserAuth
 import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Response
@@ -47,6 +47,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun homeActivity(){
         if(CheckData()){
             val intent = Intent(this, HomeActivity::class.java)
+            //TODO: New Register with token
             var mService = Common.retrofitService
             mService.register(User(password.text.toString(),username.text.toString(),email.text.toString())).enqueue(object : retrofit2.Callback<Token> {
                 override fun onResponse(call: Call<Token>, response: Response<Token>) {

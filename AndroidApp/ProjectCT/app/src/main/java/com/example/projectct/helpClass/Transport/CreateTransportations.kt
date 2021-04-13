@@ -1,4 +1,4 @@
-package com.example.projectct.helpClass
+package com.example.projectct.helpClass.Transport
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

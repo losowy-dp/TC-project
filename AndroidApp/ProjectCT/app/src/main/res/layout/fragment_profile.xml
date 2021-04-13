@@ -32,26 +32,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical" >
+
                 <TextView
+                    android:id="@+id/profile_first_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="FirstName"
                     android:textColor="@color/black"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5dp" />
+                    android:textStyle="bold" />
+
                 <TextView
+                    android:id="@+id/profile_number_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="Number_Phone"
-                    android:textSize="18sp"
-                    android:layout_marginTop="5dp"/>
+                    android:textSize="18sp" />
+
                 <TextView
+                    android:id="@+id/profile_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:text="email@gmail.com"
-                    android:textSize="18sp"
-                    android:layout_marginTop="5dp"/>
+                    android:textSize="18sp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -1,12 +1,9 @@
-package com.example.projectct.helpClass
+package com.example.projectct.helpClass.User
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-//TO Django Database
-class User {
-    @SerializedName("email")
-    @Expose
-    private var email: String
+
+class UserAuth {
     @SerializedName("username")
     @Expose
     private var username: String
@@ -14,10 +11,8 @@ class User {
     @Expose
     private var password: String
 
-
-    constructor(password: String, username: String, email: String) {
-        this.password = password
+    constructor(username: String, password: String) {
         this.username = username
-        this.email = email
+        this.password = password
     }
 }

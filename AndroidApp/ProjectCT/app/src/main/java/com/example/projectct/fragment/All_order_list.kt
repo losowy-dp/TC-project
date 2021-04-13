@@ -12,9 +12,8 @@ import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
-import com.example.projectct.activity.HomeActivity
 import com.example.projectct.activity.Order
-import com.example.projectct.helpClass.TransportationPrimary
+import com.example.projectct.helpClass.Transport.TransportationPrimary
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

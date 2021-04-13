@@ -6,11 +6,12 @@ import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.projectct.InterfaceAPI.Common
+import com.example.projectct.InterfaceAPI.ApiClient
 import com.example.projectct.InterfaceAPI.RetrofitService
+import com.example.projectct.InterfaceAPI.SessionManager
 import com.example.projectct.R
-import com.example.projectct.helpClass.Token
-import com.example.projectct.helpClass.UserAuth
+import com.example.projectct.helpClass.Token.Token
+import com.example.projectct.helpClass.User.UserAuth
 import com.google.android.material.textfield.TextInputLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,6 +20,13 @@ import android.util.Pair as UtilPair
 //Test login: test15
 //Test password: t123st4567
 class LoginActivity : AppCompatActivity() {
+    //NEW TOken
+    private lateinit var sessionManager: SessionManager
+    private lateinit var apiClient: ApiClient
+
+
+
+
     lateinit var mService: RetrofitService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +40,8 @@ class LoginActivity : AppCompatActivity() {
         buttonLogin.setOnClickListener(loginActivityListener)
         buttonRegister.setOnClickListener(registerActivityListener)
         forgotPassword.setOnClickListener(forgotPasswordAcitivityListener)
+
+
     }
 
     private val loginActivityListener = View.OnClickListener { loginAcitivity() }
@@ -66,12 +76,45 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginAcitivity(){
+        //TODO: Work with auth token
         val login = findViewById<EditText>(R.id.username_editText)
         val pass = findViewById<EditText>(R.id.password_editText)
         if(login.text.length>0 && pass.text.length>=8){
-            //TODO create file token?? Or how use it
             val intent = Intent(this, HomeActivity::class.java)
-            mService = Common.retrofitService
+            //NEW
+            apiClient = ApiClient()
+            sessionManager = SessionManager(this)
+            apiClient.getApiService().login(UserAuth(login.text.toString(),pass.text.toString())).enqueue(
+                object : Callback<Token> {
+                    override fun onResponse(call: Call<Token>, response: Response<Token>) {
+                        val loginResponse = response.body()
+                        if (response.code() == 200 && loginResponse?.detail == null) {
+                            sessionManager.saveAuthToken(loginResponse!!.authToken!!)
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(
+                                this@LoginActivity,
+                                R.string.errorLogin,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            login.text.clear()
+                            pass.text.clear()
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Token>, t: Throwable) {
+                        Toast.makeText(
+                            this@LoginActivity,
+                            R.string.errorInternetConnect,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        login.text.clear()
+                        pass.text.clear()
+                        t.printStackTrace()
+                    }
+
+                })
+/*            mService = Common.retrofitService
             mService.login(UserAuth(login.text.toString(),pass.text.toString())).enqueue(object : Callback<Token>{
                 override fun onResponse(call: Call<Token?>, response: Response<Token>) {
                   if(response.code()==401){
@@ -90,7 +133,7 @@ class LoginActivity : AppCompatActivity() {
                     pass.text.clear()
                     t.printStackTrace()
                 }
-            })
+            })*/
         }
         else{
             Toast.makeText(this, R.string.errorRegClear, Toast.LENGTH_SHORT).show()

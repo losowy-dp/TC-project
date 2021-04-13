@@ -76,4 +76,5 @@
     <string name="history_your_order">History your orders</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
+    <string name="data_changed">Data is changed</string>
 </resources>

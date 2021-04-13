@@ -1,4 +1,4 @@
-package com.example.projectct.helpClass
+package com.example.projectct.helpClass.Transport
 
 data class TransportationPrimary(
         var id: String,
