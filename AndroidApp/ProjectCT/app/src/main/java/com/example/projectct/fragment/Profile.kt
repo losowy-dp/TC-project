@@ -28,6 +28,7 @@ import retrofit2.Response
 class Profile : Fragment() {
     lateinit var apiClient: ApiClient
     lateinit var sessionManager: SessionManager
+    lateinit var id: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,13 +41,13 @@ class Profile : Fragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        filed(view)
         val buttonEditProfile = view.findViewById<Button>(R.id.but_edit_profile)
         val buttonHistoryOrders = view.findViewById<Button>(R.id.but_history_orders)
 
         buttonEditProfile.setOnClickListener(buttonEditProfileListener)
         buttonHistoryOrders.setOnClickListener(buttonHistoryOrdersListener)
-        filed(view)
+
 
         }
     private val buttonEditProfileListener = View.OnClickListener { editProfile() }
@@ -57,67 +58,64 @@ class Profile : Fragment() {
         var email = view.findViewById<TextView>(R.id.profile_email)
         apiClient = ApiClient()
         sessionManager = SessionManager(activity!!)
+        id = ""
         apiClient.getApiService().fetchDana(token = "Bearer ${sessionManager.fetchAuthToken()}")
             .enqueue(object : retrofit2.Callback<DaneUserToken> {
                 override fun onResponse(
-                    call: Call<DaneUserToken>,
-                    response: Response<DaneUserToken>
+                        call: Call<DaneUserToken>,
+                        response: Response<DaneUserToken>
                 ) {
                     var data = response.body()
                     if (response.code() != 401) {
+                        id = data!!.id
                         apiClient.getApiService().takeInfoPrimitive(data!!.id).enqueue(
-                            object : Callback<List<UserPhone>> {
+                                object : Callback<List<UserPhone>> {
 
-                                override fun onFailure(call: Call<List<UserPhone>>, t: Throwable) {
-                                    Toast.makeText(
-                                        activity!!,
-                                        "Nowy2",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-                                }
-
-                                override fun onResponse(
-                                    call: Call<List<UserPhone>>,
-                                    response: Response<List<UserPhone>>
-                                ) {
-                                    var dane = response.body()
-                                    if (response.code() == 200) {
-                                        dane!!.forEach {
-                                            first_name.setText(it.user!!.first_name)
-                                            phone.setText(it.number_of_phone)
-                                            email.setText(it.user!!.email)
-                                        }
-                                    } else {
+                                    override fun onFailure(call: Call<List<UserPhone>>, t: Throwable) {
                                         Toast.makeText(
-                                            activity!!,
-                                            "Nowy",
-                                            Toast.LENGTH_SHORT
+                                                activity,
+                                                R.string.errorLogin,
+                                                Toast.LENGTH_SHORT
                                         ).show()
                                     }
-                                }
 
-                            })
-                    } else {
-                        Toast.makeText(
-                            activity!!,
-                            R.string.errorLogin,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                                    override fun onResponse(
+                                            call: Call<List<UserPhone>>,
+                                            response: Response<List<UserPhone>>
+                                    ) {
+                                        var dane = response.body()
+                                        if (response.code() == 200) {
+                                            dane!!.forEach {
+                                                first_name.setText(it.user!!.first_name)
+                                                phone.setText(it.number_of_phone)
+                                                email.setText(it.user!!.email)
+                                            }
+                                        } else {
+                                            Toast.makeText(activity, R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
+                                        }
+                                    }
+                                })
                     }
                 }
 
                 override fun onFailure(call: Call<DaneUserToken>, t: Throwable) {
-                    TODO("Not yet implemented")
+                    Toast.makeText(activity, R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                 }
             })
     }
     private fun editProfile(){
         val intent = Intent (activity, Edit::class.java)
+
+        intent.putExtra("id",id)
         startActivity(intent)
     }
 
     private fun historyOrders(){
         val intent = Intent (activity, HistoryActivity::class.java)
+        println("******************************")
+        println(id)
+        println("******************************")
+        intent.putExtra("idi",id)
         startActivity(intent)
     }
 }

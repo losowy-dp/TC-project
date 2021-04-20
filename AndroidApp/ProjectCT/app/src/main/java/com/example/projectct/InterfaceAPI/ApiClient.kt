@@ -8,7 +8,7 @@ class ApiClient {
 
     fun getApiService(): RetrofitService{
         if(!::apiService.isInitialized){
-            val retrofit  = Retrofit.Builder().baseUrl("https://56e962bac530.ngrok.io/")
+            val retrofit  = Retrofit.Builder().baseUrl("https://1b0c1c34a9ce.ngrok.io/")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             apiService = retrofit.create(RetrofitService::class.java)
         }

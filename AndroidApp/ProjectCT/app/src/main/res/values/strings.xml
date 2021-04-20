@@ -44,7 +44,7 @@
     <string name="errorRegClear">Not all fields are filed</string>
     <string name="errorRegNotGoodPass">Not a strong password</string>
     <string name="errorRegPassNotRepeat">Passwords do not match</string>
-    <string name="errorRegEmailIsUse">This email or username is already taken</string>
+    <string name="errorRegEmailIsUse">This email is already taken</string>
     <string name="errorInternetConnect">Internet not available</string>
     <string-array name="spinner_valut">
         <item>EUR</item>

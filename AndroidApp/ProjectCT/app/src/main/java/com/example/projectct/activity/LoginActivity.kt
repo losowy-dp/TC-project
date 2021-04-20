@@ -17,17 +17,12 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.util.Pair as UtilPair
-//Test login: test15
-//Test password: t123st4567
+//Test login: test23@gmail.com
+//Test password: test54321test54321
+
 class LoginActivity : AppCompatActivity() {
-    //NEW TOken
     private lateinit var sessionManager: SessionManager
     private lateinit var apiClient: ApiClient
-
-
-
-
-    lateinit var mService: RetrofitService
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -76,7 +71,6 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun loginAcitivity(){
-        //TODO: Work with auth token
         val login = findViewById<EditText>(R.id.username_editText)
         val pass = findViewById<EditText>(R.id.password_editText)
         if(login.text.length>0 && pass.text.length>=8){
@@ -114,26 +108,6 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                 })
-/*            mService = Common.retrofitService
-            mService.login(UserAuth(login.text.toString(),pass.text.toString())).enqueue(object : Callback<Token>{
-                override fun onResponse(call: Call<Token?>, response: Response<Token>) {
-                  if(response.code()==401){
-                      Toast.makeText(this@LoginActivity,R.string.errorLogin, Toast.LENGTH_SHORT).show()
-                      login.text.clear()
-                      pass.text.clear()
-                  }
-                    else {
-                    intent.putExtra("login",login.text.toString())
-                    startActivity(intent)
-                  }
-                }
-                override fun onFailure(call: Call<Token>, t: Throwable) {
-                    Toast.makeText(this@LoginActivity,R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
-                    login.text.clear()
-                    pass.text.clear()
-                    t.printStackTrace()
-                }
-            })*/
         }
         else{
             Toast.makeText(this, R.string.errorRegClear, Toast.LENGTH_SHORT).show()

@@ -21,10 +21,10 @@ class CreateTransportations {
     private var currency: String
     @SerializedName("car_owner")
     @Expose
-    private var car_owner: Int
+    private var car_owner: String
 
 
-    constructor(descriptions: String, price: String, currency: String, car_owner: Int, start_location: String, delivery_location: String) {
+    constructor(descriptions: String, price: String, currency: String, car_owner: String, start_location: String, delivery_location: String) {
         this.descriptions = descriptions
         this.price = price
         this.currency = currency

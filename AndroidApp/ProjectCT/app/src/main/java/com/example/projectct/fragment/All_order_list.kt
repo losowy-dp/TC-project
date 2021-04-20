@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
+import com.example.projectct.InterfaceAPI.ApiClient
 import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
@@ -26,6 +27,7 @@ import retrofit2.Response
  */
 class All_order_list : Fragment() {
     lateinit var mService: RetrofitService
+    lateinit var apiClient: ApiClient
     //Interface
     interface OnSelectedButtonListenerAll{
         fun onButtonSelectedAll(button: String)
@@ -50,9 +52,9 @@ class All_order_list : Fragment() {
         val buttonMyOrder = view.findViewById<Button>(R.id.my_order_fragment)
         buttonMyOrder.setOnClickListener(MyOrderFragment)
         var listView = view.findViewById<ListView>(R.id.allOrderList)
-        mService = Common.retrofitService
-        mService.getAll().enqueue(object : Callback<List<TransportationPrimary>> {
-            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+        apiClient = ApiClient()
+        apiClient.getApiService().getAll().enqueue(object : Callback<List<TransportationPrimary>> {
+             override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
