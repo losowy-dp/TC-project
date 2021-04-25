@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class Edit : AppCompatActivity() {
+class   Edit : AppCompatActivity() {
     lateinit var sessionManager: SessionManager
     lateinit var buttonSaveChange: Button
     lateinit var fullname: EditText
