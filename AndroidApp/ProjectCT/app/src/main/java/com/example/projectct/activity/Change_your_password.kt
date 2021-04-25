@@ -35,23 +35,8 @@ class Change_your_password : AppCompatActivity() {
          newpassword = findViewById<EditText>(R.id.first_new_password_editText)
          againpassword = findViewById<EditText>(R.id.second_new_password_editText)
         if(errorCheck()){
-
+        //TODO
         }
-        /*val duration = Toast.LENGTH_LONG
-        if(newpassword.text.length < 8) {
-            val toast = Toast.makeText(this@Change_your_password, "R.string.errorNewpassSameOldpass", duration)
-            toast.show()
-        } else{
-            if (oldpassword.text == newpassword.text) {
-                val toast = Toast.makeText(this@Change_your_password, R.string.errorNewpassSameOldpass, duration)
-                toast.show()
-            }else if(newpassword.text != againpassword.text){
-                val toast = Toast.makeText(this@Change_your_password, R.string.errorNewpassNotSameAgainpass, duration)
-                toast.show()
-            }else{
-
-            }
-        }*/
     }
     private fun errorCheck(): Boolean{
         if(newpassword.text.length < 8 && Pattern.matches("^[a-zA-Z0-9]+\$",newpassword.text.toString())==false){

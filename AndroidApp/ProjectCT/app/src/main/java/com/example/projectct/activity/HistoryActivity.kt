@@ -25,9 +25,6 @@ class HistoryActivity : AppCompatActivity() {
 
         buttonBacktoMenu.setOnClickListener(buttonBacktoMenuListener)
         var id = intent.extras!!.getString("idi").toString()
-        println("****************************************")
-        println(id)
-        println("****************************************")
         var listView = findViewById<ListView>(R.id.historyOrderList)
         apiClient = ApiClient()
         apiClient.getApiService().historyOrder(id).enqueue(object: Callback<List<TransportationPrimary>>{

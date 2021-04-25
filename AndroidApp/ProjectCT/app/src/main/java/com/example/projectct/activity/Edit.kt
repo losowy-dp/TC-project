@@ -103,16 +103,9 @@ class   Edit : AppCompatActivity() {
                         TODO("Not yet implemented")
                     }
                 })
-               /* if(toDBProfile()){
-                    Toast.makeText(this,"Change",Toast.LENGTH_SHORT).show()
-                }
-                else{
-                    Toast.makeText(this,"NOT Change",Toast.LENGTH_SHORT).show()
-                }*/
             }
         }
     }
-    //TODO: Переробити
     private fun errors():Boolean{
         if(TextUtils.isEmpty(fullname.getText().toString().trim()) || TextUtils.isEmpty(login.getText().toString().trim()) || TextUtils.isEmpty(phonenumber.getText().toString().trim()) || TextUtils.isEmpty(email.getText().toString().trim()))
         {

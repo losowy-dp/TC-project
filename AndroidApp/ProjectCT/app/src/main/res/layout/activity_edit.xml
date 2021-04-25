@@ -76,7 +76,6 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="150dp"
@@ -87,15 +86,22 @@
                 android:textAlignment="center"
                 android:textColor="@color/menuText"
                 android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
+            <com.tfcporciuncula.phonemoji.PhonemojiFlagTextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:id="@+id/Flag"
+                android:gravity="center"
+                android:textSize="16sp"
+                app:phonemoji_flagFor="@id/phonemojiTextInputEditTex"
+                />
+            <com.tfcporciuncula.phonemoji.PhonemojiTextInputEditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
+                android:id="@+id/phonemojiTextInputEditTex"
+                app:phonemoji_initialRegionCode="PL"
+                android:layout_weight="10"
                 android:enabled="false"
-                android:inputType="textPersonName" />
+                />
 
         </LinearLayout>
 

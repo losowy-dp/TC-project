@@ -18,3 +18,17 @@ data class Costyl(
         var last_name: String?=null,
         var email: String?=null
 )
+
+data class UserInfo(
+        var first_name: String?=null,
+        var last_name: String?=null,
+        var email: String?=null
+)
+data class UserPhone(
+        var user: UserInfo?=null,
+        var number_of_phone: String?=null
+)
+data class UserPhonePrim(
+        var id: String?=null,
+        var phone_number: String?=null
+)

@@ -60,16 +60,6 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this@RegisterActivity, R.string.errorRegEmailIsUse, Toast.LENGTH_SHORT).show()
                     } else {
                         var date = response.body()
-                       /* apiClient.getApiService().createProfile(date!!.id.toString()).enqueue(object : Callback<String> {
-                            override fun onResponse(call: Call<String>, response: Response<String>) {
-                                //Delete
-                                Toast.makeText(this@RegisterActivity,"Nowy Profile",Toast.LENGTH_SHORT).show()
-                            }
-
-                            override fun onFailure(call: Call<String>, t: Throwable) {
-
-                            }
-                        })*/
                         apiClient.getApiService().login(UserAuth(email.text.toString(), password.text.toString())).enqueue(object : Callback<Token> {
                             override fun onResponse(call: Call<Token>, response: Response<Token>) {
                                 var loginResponse = response.body()

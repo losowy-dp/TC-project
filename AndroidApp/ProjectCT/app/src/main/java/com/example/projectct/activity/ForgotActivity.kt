@@ -16,7 +16,6 @@ class ForgotActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot)
         val buttonSend = findViewById<Button>(R.id.button_send)
-        //do listnera
         buttonSend.setOnClickListener(listnerSend)
     }
     private val listnerSend = View.OnClickListener { (sendEmail()) }

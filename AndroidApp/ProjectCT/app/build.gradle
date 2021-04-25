@@ -46,9 +46,9 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    //Phone
+    implementation 'com.github.tfcporciuncula:phonemoji:1.1.1'
     implementation 'com.android.support:multidex:1.0.3'
-
     //new
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
