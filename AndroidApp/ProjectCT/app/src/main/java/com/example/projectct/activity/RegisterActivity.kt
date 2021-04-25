@@ -91,15 +91,18 @@ class RegisterActivity : AppCompatActivity() {
         fullname.text.clear()
     }
 
-    private fun CheckData(): Boolean{
-        if( fullname.text.length==0 || email.text.length==0 || password.text.length ==0 || pass_rep.text.length ==0){
-            Toast.makeText(this,R.string.errorRegClear,Toast.LENGTH_SHORT).show()
+    private fun CheckData(): Boolean {
+        if (fullname.text.length == 0 || email.text.length == 0 || password.text.length == 0 || pass_rep.text.length == 0) {
+            Toast.makeText(this, R.string.errorRegClear, Toast.LENGTH_SHORT).show()
             return false
         }
-        var regex = "^[a-zA-Z0-9]+$"
-        if(Pattern.matches("^[a-zA-Z0-9]+\$",password.text.toString())==false || password.text.length<8){
-            Toast.makeText(this,R.string.errorRegNotGoodPass,Toast.LENGTH_SHORT).show()
+        if (Pattern.matches("^[a-zA-Z0-9]+\$", password.text.toString()) == false || password.text.length < 8 || Pattern.matches(email.text.toString(), password.text.toString()) == false) {
+            Toast.makeText(this, R.string.errorRegNotGoodPass, Toast.LENGTH_SHORT).show()
             return false
+        }
+        if (Pattern.matches(email.text.toString(), password.text.toString()) == false){
+            Toast.makeText(this, R.string.errorEmailInPass, Toast.LENGTH_SHORT).show()
+        return false
         }
         if(password.text.toString() != pass_rep.text.toString()){
             Toast.makeText(this,R.string.errorRegPassNotRepeat,Toast.LENGTH_SHORT).show()

@@ -47,7 +47,7 @@ class   Edit : AppCompatActivity() {
     private fun fieldData(){
         fullname = findViewById<EditText>(R.id.editTextTextPersonName)
         login = findViewById<EditText>(R.id.editTextTextPersonName2)
-        phonenumber = findViewById<EditText>(R.id.editTextTextPersonName3)
+        phonenumber = findViewById<EditText>(R.id.phonemojiTextInputEditText)
         email = findViewById<EditText>(R.id.editTextTextPersonName4)
         apiClient = ApiClient()
         sessionManager = SessionManager(this)

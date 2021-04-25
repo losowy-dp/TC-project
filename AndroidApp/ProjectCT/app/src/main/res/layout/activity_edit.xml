@@ -92,12 +92,12 @@
                 android:id="@+id/Flag"
                 android:gravity="center"
                 android:textSize="16sp"
-                app:phonemoji_flagFor="@id/phonemojiTextInputEditTex"
+                app:phonemoji_flagFor="@id/phonemojiTextInputEditText"
                 />
             <com.tfcporciuncula.phonemoji.PhonemojiTextInputEditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/phonemojiTextInputEditTex"
+                android:id="@+id/phonemojiTextInputEditText"
                 app:phonemoji_initialRegionCode="PL"
                 android:layout_weight="10"
                 android:enabled="false"
