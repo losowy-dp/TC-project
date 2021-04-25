@@ -129,6 +129,10 @@ class Edit : AppCompatActivity() {
             Toast.makeText(this, R.string.errorLogin, Toast.LENGTH_SHORT).show()
             return false
         }
+        if(email.text.length < 6 && android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()){
+            Toast.makeText(this, R.string.errorEmail, Toast.LENGTH_SHORT).show()
+            return false
+        }
         return true
     }
 
