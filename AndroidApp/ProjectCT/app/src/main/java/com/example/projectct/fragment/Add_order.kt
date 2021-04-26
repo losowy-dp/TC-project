@@ -9,14 +9,13 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.ApiClient
-import com.example.projectct.InterfaceAPI.Common
-import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.InterfaceAPI.SessionManager
 import com.example.projectct.R
 import com.example.projectct.helpClass.Transport.CreateTransportations
 import com.example.projectct.helpClass.Transport.TransportationPrimary
 import com.example.projectct.helpClass.User.DaneUserToken
 import retrofit2.Call
+import retrofit2.Callback
 import retrofit2.Response
 
 
@@ -32,7 +31,6 @@ class   Add_order : Fragment() {
     lateinit var price: EditText
     lateinit var desc: EditText
     lateinit var car: EditText
-    lateinit var mService: RetrofitService
     lateinit var apiClient: ApiClient
     lateinit var sessionManager: SessionManager
     override fun onCreateView(
@@ -59,24 +57,17 @@ class   Add_order : Fragment() {
     private var buttonAcceptListener = View.OnClickListener { buttonAccept() }
     private fun buttonAccept(){
         if(checkAllFields()){
-            from = view!!.findViewById(R.id.from_edit_text)
-            where = view!!.findViewById(R.id.where_edit_text)
-            price = view!!.findViewById(R.id.renumeration_EditText)
-            desc = view!!.findViewById(R.id.description_edit_text)
-            car = view!!.findViewById(R.id.car_edit_text)
-            spinner = view!!.findViewById(R.id.renumertion_spinner)
-            mService = Common.retrofitService
             apiClient = ApiClient()
-            var idi: String = ""
+            var id: String = ""
             sessionManager = SessionManager(activity!!)
             apiClient.getApiService().fetchDana(token = "Bearer ${sessionManager.fetchAuthToken()}").enqueue(object : retrofit2.Callback<DaneUserToken> {
                 override fun onResponse(
                         call: Call<DaneUserToken>,
                         response: Response<DaneUserToken>
                 ) {
-                    var data = response.body()
+                    val data = response.body()
                     if (response.code() != 401) {
-                        idi = data!!.id
+                        id = data!!.id.toString()
                     } else {
                         println("Hello")
                     }
@@ -87,25 +78,24 @@ class   Add_order : Fragment() {
                 }
             })
             println("***************************************")
-            println(idi)
+            println(id)
             println("***************************************")
-            mService.createTransport(CreateTransportations(desc.text.toString(),price.text.toString(),spinner.selectedItem.toString(),"39",from.text.toString(),where.text.toString()))
-                    .enqueue(object:  retrofit2.Callback<TransportationPrimary> {
+            apiClient.getApiService().createTransport(CreateTransportations(desc.text.toString(),price.text.toString(),spinner.selectedItem.toString(),id, from.text.toString(),where.text.toString()))
+                    .enqueue(object: Callback<TransportationPrimary>{
                         override fun onResponse(call: Call<TransportationPrimary>, response: Response<TransportationPrimary>) {
-                           if(response.code()==201){
-                               clearAllFields()
-                               Toast.makeText(activity!!,R.string.addTrans,Toast.LENGTH_SHORT).show()
-                           }
+                            if(response.code()==201){
+                                clearAllFields()
+                                Toast.makeText(activity!!,R.string.addTrans,Toast.LENGTH_SHORT).show()
+                            }
                             else{
                                 clearAllFields()
-                               Toast.makeText(activity!!,R.string.errorAddTrans,Toast.LENGTH_SHORT).show()
-                           }
+                                Toast.makeText(activity!!,R.string.errorAddTrans,Toast.LENGTH_SHORT).show()
+                            }
                         }
 
                         override fun onFailure(call: Call<TransportationPrimary>, t: Throwable) {
                             Toast.makeText(activity!!, R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                         }
-
                     })
         }
     }
@@ -115,7 +105,7 @@ class   Add_order : Fragment() {
         price = view!!.findViewById(R.id.renumeration_EditText)
         desc = view!!.findViewById(R.id.description_edit_text)
         car = view!!.findViewById(R.id.car_edit_text)
-        if(from.text.length>0 && where.text.length>0 && price.text.length>0 && desc.text.length>0 && car.text.length>0){
+        if(from.text.isNotEmpty() && where.text.isNotEmpty() && price.text.isNotEmpty() && desc.text.isNotEmpty() && car.text.isNotEmpty()){
             return true
         }
         else{
@@ -125,11 +115,6 @@ class   Add_order : Fragment() {
         }
     }
     private fun clearAllFields(){
-        from = view!!.findViewById(R.id.from_edit_text)
-        where = view!!.findViewById(R.id.where_edit_text)
-        price = view!!.findViewById(R.id.renumeration_EditText)
-        desc = view!!.findViewById(R.id.description_edit_text)
-        car = view!!.findViewById(R.id.car_edit_text)
         from.text.clear()
         where.text.clear()
         price.text.clear()

@@ -7,11 +7,10 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.ApiClient
-import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.SessionManager
 import com.example.projectct.R
 import com.example.projectct.helpClass.Token.Token
-import com.example.projectct.helpClass.User.NewUser
+import com.example.projectct.helpClass.User.DaneUserToken
 import com.example.projectct.helpClass.User.User
 import com.example.projectct.helpClass.User.UserAuth
 import com.google.android.material.textfield.TextInputLayout
@@ -37,10 +36,10 @@ class RegisterActivity : AppCompatActivity() {
         //OnClick
         buttonRegister.setOnClickListener(registerActivityListener)
         buttonBack.setOnClickListener(backActivityListener)
-        fullname = findViewById<EditText>(R.id.reg_name_editText)
-        email = findViewById<EditText>(R.id.email_editText)
-        password = findViewById<EditText>(R.id.passwordReg_editText)
-        pass_rep = findViewById<EditText>(R.id.password_repeat_editText)
+        fullname = findViewById(R.id.reg_name_editText)
+        email = findViewById(R.id.email_editText)
+        password = findViewById(R.id.passwordReg_editText)
+        pass_rep = findViewById(R.id.password_repeat_editText)
     }
 
     private val registerActivityListener = View.OnClickListener { homeActivity() }
@@ -50,19 +49,18 @@ class RegisterActivity : AppCompatActivity() {
     private fun homeActivity(){
         if(CheckData()) {
             val intent = Intent(this, HomeActivity::class.java)
-            //TODO: New Register with token
             apiClient = ApiClient()
             sessionManager = SessionManager(this)
-            apiClient.getApiService().register(User(password.text.toString(), email.text.toString(), email.text.toString())).enqueue(object : Callback<NewUser> {
-                override fun onResponse(call: Call<NewUser>, response: Response<NewUser>) {
+            val arrayName: List<String> = fullname.text.toString().split(" ")
+            apiClient.getApiService().register(User(password.text.toString(), email.text.toString(), email.text.toString(),arrayName[0],arrayName[1])).enqueue(object : Callback<DaneUserToken> {
+                override fun onResponse(call: Call<DaneUserToken>, response: Response<DaneUserToken>) {
                     if (response.code() == 400) {
                         ClearData()
                         Toast.makeText(this@RegisterActivity, R.string.errorRegEmailIsUse, Toast.LENGTH_SHORT).show()
                     } else {
-                        var date = response.body()
                         apiClient.getApiService().login(UserAuth(email.text.toString(), password.text.toString())).enqueue(object : Callback<Token> {
                             override fun onResponse(call: Call<Token>, response: Response<Token>) {
-                                var loginResponse = response.body()
+                                val loginResponse = response.body()
                                 sessionManager.saveAuthToken(loginResponse!!.authToken!!)
                                 startActivity(intent)
                             }
@@ -74,7 +72,7 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<NewUser>, t: Throwable) {
+                override fun onFailure(call: Call<DaneUserToken>, t: Throwable) {
                     Toast.makeText(this@RegisterActivity, R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
                 }
             })
@@ -92,15 +90,15 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun CheckData(): Boolean {
-        if (fullname.text.length == 0 || email.text.length == 0 || password.text.length == 0 || pass_rep.text.length == 0) {
+        if (fullname.text.isEmpty() || email.text.isEmpty() || password.text.isEmpty() || pass_rep.text.isEmpty()) {
             Toast.makeText(this, R.string.errorRegClear, Toast.LENGTH_SHORT).show()
             return false
         }
-        if (Pattern.matches("^[a-zA-Z0-9]+\$", password.text.toString()) == false || password.text.length < 8 || Pattern.matches(email.text.toString(), password.text.toString()) == false) {
+        if (!Pattern.matches("^[a-zA-Z0-9]+\$", password.text.toString()) || password.text.length < 8 || !Pattern.matches(email.text.toString(), password.text.toString())) {
             Toast.makeText(this, R.string.errorRegNotGoodPass, Toast.LENGTH_SHORT).show()
             return false
         }
-        if (Pattern.matches(email.text.toString(), password.text.toString()) == false){
+        if (!Pattern.matches(email.text.toString(), password.text.toString())){
             Toast.makeText(this, R.string.errorEmailInPass, Toast.LENGTH_SHORT).show()
         return false
         }
@@ -108,7 +106,7 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this,R.string.errorRegPassNotRepeat,Toast.LENGTH_SHORT).show()
             return false
         }
-        return true;
+        return true
     }
 
     private fun loginActivity()

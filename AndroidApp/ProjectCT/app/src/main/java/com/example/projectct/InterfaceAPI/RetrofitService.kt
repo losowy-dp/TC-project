@@ -8,40 +8,42 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitService {
+    //POST Request
+    //LoginActivity and RegisterActivity
     @POST("/auth/jwt/create/")
     fun login(@Body data: UserAuth): Call<Token>
-
+    //RegisterActivity
     @POST("/auth/users/")
-    fun register(@Body data: User): Call<NewUser>
-
-    @GET("/transportations/getTransportions/")
-    fun getAll(): Call<List<TransportationPrimary>>
-
+    fun register(@Body data: User): Call<DaneUserToken>
+    //Add_order
     @POST("/transportations/getTransportions/")
     fun createTransport(@Body data: CreateTransportations): Call<TransportationPrimary>
-
+    @POST("/auth/users/set_password/")
+    fun resetPassword(@Header("Authorization")token: String,@Body data: Password): Call<Int>
+    //GET Request
+    //All_order_list
+    @GET("/transportations/getTransportions/")
+    fun getAll(): Call<List<TransportationPrimary>>
+    //Order
     @GET("/transportations/{id}")
     fun takeTransport(@Path("id")id: String): Call<List<TransportationPrimary>>
 
     @GET("/auth/users/me")
     fun fetchDana(@Header("Authorization")token: String): Call<DaneUserToken>
 
-    @GET("/account/profile/{id}")
-    fun takeInfoPrimitive(@Path("id")id: String): Call<List<UserPhone>>
+    @GET("/account/userDetail/{id}")
+    fun takeInfoUser(@Path("id")id: String): Call<UserInfo>
 
-    @POST("/account/profile/edit/{id}")
-    fun changeInfo(@Path("id")id: String,@Body dane: UserPhone): Call<String>
+    @GET("/account/profileDetail/{id}")
+    fun takeInfoProfile(@Path("id")id: String): Call<UserPhone>
 
-    @POST("/account/edit_profile/")
-    fun changeProfileInfo(@Body dane: UserPhonePrim): Call<String>
 
-    @POST("/account/create_profile/{id}")
-    fun createProfile(@Path("id")id:String): Call<String>
-
-    @GET("/transportations/ordered/{id}")
+    @GET("/transportations/ordered/{id}/")
     fun historyOrder(@Path("id")id: String): Call<List<TransportationPrimary>>
 
-
-    @POST("/edit_kastyl/{id}")
-    fun kostyl(@Path("id")id: String,@Body dane: Costyl): Call<String>
+    //PUT Request
+    @PUT("/account/userDetail/{id}/")
+    fun changeUserDetail(@Path("id")id: String,@Body user: UserInfo): Call<String>
+    @PUT("/account/profileDetail/{id}/")
+    fun changeProfileDetail(@Path("id")id: String,@Body user: UserPhone): Call<String>
 }

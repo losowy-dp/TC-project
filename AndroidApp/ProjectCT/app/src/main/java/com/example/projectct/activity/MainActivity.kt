@@ -31,18 +31,18 @@ class MainActivity : AppCompatActivity() {
         top_animation = AnimationUtils.loadAnimation(this, R.anim.top_animation)
         bot_animation = AnimationUtils.loadAnimation(this,R.anim.botom_animation)
         //Hooks
-        image = findViewById<ImageView>(R.id.icon)
-        logo = findViewById<TextView>(R.id.textView)
-        tag = findViewById<TextView>(R.id.textView2)
+        image = findViewById(R.id.icon)
+        logo = findViewById(R.id.textView)
+        tag = findViewById(R.id.textView2)
         image.startAnimation(top_animation)
         logo.startAnimation(bot_animation)
         tag.startAnimation(bot_animation)
         //Handler
         Handler(Looper.getMainLooper()).postDelayed({
-           var intent = Intent(this,LoginActivity::class.java)
+           val intent = Intent(this,LoginActivity::class.java)
 
             if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-                var options = ActivityOptions.makeSceneTransitionAnimation(this,
+                val options = ActivityOptions.makeSceneTransitionAnimation(this,
                 UtilPair.create(image,"logo_image"),
                 UtilPair.create(logo,"logo_text"))
             startActivity(intent, options.toBundle())

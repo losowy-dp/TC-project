@@ -30,7 +30,7 @@ class HomeActivity : AppCompatActivity(), All_order_list.OnSelectedButtonListene
     }
 
     private fun setCurentFragment(fragment: Fragment){
-        val apply = supportFragmentManager.beginTransaction().apply {
+        supportFragmentManager.beginTransaction().apply {
             replace(R.id.fl_wrapper, fragment)
             commit()
         }

@@ -19,6 +19,7 @@ import com.example.projectct.InterfaceAPI.SessionManager
 import com.example.projectct.R
 import com.example.projectct.activity.HistoryActivity
 import com.example.projectct.helpClass.User.DaneUserToken
+import com.example.projectct.helpClass.User.UserInfo
 import com.example.projectct.helpClass.User.UserPhone
 import org.w3c.dom.Text
 import retrofit2.Call
@@ -60,41 +61,38 @@ class Profile : Fragment() {
         sessionManager = SessionManager(activity!!)
         id = ""
         apiClient.getApiService().fetchDana(token = "Bearer ${sessionManager.fetchAuthToken()}")
-            .enqueue(object : retrofit2.Callback<DaneUserToken> {
+            .enqueue(object :Callback<DaneUserToken> {
                 override fun onResponse(
                         call: Call<DaneUserToken>,
                         response: Response<DaneUserToken>
                 ) {
                     var data = response.body()
                     if (response.code() != 401) {
-                        id = data!!.id
-                        apiClient.getApiService().takeInfoPrimitive(data!!.id).enqueue(
-                                object : Callback<List<UserPhone>> {
+                        id = data!!.id.toString()
+                        apiClient.getApiService().takeInfoUser(data!!.id!!).enqueue(object : Callback<UserInfo>{
+                            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                                var dane = response.body()
+                                if(response.code()==200){
+                                    first_name.text = dane!!.first_name+" "+dane!!.last_name
+                                    email.text = dane!!.email
+                                }
+                            }
 
-                                    override fun onFailure(call: Call<List<UserPhone>>, t: Throwable) {
-                                        Toast.makeText(
-                                                activity,
-                                                R.string.errorLogin,
-                                                Toast.LENGTH_SHORT
-                                        ).show()
-                                    }
+                            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
 
-                                    override fun onResponse(
-                                            call: Call<List<UserPhone>>,
-                                            response: Response<List<UserPhone>>
-                                    ) {
-                                        var dane = response.body()
-                                        if (response.code() == 200) {
-                                            dane!!.forEach {
-                                                first_name.setText(it.user!!.first_name)
-                                                phone.setText(it.number_of_phone)
-                                                email.setText(it.user!!.email)
-                                            }
-                                        } else {
-                                            Toast.makeText(activity, R.string.errorInternetConnect, Toast.LENGTH_SHORT).show()
-                                        }
-                                    }
-                                })
+                            }
+                        })
+                        apiClient.getApiService().takeInfoProfile(data!!.id!!).enqueue(object: Callback<UserPhone>{
+                            override fun onResponse(call: Call<UserPhone>, response: Response<UserPhone>) {
+                                if(response.code()==200)
+                                    phone.text = response.body()!!.number_of_phone
+                            }
+
+                            override fun onFailure(call: Call<UserPhone>, t: Throwable) {
+
+                            }
+
+                        })
                     }
                 }
 
@@ -112,10 +110,7 @@ class Profile : Fragment() {
 
     private fun historyOrders(){
         val intent = Intent (activity, HistoryActivity::class.java)
-        println("******************************")
-        println(id)
-        println("******************************")
-        intent.putExtra("idi",id)
+        intent.putExtra("id",id)
         startActivity(intent)
     }
 }

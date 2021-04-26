@@ -7,7 +7,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.ApiClient
-import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.InterfaceAPI.SessionManager
 import com.example.projectct.R
 import com.example.projectct.helpClass.Token.Token
@@ -52,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
         val buttonLogin = findViewById<Button>(R.id.sign_in)
         val buttonRegister = findViewById<Button>(R.id.sign_up)
         if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP){
-            var options = ActivityOptions.makeSceneTransitionAnimation(
+            val options = ActivityOptions.makeSceneTransitionAnimation(
                 this,
                 UtilPair.create(image, "logo_image"),
                 UtilPair.create(logo, "logo_tag"),
@@ -73,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
     private fun loginAcitivity(){
         val login = findViewById<EditText>(R.id.username_editText)
         val pass = findViewById<EditText>(R.id.password_editText)
-        if(login.text.length>0 && pass.text.length>=8){
+        if(login.text.isNotEmpty() && pass.text.length>=8){
             val intent = Intent(this, HomeActivity::class.java)
             //NEW
             apiClient = ApiClient()

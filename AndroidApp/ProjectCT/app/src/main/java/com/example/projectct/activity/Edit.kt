@@ -32,7 +32,7 @@ class   Edit : AppCompatActivity() {
         setContentView(R.layout.activity_edit)
         id = intent.extras!!.getString("id").toString()
         fieldData()
-        buttonSaveChange = findViewById<Button>(R.id.but_save_change)
+        buttonSaveChange = findViewById(R.id.but_save_change)
         val buttonChangePassword = findViewById<Button>(R.id.but_change_password)
         val buttonBackToMenu = findViewById<Button>(R.id.but_back_to_menu)
         buttonBackToMenu.setOnClickListener(buttonBackToMenuListener)
@@ -45,28 +45,35 @@ class   Edit : AppCompatActivity() {
     private val buttonSaveChangeListener = View.OnClickListener { saveChange() }
     private val buttonChangePasswordListener = View.OnClickListener { changePassword() }
     private fun fieldData(){
-        fullname = findViewById<EditText>(R.id.editTextTextPersonName)
-        login = findViewById<EditText>(R.id.editTextTextPersonName2)
-        phonenumber = findViewById<EditText>(R.id.phonemojiTextInputEditText)
-        email = findViewById<EditText>(R.id.editTextTextPersonName4)
+        fullname = findViewById(R.id.editTextTextPersonName)
+        login = findViewById(R.id.editTextTextPersonName2)
+        phonenumber = findViewById(R.id.phonemojiTextInputEditText)
+        email = findViewById(R.id.editTextTextPersonName4)
         apiClient = ApiClient()
         sessionManager = SessionManager(this)
-        apiClient.getApiService().takeInfoPrimitive(id).enqueue(object: Callback<List<UserPhone>>{
-            override fun onResponse(call: Call<List<UserPhone>>, response: Response<List<UserPhone>>) {
-                var dane = response.body()
-                if (response.code() == 200) {
-                    dane!!.forEach {
-                        fullname.setText(it.user!!.first_name)
-                        login.setText(it.user!!.last_name)
-                        phonenumber.setText(it.number_of_phone)
-                        email.setText(it.user!!.email)
-                    }
+        apiClient.getApiService().takeInfoUser(id).enqueue(object: Callback<UserInfo>{
+            override fun onResponse(call: Call<UserInfo>, response: Response<UserInfo>) {
+                if(response.code()==200){
+                    val data = response.body()
+                    fullname.setText(data!!.first_name)
+                    login.setText(data!!.last_name)
+                    email.setText(data!!.email)
                 }
             }
 
-            override fun onFailure(call: Call<List<UserPhone>>, t: Throwable) {
+            override fun onFailure(call: Call<UserInfo>, t: Throwable) {
+            }
+        })
+        apiClient.getApiService().takeInfoProfile(id).enqueue(object: Callback<UserPhone>{
+            override fun onResponse(call: Call<UserPhone>, response: Response<UserPhone>) {
+                if(response.code()==200){
+                    val data = response.body()
+                    phonenumber.setText(data!!.number_of_phone)
+                }
             }
 
+            override fun onFailure(call: Call<UserPhone>, t: Throwable) {
+            }
         })
     }
     private fun homeActivity(){
@@ -83,43 +90,29 @@ class   Edit : AppCompatActivity() {
         }
         else
         {
-            if(true)
+            if(errors())
             {
-                //save data in database
-                fullname.isEnabled = false
-                login.isEnabled = false
-                phonenumber.isEnabled = false
-                email.isEnabled = false
-                buttonSaveChange.setText(R.string.change_the_data)
-                //Costyl
-                apiClient.getApiService().kostyl(id, Costyl(phonenumber.text.toString(),fullname.text.toString(),login.text.toString(),email.text.toString())).enqueue(object : Callback<String>{
-                    override fun onResponse(call: Call<String>, response: Response<String>) {
-                        if(response.code()==200)
-                            Toast.makeText(this@Edit,"Change",Toast.LENGTH_SHORT).show()
-                        else Toast.makeText(this@Edit,"NOT Change", Toast.LENGTH_SHORT).show()
-                    }
+                toDBProfile()
+                toDBUser()
+                    //save data in database
+                    fullname.isEnabled = false
+                    login.isEnabled = false
+                    phonenumber.isEnabled = false
+                    email.isEnabled = false
+                    buttonSaveChange.setText(R.string.change_the_data)
 
-                    override fun onFailure(call: Call<String>, t: Throwable) {
-                        TODO("Not yet implemented")
-                    }
-                })
             }
         }
     }
     private fun errors():Boolean{
-        if(TextUtils.isEmpty(fullname.getText().toString().trim()) || TextUtils.isEmpty(login.getText().toString().trim()) || TextUtils.isEmpty(phonenumber.getText().toString().trim()) || TextUtils.isEmpty(email.getText().toString().trim()))
+        if(TextUtils.isEmpty(fullname.text.toString().trim()) || TextUtils.isEmpty(login.text.toString().trim()) || TextUtils.isEmpty(phonenumber.getText().toString().trim()) || TextUtils.isEmpty(email.getText().toString().trim()))
         {
             Toast.makeText(this, R.string.erroremptylines, Toast.LENGTH_SHORT).show()
             return false
         }
-        if(phonenumber.text.length > 12 || phonenumber.text.length < 8)
+        if(phonenumber.text.length < 8)
         {
             Toast.makeText(this, R.string.errorphonenumber, Toast.LENGTH_SHORT).show()
-            return false
-        }
-        if(login.text.length < 6)
-        {
-            Toast.makeText(this, R.string.errorLogin, Toast.LENGTH_SHORT).show()
             return false
         }
         if(email.text.length < 6 && android.util.Patterns.EMAIL_ADDRESS.matcher(email.text).matches()){
@@ -129,33 +122,35 @@ class   Edit : AppCompatActivity() {
         return true
     }
 
-    private fun saveData(){
-        if(toDBProfile())
-            Toast.makeText(this,R.string.data_changed,Toast.LENGTH_SHORT).show()
-    }
-    private fun toDBProfile(): Boolean{
-        var odp: Boolean = false
-        apiClient.getApiService().changeProfileInfo(UserPhonePrim(id,phonenumber.text.toString())).enqueue(object : Callback<String>{
+    private fun toDBProfile(){
+
+        apiClient.getApiService().changeUserDetail(id,UserInfo(id,fullname.text.toString(),login.text.toString(),email.text.toString())).enqueue(object: Callback<String>{
             override fun onResponse(call: Call<String>, response: Response<String>) {
-               if(response.code()==200){
-                   odp =true
-               }
+
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-               odp = false
-            }
 
+            }
         })
-        return false
     }
 
 
-    private fun toDBUser(): Boolean{
-        return false
+    private fun toDBUser(){
+
+        apiClient.getApiService().changeProfileDetail(id, UserPhone(id,phonenumber.text.toString())).enqueue(object: Callback<String>{
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+
+            }
+        })
     }
     private fun changePassword(){
         val intent = Intent(this, Change_your_password::class.java)
+        intent.putExtra("id",id)
         startActivity(intent)
         }
     }

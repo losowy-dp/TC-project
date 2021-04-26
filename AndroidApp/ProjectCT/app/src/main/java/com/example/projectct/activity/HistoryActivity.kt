@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.InterfaceAPI.ApiClient
-import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.R
 import com.example.projectct.helpClass.Transport.TransportationPrimary
 import retrofit2.Call
@@ -24,20 +23,20 @@ class HistoryActivity : AppCompatActivity() {
         val buttonBacktoMenu = findViewById<Button>(R.id.but_back_to_menu2)
 
         buttonBacktoMenu.setOnClickListener(buttonBacktoMenuListener)
-        var id = intent.extras!!.getString("idi").toString()
-        var listView = findViewById<ListView>(R.id.historyOrderList)
+        val id = intent.extras!!.getString("id").toString()
+        val listView = findViewById<ListView>(R.id.historyOrderList)
         apiClient = ApiClient()
         apiClient.getApiService().historyOrder(id).enqueue(object: Callback<List<TransportationPrimary>>{
             override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
-               var telo = response.body()
+               val telo = response.body()
                 if(telo!=null){
                     arrayList = ArrayList()
                     telo.forEach{
                         map = HashMap()
-                        var nowa: String = it.start_location+ " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
-                        map.put("citys",nowa)
-                        var  price: String  = it.id
-                        map.put("value", price)
+                        val nowa: String = it.start_location+ " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                        map["citys"] = nowa
+                        val  price: String  = it.id
+                        map["value"] = price
                         arrayList.add(map)
                     }
                     val adapter = SimpleAdapter(
@@ -48,12 +47,10 @@ class HistoryActivity : AppCompatActivity() {
                             intArrayOf(android.R.id.text1)
                     )
                     listView.adapter = adapter
-                    listView.onItemClickListener = object : AdapterView.OnItemClickListener{
-                        override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                            val intent = Intent(this@HistoryActivity, Order::class.java)
-                            intent.putExtra("id", arrayList.get(position).get("value"))
-                            startActivity(intent)
-                        }
+                    listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+                        val intent = Intent(this@HistoryActivity, Order::class.java)
+                        intent.putExtra("id", arrayList[position]["value"])
+                        startActivity(intent)
                     }
                 }
             }

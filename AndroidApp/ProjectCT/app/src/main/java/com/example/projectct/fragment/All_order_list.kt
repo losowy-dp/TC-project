@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.ApiClient
-import com.example.projectct.InterfaceAPI.Common
 import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
 import com.example.projectct.activity.Order
@@ -26,7 +25,6 @@ import retrofit2.Response
  * create an instance of this fragment.
  */
 class All_order_list : Fragment() {
-    lateinit var mService: RetrofitService
     lateinit var apiClient: ApiClient
     //Interface
     interface OnSelectedButtonListenerAll{
@@ -51,21 +49,21 @@ class All_order_list : Fragment() {
         button.backgroundTintList = null
         val buttonMyOrder = view.findViewById<Button>(R.id.my_order_fragment)
         buttonMyOrder.setOnClickListener(MyOrderFragment)
-        var listView = view.findViewById<ListView>(R.id.allOrderList)
+        val listView = view.findViewById<ListView>(R.id.allOrderList)
         apiClient = ApiClient()
         apiClient.getApiService().getAll().enqueue(object : Callback<List<TransportationPrimary>> {
              override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
-                    var telo = response.body()
+                    val telo = response.body()
                     if (telo != null) {
                         arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            var nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
                             map.put("citys", nowa)
-                            var price: String = it.id
+                            val price: String = it.id
                             map.put("value", price)
                             arrayList.add(map)
                         }

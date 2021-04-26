@@ -13,11 +13,18 @@ class User {
     @SerializedName("password")
     @Expose
     private var password: String
+    @SerializedName("first_name")
+    @Expose
+    private var first_name: String
+    @SerializedName("last_name")
+    @Expose
+    private var last_name: String
 
-
-    constructor(password: String, username: String, email: String) {
+    constructor(password: String, username: String, email: String,first_name: String, last_name: String) {
         this.password = password
         this.username = username
         this.email = email
+        this.first_name = first_name
+        this.last_name = last_name
     }
 }
