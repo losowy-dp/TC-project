@@ -1,0 +1,324 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block include %}
+<link rel="stylesheet" href="{% static 'account/profile.css' %}">
+
+<!-- <link href="{% static 'account/jquery.toast.min.css' %}" rel="stylesheet" type="text/css"> -->
+
+
+<style>
+
+/* .wrapper{
+  background-image: url("{% static 'account/img/RLQNm.jpg' %}");
+  background-size: 100%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+} */
+
+  .profile_2{
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 700px;
+    /* height: 300px; */
+    margin: auto;
+    margin-bottom: 30px;
+    padding: 0;
+    /* border-radius: 10px; */
+  }
+
+  .block_photo {
+    width: 100%;
+    /* height: 800px; */
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  .photo_2{
+    margin: 0;
+    width: 270px;
+    height: 300px;
+    position: relative;
+  }
+
+  .photo_2 img {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  .data {
+    margin: 0;
+    width: 430px;
+    height: 300px;
+    /* background-color: snow; */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .username{
+    width: 90%;
+    padding-top: 10px;
+    border-bottom: black 1px solid;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .informations_block {
+    height: 300px;
+  }
+
+
+  @media (max-width: 700px){
+    .wrapper{
+      background-size: auto;
+    }
+
+    .profile_2{
+      width: 100%;
+    }
+    .block_photo{
+      flex-direction: column;
+    }
+    .photo_2{
+      margin: auto;
+    }
+
+    .data{
+      width: 100%;
+    }
+  }
+</style>
+
+
+{% endblock %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+
+
+
+
+    <div class="profile_2">
+      <div class="block_photo">
+        <div class="photo_2">
+          {% if profile.photo %}
+          <img src="{{MEDIA_URL}}{{ profile.photo.url }}" alt="">
+          {% else %}
+          <img src="https://prvera.ru/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+          {% endif %}
+          <div class="change_photo" id="change">
+            <p class="text_change_photo">Zmień zdjęcie</p>
+          </div>
+        </div>
+        <div class="data">
+          <div class="username">
+            <h2>{{ user.username }}</h2>
+          </div>
+          <div class="informations_block">
+          <!-- <p><span class="information_text">Login:</span> {{ user.username }}</p> -->
+          <p>
+            <span class="information_text">Imie:</span> 
+            {% if user.first_name %}
+            {{ user.first_name }}
+            {% else %}
+            Nie podano danych
+            {% endif %}
+          </p>
+          <p>
+            <span class="information_text">Nazwisko:</span> 
+            {% if user.first_name %}
+            {{ user.last_name }}
+            {% else %}
+            Nie podano danych
+            {% endif %}
+          </p>
+          <!-- <p> Nazwisko: {{ user.last_name }}</p> -->
+          <p>
+            <span class="information_text">Email:</span> 
+            {{ user.email }}
+          </p>
+          <p>
+            <span class="information_text">Numer telefonu:</span> 
+            {% if user.first_name %}
+            {{ profile.number_of_phone }}
+            {% else %}
+            Nie podano danych
+            {% endif %}
+          </p>
+          <p>
+            <span class="information_text">Data urodzenia:</span> 
+            {% if user.first_name %}
+            {{ profile.birthday }}
+            {% else %}
+            Nie podano danych
+            {% endif %}
+          </p>
+          <div class="edit_block">
+            <a class="edit_data" href="{% url 'edit_profile' user.id %}">Zmień dane</a>
+          </div>
+        </div>    
+      </div>
+   
+   
+   
+  
+   
+      
+   
+   
+   
+   
+   
+    </div>
+
+    <div class="moje_zlecenia">
+      <p>Moje zlecenia({{ count }})</p>
+    </div>
+
+    <div>
+      {% for item in transportations %}
+      <!-- <a href="#" style="display: block; text-decoration: none; color: black;"> -->
+      <div class="transportation_item">
+        <!-- <a  class="transportation_item" href="{% url 'transportation' item.id %}" style="text-decoration: none; color: black;"> -->
+          <div class="image">
+            {% if item.photo %}
+            <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
+            {% else %}
+            <img src="{% static 'transportation_car/img/transport.jpg'%}"> 
+            {% endif %}
+              
+          </div>
+
+          <div style="width: 85%; display: flex; flex-direction: column; margin-left: 10px;">
+            <div class="in">
+              <p style="margin-bottom: 3px;"><b>{{ item.model}}</b></p>
+            </div>
+            <div class="in">
+              <p style="margin-bottom: 3px;">{{ item.start_location}}</p>
+            </div>
+            <div class="in">
+              <p style="margin-bottom: 3px;">{{ item.delivery_location}}</p>
+            </div>
+            <div  class="settings">
+              <!-- <button type="button" class="btn btn-primary">Zobacz</button>
+              <button type="button" class="btn btn-primary">Edytuj</button>
+              <button type="button" class="btn btn-primary">Usuń</button> -->
+              <a href="{% url 'transportation' item.id %}" style="text-decoration: none;">Zobacz</a>
+              <a href="{% url 'edit_transport' item.id %}" style="text-decoration: none;">Edytuj</a>
+              <a href="{% url 'delete_transport' item.id %}" style="text-decoration: none;">Usuń</a>
+            </div>
+          </div>
+
+  <!-- </a> -->
+        </div>
+    {% endfor %}
+    </div>
+
+  </div>
+
+  <form action="{% url 'edit_photo' user.id %}" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="conteiner_change_photo">
+    <!-- <div class="chancel">
+      <p>nazad</p>
+
+      </div> -->
+    <div class="block_change_photo">
+      <div class="block_text_zagruzka">
+        <p class="text_zagruzka">Ładowanie nowego zdjęcia</p>
+        <p class="text_chancel" id="text_chancel">&#10005;</p>
+      </div>
+
+      <div class="form_photo_2">
+        <div class="form_item">
+          <p>
+            Możesz przesłać zdjęcie w formacie JPG lub PNG.
+          </p>
+        </div>
+        <div class="form_item">
+          <button type="button" class="btn btn-primary" onclick="document.getElementById('photo').click();">Wybrać zdjęcie</button>
+          <!-- <input type="button" id="loadFileXml" value="Wybrać zdjęcie" onclick="document.getElementById('photo').click();" /> -->
+          {{ form_change_photo.photo }}
+        </div>
+       
+        
+      </div>
+
+      <div class="block_zdjecie">
+        <img src="" alt="" id="zdjecie">
+      </div>
+      <div class="knopki">
+        <button type="submit" class="btn btn-primary">Zapisać</button>
+        <button id="wr" type="button" class="btn btn-primary">Wróć</button>
+      </div>
+
+
+    </div>
+    
+    
+  </div>
+</form>
+
+
+  <script>
+    $('.photo_2').mouseenter(function(){
+      $('.change_photo').css('display', 'flex');
+    });
+
+    $('.photo_2').mouseleave(function(){
+      $('.change_photo').css('display', 'none');
+    });
+
+    document.getElementById("change").onclick = function(){
+      $('.conteiner_change_photo').css('display', 'flex');
+    }
+
+    document.getElementById("text_chancel").onclick = function(){
+      $('.conteiner_change_photo').css('display', 'none');
+    }
+
+
+    document.getElementById("wr").onclick = function(){
+      document.getElementById("zdjecie").src = "";
+      $(".form_photo_2").css('display','flex');
+      $(".knopki").css('display','none');
+      $("#photo").val("");
+    }
+
+
+    document.getElementById("photo").onchange = function (evt){
+      var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+
+        if (FileReader && files && files.length) {
+          var fr = new FileReader();
+          fr.onload = function () {
+            document.getElementById("zdjecie").src = fr.result;
+           
+            var s = document.getElementById("zdjecie").height
+            console.log(s);
+            // $(".block_change_photo").height($("#zdjecie").height() + 200)
+          }
+          fr.readAsDataURL(files[0])
+          $(".form_photo_2").css('display','none');
+          $(".knopki").css('display','flex');
+        } else {
+
+        }
+       
+    }
+
+    function f(){
+      console.log($("#zdjecie").height())
+    }
+
+  </script>
+
+
+
+{% endblock %}

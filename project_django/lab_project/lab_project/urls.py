@@ -22,12 +22,12 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('transportations/', include('transportation_car.urls')),
-    path('accounts/', include('accounts.urls')),
+    path('account/', include('account.urls')),
 
     path('auth/', include('djoser.urls')),
     path('auth/', include('djoser.urls.jwt')),
-
-    path('api/accounts', include('accounts.urls'))
+    # path('accounts/', include('django.contrib.auth.urls')),
+    #path('api/account/', include('account.urls'))
 ]
 
 

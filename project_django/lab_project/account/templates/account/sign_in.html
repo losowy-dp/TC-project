@@ -1,0 +1,88 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'account/login.css' %}">
+	<script src="{% static 'js/jquery-3.1.1.js' %}"></script>
+	<title>Title</title>
+</head>
+<body>
+
+<div class="container" id="container">
+	{% if key %}
+<script>
+	container.classList.add("right-panel-active");
+</script>
+{% endif %}
+	<div class="form-container sign-up-container">
+		<form method="post" name="registration">
+
+			{% csrf_token %}
+			<h1>Utwórz konto</h1>
+<!--			<div class="social-container">-->
+<!--				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>-->
+<!--				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>-->
+<!--				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>-->
+<!--			</div>-->
+            {{ form_registration.username }}
+
+            {{ form_registration.first_name }}
+            {{ form_registration.email }}
+			
+            {{ form_registration.password }}
+			<p class="error">{{ form_registration.errors.password2.as_text }}</p>
+            {{ form_registration.password2 }}
+
+<!--			<input type="text" placeholder="Name" />-->
+<!--			<input type="email" placeholder="Email" />-->
+<!--			<input type="password" placeholder="Password" />-->
+
+			<button type="submit" name="btnformregistration" id="sub">Zarejestruj się</button>
+		</form>
+	</div>
+	<div class="form-container sign-in-container">
+		<form method="post">
+            {% csrf_token %}
+			<h1 style="margin-bottom: 20px">Logowanie</h1>
+<!--			<div class="social-container">-->
+<!--				<a href="#" class="social"><i class="fab fa-facebook-f"></i></a>-->
+<!--				<a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>-->
+<!--				<a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>-->
+<!--			</div>-->
+<!--			<span>or use your account</span>-->
+<!--			<input type="username" placeholder="Username" />-->
+<!--            <p style="margin-top: 0; margin-bottom: 0;">Imie</p>-->
+            {{ form_login.username }}
+<!--            <p style="margin-top: 0; margin-bottom: 0;">Haslo</p>-->
+            {{ form_login.password }}
+<!--			<input type="password" placeholder="Haslo" name={{form_login.password}} />-->
+			{% if error %}
+			<p class="error">{{ error }}</p>
+			{% endif %}
+			<a href="{% url 'password_reset' %}">Zapomniałeś hasło?</a>
+			<button type="submit" id="sub_login" name="btnformlogin">Zaloguj się</button>
+
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Witamy!</h1>
+				<p>Jeśli posiadasz konto na naszej stronie wprowadź dane i zaloguj się</p>
+				<button class="ghost" id="signIn" >Logowanie</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Witamy!</h1>
+				<p>Jeśli nie posiadasz konta na naszej stronie zarejstruj się</p>
+                <a href="#"><button class="ghost" id="signUp" >Rejestracja</button></a>
+            </div>
+		</div>
+	</div>
+</div>
+
+    <script src="{% static 'account/login.js' %}"></script>
+	<script src="{% static 'account/validation.js' %}"></script>
+</body>
+</html>

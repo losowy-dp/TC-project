@@ -1,0 +1,1 @@
+container.classList.add("right-panel-active");

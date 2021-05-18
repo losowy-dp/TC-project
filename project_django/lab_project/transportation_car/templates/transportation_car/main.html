@@ -1,0 +1,108 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block include %}
+<link rel="stylesheet" href="{% static 'css/slider.css' %}">
+{% endblock %}
+
+{% block title %}
+    Transporty
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+
+{% block slider%}
+<div class="slider" id="slider">
+  <div class="slider__wrapper">
+    <div class="slider__items">
+      <div class="slider__item">
+        <div  class="block-audi">
+          <img src="{% static 'main_img/audi-rs-e-tron-gt-exterior-hevcars-6.jpg' %}" alt="" class = "audi">
+        </div>
+      </div>
+      <div class="slider__item">
+        <div  class="block-audi">
+          <img src="{% static 'main_img/audi-rs-e-tron-gt-exterior-hevcars-2.jpg' %}" alt="" class = " audi audi-1">
+        </div>
+      </div>
+      <div class="slider__item">
+        <div  class="block-audi">
+          <img src="{% static 'main_img/audi-rs-e-tron-gt-exterior-hevcars-11.jpg' %}" alt="" class = "audi">
+        </div>
+      </div>
+      <div class="slider__item">
+        <div  class="block-audi">
+          <img src="{% static 'main_img/audi-rs-e-tron-gt-exterior-hevcars-13.jpg' %}" alt="" class = "audi">
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="slider__control slider__control_prev" href="#" role="button"></a>
+  <a class="slider__control slider__control_next" href="#" role="button"></a>
+</div>
+
+<script>
+  //$('.block-audi').height('630px');
+  $('.audi').width('100%');
+  fun();
+  //$('.audi').height('100%');
+  //fun();
+  document.getElementsByTagName("BODY")[0].onresize = fun;
+  function fun(){
+              $('.audi').css('width',$('#slider').width());
+              if($(window).width() < 1120){
+                // $('.audi').height('auto');
+                $('.block-audi').height($('.audi-1').height());
+                // $('.block-audi').css('display', 'noen');
+                // alert('Less than 960');
+                // $('.audi').height($('.block-audi').height());
+              } else {
+                $('.block-audi').height('630px');
+              }
+              
+              // $('.audi').height($('.audi').width/3);
+          // $('#slider').height($('audi'))
+          }        
+</script>
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- <div class="col">
+  
+ 
+
+</div> -->
+
+
+
+<!--    <div class="col">-->
+<!--        {% for item in transportations %}-->
+
+<!--        <div class="card mb-3">-->
+<!--          <div class="card-header">-->
+<!--              {{ item.start_location.city}}-{{item.delivery_location.city}}-->
+<!--          </div>-->
+<!--          <div class="card-body">-->
+<!--                <h5 class="card-title">{{ item.car_owner }}</h5>-->
+<!--                <p class="card-text">{{ item.price }}</p>-->
+<!--                <a href="#" class="btn btn-primary">Zobacz</a>-->
+<!--          </div>-->
+<!--          <div class="card-footer text-muted">-->
+<!--            {{ item.data_created|date:"Y-m-d H:i:s"}}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        {% empty %}-->
+<!--          Opps..-->
+<!--        {% endfor %}-->
+<!--        </div>-->
+
+<script src="{% static 'js/slider.js' %}"></script>
+{% endblock %}

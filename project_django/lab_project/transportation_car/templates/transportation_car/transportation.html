@@ -1,0 +1,249 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block include %}
+<link rel="stylesheet" href="{% static 'transportation_car/css/transportation.css' %}">
+
+
+
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script>
+<script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
+
+
+<!-- 1 -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+<!-- 2 -->
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+{% endblock %}
+
+{% block title %}
+    Transporty
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock %}
+{% block content %}
+<div >
+    <p class="data_created" style="margin-bottom: 0;" >Dodano: {{ transportation.data_created }}</p>
+</div>
+
+<p class="car">{{ transportation.model }}</p>
+</div>
+</div>
+
+
+<div class="block_map">
+    <div id="mapid"></div>
+    <!-- <div class='pointer'></div>        -->
+</div>
+      <!-- <script src="{% static 'transportation_car/js/map.js' %}"></script> -->
+<script>        
+    mapboxgl.accessToken = 'pk.eyJ1Ijoia29zdGlhc2tvcGVjIiwiYSI6ImNrbzNma2VvMTE4dTYydm12OWdqYWV4ZmUifQ.Rr5Kk6gDkwHK5MervsubUg';
+    var map = new mapboxgl.Map({
+        container: 'mapid',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        // center: [80, 80],
+        zoom: 13
+    });
+
+    // <p>{{ transportation.punktA_1 }}</p>
+    //         <p>{{ transportation.punktA_2 }}</p>
+    //         <p>{{ transportation.punktB_1 }}</p>
+    //         <p>{{ transportation.punktB_2 }}</p>
+
+
+   
+    var a_1 = Number({{ transportation.punktA_1 }});
+    var a_2 = Number({{ transportation.punktA_2 }});
+    var b_1 = Number({{ transportation.punktB_1 }});
+    var b_2 = Number({{ transportation.punktB_2 }});
+
+    var marker1 = new mapboxgl.Marker({
+            color: "green"
+        }).setLngLat([a_1, a_2])
+        .addTo(map);
+
+    var marker2 = new mapboxgl.Marker({
+            color: "red"
+        }).setLngLat([b_1, b_2])
+        .addTo(map);
+
+        map.fitBounds([
+            [a_1,a_2],
+            [b_1,b_2]
+        ],{
+        padding: 50
+    }); 
+
+getRoute(a_1,a_2,b_1,b_2);
+getRoute(a_1,a_2,b_1,b_2);
+
+function getRoute(a_1,a_2,b_1,b_2) {
+   
+   var url = 'https://api.mapbox.com/directions/v5/mapbox/driving-traffic/' + a_1 + ',' + a_2 + ';' + b_1 + ',' + b_2 + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+ 
+   // make an XHR request https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
+   var req = new XMLHttpRequest();
+   req.open('GET', url, true);
+   req.onload = function() {
+     var json = JSON.parse(req.response);
+     var data = json.routes[0];
+     var route = data.geometry.coordinates;
+     var geojson = {
+       type: 'Feature',
+       properties: {},
+       geometry: {
+         type: 'LineString',
+         coordinates: route
+       }
+     };
+
+    //  distance = turf.length(geojson).toLocaleString();
+     // distanceContainer.appendChild("value");
+    //  $("#distance").text("Dystans: " + distance + "km");
+    distance = turf.length(geojson).toLocaleString();
+    $("#dystans").text(" " + distance + "km");
+
+     // if the route already exists on the map, reset it using setData
+     if (map.getSource('route')) {
+       map.getSource('route').setData(geojson);
+     } else { // otherwise, make a new request
+       map.addLayer({
+         id: 'route',
+         type: 'line',
+         source: {
+           type: 'geojson',
+           data: {
+             type: 'Feature',
+             properties: {},
+             geometry: {
+               type: 'LineString',
+               coordinates: geojson
+             }
+           }
+         },
+         layout: {
+           'line-join': 'round',
+           'line-cap': 'round'
+         },
+         paint: {
+           'line-color': '#3887be',
+           'line-width': 5,
+           'line-opacity': 0.75
+         }
+       });
+     }
+   };
+   req.send();
+ }
+
+
+
+</script>
+
+<div class="container mt-5 content">
+    <div class="row" >
+        <div class="col">
+            <div class="car-content">
+                <div class="car-information">
+                    <div class="img-car">
+                        {% if transportation.photo %}
+                        <img src="{{MEDIA_URL}}{{ transportation.photo.url }}" alt="">
+                        {% else %}
+                        <img src="{% static 'transportation_car/img/transport.jpg'%}"> 
+                        {% endif %}
+                    </div>  
+                    <div class="main-infaarmation">
+                        <div>
+                            <p><b>Zleceniodawca: </b>{{ transportation.car_owner }}</p>
+                        </div>
+                        <div class="adress-1">
+                            <p><b>Adres i termin nadania</b></p>
+                            <div style="display: flex;">
+                                <img style="height: 25px; margin-right: 5px;" src="https://cdn.pixabay.com/photo/2014/04/03/10/03/google-309741_1280.png" alt="">
+                                <p>{{ transportation.start_location }}</p>
+                            </div>
+                            
+                            {% if transportation.data_start_shipment %}
+                            <p>{{ transportation.data_start_shipment }} - {{ transportation.data_end_shipment }}</p>
+                            {% else %}
+                            <p>Termin elastyczny</p> 
+                            {% endif %}
+                        </div>
+
+                        <div>
+                            <p><b>Adres i termin dostawy</b></p>
+                            <div style="display: flex;">
+                                <img style="height: 25px; margin-right: 5px;" src="https://cdn.pixabay.com/photo/2014/04/03/10/03/google-309740_1280.png" alt="">
+                                <p>{{ transportation.delivery_location }}</p>
+                            </div>
+                            
+                            {% if transportation.data_start_deliveri %}
+                            <p>{{ transportation.data_start_deliveri }} - {{ transportation.data_end_deliveri }}</p>
+                            {% else %}
+                            <p>Termin elastyczny</p> 
+                            {% endif %}
+                        </div>
+                    
+                        
+                    </div>
+                   
+                </div>
+
+                <div class="car-information">     
+                    <div>
+                        <p><b>Dystans:</b><span id="dystans"></span></p>
+                    </div>                    
+                </div>
+
+                <div class="car-information">
+                    <div>
+                        <b style="margin-right: 5px;">Samochód: </b>
+                    </div>
+                    
+                    <div>
+                        <p><b>Typ samochodu: </b> {{ transportation.typeCar }}</p>
+
+                        <p><b>Marka i model: </b> {{ transportation.model }}</p>
+
+                    </div>
+                    
+                    
+                </div>
+
+
+                <div class="car-information">
+                    <b style="margin-right: 5px;">Opis: </b>
+                    {% if transportation.description %}
+                    <p>{{ transportation.description }}</p>
+                    {% else %}
+                    <p>Nie podany</p> 
+                    {% endif %}
+                </div>
+
+                <div class="car-information">
+                    <b style="margin-right: 5px;">Cena: </b>
+                    <p>{{ transportation.price }}{{ transportation.currency }}</p>
+                </div>
+
+                
+
+            </div>
+            
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}

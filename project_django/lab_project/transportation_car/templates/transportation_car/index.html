@@ -1,6 +1,27 @@
 
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block include %}
+<link rel="stylesheet" href="{% static 'transportation_car/css/style_item.css' %}">
+<link rel="stylesheet" href="{% static 'transportation_car/css/pagination.css' %}">
+
+<!-- 1 -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+<!-- 2 -->
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+
+
+{% endblock %}
+
 {% block title %}
     Transporty
 {% endblock %}
@@ -8,26 +29,239 @@
 {% block sidebar %}
 
 {% endblock %}
-
 {% block content %}
-    <div class="col-md-9">
-        {% for item in transportations %}
 
-        <div class="card mb-3">
-          <div class="card-header">
-              {{ item.start_location.city}}-{{item.delivery_location.city}}
+<div class="col">
+
+
+    <div id="mapid" style="display: none;"></div>
+
+
+    
+
+    <div class="search">
+      <form action="" class="form_search" method="post">
+        {% csrf_token %}
+        <div class="search_for_city">
+          <p style="margin-right: 10px; margin-top:5px;">Skąd </p>
+          <div id="geocoder"></div>
+          <!-- <input type="text"> -->
+        </div>
+        <div class="search_for_city">
+          <p style="margin-right: 10px; margin-top:5px;">Dokąd </p>
+          <div id="geocoder1"></div>
+          <!-- <input type="text"> -->
+        </div>
+        <button type="submit" class="btn btn-primary">Szukaj</button>
+      </form>
+    </div>
+
+
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1Ijoia29zdGlhc2tvcGVjIiwiYSI6ImNrbzNma2VvMTE4dTYydm12OWdqYWV4ZmUifQ.Rr5Kk6gDkwHK5MervsubUg';
+        var map = new mapboxgl.Map({
+        container: 'mapid',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-79.4512, 43.6568],
+        zoom: 13
+      });
+
+      var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        language: 'pl-PL',
+        mapboxgl: mapboxgl,
+      });
+
+      var geocoder1 = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        language: 'pl-PL',
+        mapboxgl: mapboxgl,
+      });
+
+      document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+      document.getElementById('geocoder1').appendChild(geocoder1.onAdd(map));
+
+
+    </script>
+
+
+    <div class="result-search">
+      
+      <div class="search-1">
+        <p>Zlecenia: <span><span id="number">{{ number }}</span></span> z <span id="count">{{ length }}</span></p>
+      </div>
+      
+      <div class="search-2">
+
+        <div id="pagination"></div>
+
+
+        <script src="{% static 'transportation_car/js/pagination.js' %}"></script>
+        
+
+        <!-- <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link" href="{% url 'home' 1 %}">1</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'home' 2 %}">2</a></li>
+            <li class="page-item"><a class="page-link" href="{% url 'home' 3 %}">3</a></li>
+            <li class="page-item">
+              <a class="page-link" href="#">Next</a>
+            </li>
+          </ul>
+        </nav> -->
+      </div>
+      
+    </div>
+
+   <!-- <a class="super-link" href="#">
+    <div class="test">
+      
+      <div class="kart">
+        <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt="">
+      </div>
+
+      <div class="test2">
+        <div>
+          <div class="test-data" style="font-size: 11px;">12 kwietnia 2020</div>
+          <h4>Rover 200</h4>
+         
+          <div class="test-adres">
+            <p><b>Załadunek</b></p>
+            <div><p>Moskwa</p></div>
           </div>
-          <div class="card-body">
-                <h5 class="card-title">{{ item.car_owner }}</h5>
-                <p class="card-text">{{ item.price }}</p>
-                <a href="#" class="btn btn-primary">Zobacz</a>
+
+          <div class="test-adres">
+            <p><b>Dostawa</b></p>
+            <div><p>Warszawa</p></div>
           </div>
-          <div class="card-footer text-muted">
-            {{ item.data_created|date:"Y-m-d H:i:s"}}
+
+        </div>
+      </div>
+    </div>
+    </a> -->
+
+
+    {% for item in transportations %}
+
+
+
+
+    <a class="super-link" href="{% url 'transportation' item.id %}">
+      <div class="test">
+        
+        <div class="kart">
+          {% if item.photo %}
+          <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
+          {% else %}
+          <img src="https://lh3.googleusercontent.com/proxy/bummKuuxK52LjrVFLQTEb3R996G9Uh5VUv1sLUHyzgYos6w4dDMGRnPeRXy2nAHhPkPXxIcvPnWTKMbnJGlvzVe7sLX2SzOvJdRG"> 
+          <!-- <img src="{% static 'transportation_car/img/transport.jpg'%}">  -->
+          {% endif %}
+          <!-- <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt=""> -->
+        </div>
+  
+        <div class="test_2">
+          <div class="test2">
+            <div>
+              <div class="test-data" style="font-size: 11px;">{{ item.data_created}}</div>
+              <h4>{{ item.model}}</h4>
+             
+              <div class="test-adres">
+                <p><b>Załadunek:</b></p>
+                <div><p>{{ item.start_location}}</p></div>
+              </div>
+    
+              <div class="test-adres">
+                <p><b>Dostawa:</b></p>
+                <div><p>{{item.delivery_location}}</p></div>
+              </div>
+
+              <div class="test-adres">
+                <p><b>Cena:</b></p>
+                <div><p>{{item.price}}{{item.currency}}</p></div>
+              </div>
+    
+            </div>
+          </div>
+          <div class="test3">
+            <button type="button" class="btn btn-primary">Zobacz</button>
           </div>
         </div>
-        {% empty %}
-          Opps..
-        {% endfor %}
+        
+      </div>
+      </a>
+
+
+
+
+
+
+    <!-- <a href="#" style="display: block; text-decoration: none; color: black;">
+  
+      <a  class="transportation_item" href="{% url 'transportation' item.id %}" style="text-decoration: none; color: black;">
+        <div class="image">
+          {% if item.photo %}
+          <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
+          {% else %}
+          <img src="{% static 'transportation_car/img/transport.jpg'%}"> 
+          {% endif %}
+            
         </div>
+      <div class="name">
+        <span class="name-text">Rover 200</span>
+      </div>
+      <div class="informations">
+          <div class="locations">
+            <span>{{ item.start_location}} -> {{item.delivery_location}}</span>
+          </div>
+          <div class="time">
+            <span>Dodano: {{ item.data_created}}</span>
+          </div>
+      </div>
+</a> -->
+  {% endfor %}
+
+
+  <!-- <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav> -->
+
+
+
+</div>
+
+
+
+<!--    <div class="col">-->
+<!--        {% for item in transportations %}-->
+
+<!--        <div class="card mb-3">-->
+<!--          <div class="card-header">-->
+<!--              {{ item.start_location.city}}-{{item.delivery_location.city}}-->
+<!--          </div>-->
+<!--          <div class="card-body">-->
+<!--                <h5 class="card-title">{{ item.car_owner }}</h5>-->
+<!--                <p class="card-text">{{ item.price }}</p>-->
+<!--                <a href="#" class="btn btn-primary">Zobacz</a>-->
+<!--          </div>-->
+<!--          <div class="card-footer text-muted">-->
+<!--            {{ item.data_created|date:"Y-m-d H:i:s"}}-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        {% empty %}-->
+<!--          Opps..-->
+<!--        {% endfor %}-->
+<!--        </div>-->
 {% endblock %}

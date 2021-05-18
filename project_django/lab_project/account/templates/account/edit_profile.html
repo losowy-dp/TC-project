@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block include %}
+<link rel="stylesheet" href="{% static 'account/edit_profile.css' %}">
+<link rel="stylesheet" href="{% static 'account/number_of_phone/intlTelInput.css' %}">
+{% endblock %}
+
+{% block title %}
+  {{ title }}
+{% endblock %}
+
+{% block content %}
+    <!-- <div class="d-grid gap-2 col-6 mx-auto"> -->
+    
+      <div class="profile">
+        <div class="login">
+            <p>{{ user.username }}</p>
+        </div>
+
+
+        <div class="information_main">
+            <form action="{% url 'edit_data_profile' user.id %}" method="POST" >
+
+                {% csrf_token %}
+
+            <div class="contacts">
+                Informacja o mnie
+            </div>
+
+            <div class="block_me">
+                <div class="block_with_fields">
+                <div class="fields password">
+                    <p class="name_field">Imie:</p>
+                    {{ form_main.first_name}}
+                    <!-- <input type="text"> -->
+                </div>
+
+                <div class="fields password">
+                    <p class="name_field">Nazwisko:</p>
+                    {{ form_main.last_name}}
+                    <!-- <input type="text"> -->
+                </div>
+
+                <div class="fields password">
+                    <p class="name_field">Data urodzenia:</p>
+                    {{ form_main.birthday }}
+                    <!-- <input type="date"> -->
+                </div>
+                <div class="fields password">
+                    <p class="name_field">Photo:</p>
+                    <!-- <input type="date"> -->
+                </div>
+            </div>
+            </div>
+            <div class="sub_main">
+                <button type="submit" class="btn btn-primary">Zmień</button>
+                <!-- <button class="" type="submit">Zmień</button> -->
+            </div>
+
+            <script>
+                $('#first_name').val("{{ user.first_name }}");
+                $('#last_name').val("{{ user.last_name }}");
+                $('#birthday').val("{{ profile.birthday | date:"Y-m-d" }}");
+            </script>
+
+        </form>
+        </div>
+
+
+
+
+      <div class="number_of_phone">
+        <div class="contacts">
+            Telefon
+        </div>
+        <form action="{% url 'edit_phone' user.id %}" method="POST">
+            {% csrf_token %}
+        <div class="block_number">
+            
+            
+                <div class="fields">
+                  <p class="name_field">Numer telefonu:</p>
+                  {{ form_number.number_of_phone }}
+                  <!-- <input id="phone" type="tel" class="form-control" > -->
+                    
+                </div>
+               
+           
+        </div>
+
+       
+
+        <div class="sub_main">
+            <button type="submit" class="btn btn-primary">Zmień</button>
+            <!-- <button id="sub_number" type="submit">Zmień</button> -->
+        </div>
+    </form>
+    
+
+      </div>
+
+      <!-- <div class="number_of_phone">
+        <div class="contacts">
+            Zdjęcie
+        </div>
+        <form action="{% url 'edit_photo' user.id %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="block_number">
+            
+            
+                <div class="fields">
+                  <p class="name_field">Zdjęcie:</p>
+                  {{ photoForm }}
+                
+                    
+                </div>
+               
+           
+        </div>
+
+       
+
+        <div class="sub_main">
+            <button id="sub_number" type="submit">Zmień</button>
+        </div>
+    </form>
+    
+
+      </div> -->
+
+
+
+
+
+      <div class="information_main">
+        <form action="{% url 'change_password' user.id %}" method="POST">
+
+            {% csrf_token %}
+
+        <div class="contacts">
+            Zmiana hasła
+        </div>
+
+        <div class="block_me">
+        <div class="block_with_fields">
+            <!-- <div class="fields password">
+                <p class="name_field">Aktualne hasło</p>
+                {{ form_change_password.old_password }}
+            </div>
+
+            <div class="fields password">
+                <p class="name_field">Nowe hasło</p>
+                {{ form_change_password.new_password1 }}
+            </div>
+
+            <div class="fields password">
+                <p class="name_field">Powtórz nowe hasło</p>
+                {{ form_change_password.new_password2 }}
+            </div> -->
+            {{form_change_password}}
+            <div class="er">
+                {{ error }}
+            </div>
+        </div>
+        
+           
+    </div>
+        <div class="sub_main">
+
+            <button type="submit" class="btn btn-primary">Zmień</button>
+            <!-- <button class="" type="submit">Zmień</button> -->
+        </div>
+
+        <script>
+
+
+
+            // if($('#id_old_password').val() == $('#id_new_password1').val()){
+            //     console.log("nie nie nie nie nie nie nnie nnie")
+            // }
+            $('#first_name').val("{{ user.first_name }}");
+            $('#last_name').val("{{ user.last_name }}");
+            $('#birthday').val("{{ profile.birthday | date:"Y-m-d" }}");
+
+            // document.getElementById("old_password").oninput = checkE;
+            // document.getElementById("new_password").oninput = checkPassword;
+            // document.getElementById("kostia").onclick = checkPassword;
+
+            // function checkPassword() {
+            //     var text_old_password = $("#id_old_password").val();
+            //     var text_new_password = $("#id_new_password1").val();
+
+            //     console.log(text_old_password + " 1 ")
+            //     console.log(text_new_password + " 2 ")
+
+            //     if(text_old_password == text_new_password){
+            //         document.getElementById("id_new_password1").setCustomValidity("Nowe hasło powinno różnić się od starego");
+            //     } else {
+            //         document.getElementById("id_new_password1").setCustomValidity("");
+            //     } 
+            // }
+
+        </script>
+
+    </form>
+    </div>
+
+
+
+
+      
+
+
+
+    </div>
+<!-- <script src="{% static 'account/number_of_phone/utils.js' %}"></script> -->
+<script src="{% static 'account/number_of_phone/intlTelInput.js' %}"></script>
+<script>
+    $("#phone").intlTelInput({
+    initialCountry: "auto",
+    geoIpLookup: function(callback) {
+        jQuery.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+            var countryCode = (resp && resp.country) ? resp.country : "";
+            callback(countryCode);
+        });
+    },
+    utilsScript: "{% static 'account/number_of_phone/utils.js' %}",
+    allowExtensions: true,
+});
+
+
+
+
+// $("#phone").intlTelInput({
+//   utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.0.3/js/utils.js",
+//   allowDropdown: true
+// });
+</script>
+
+
+<script>
+    $("#phone").intlTelInput("setNumber", "{{ profile.number_of_phone }}");
+    
+    document.getElementById('sub_number').onclick = number_fun;
+
+    function number_fun() {
+        var intlNumber = $("#phone").intlTelInput("getNumber");
+        $('#phone').val(intlNumber)
+        console.log(intlNumber);
+        console.log($('#phone').val())
+    }
+
+    
+
+
+</script>
+
+    <!-- <script src="{% static 'account/reset_password.js' %}"></script> -->
+    {% if error %}
+    <script>
+        
+       $('.form_reset_password').height("150px")
+        $('.form_reset_password').css("display","flex")
+    </script>
+    {% endif %}
+{% endblock %}

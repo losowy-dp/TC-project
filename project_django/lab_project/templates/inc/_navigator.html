@@ -1,0 +1,31 @@
+{% load static %}
+
+{% block include %}
+ <link rel="stylesheet" href="{% static 'css/nav.css' %}?3456789">
+ <script src="{% static 'js/jquery-3.1.1.js' %}"></script>
+    {% endblock %}
+<nav class="navbar light">
+            <div class="nav-container" >
+                <a class="brand" href="{% url 'main' %}">CarTransportations</a>
+                <button id="bt" class="navbar-button" type="button">
+                    <span class="navbar-button-icon" style="background-image: url('{% static 'img/menu.png' %}');"></span>
+                </button>
+
+                <div id="main_menu" class="nav-menu">
+                    <ul class="navbar-nav">
+                        <li  class=""><a class="nav-item" href="{% url 'createTransportations' %}">Zleć transport</a></li>
+                        <li  class=""><a class="nav-item" href="{% url 'home' 1 %}">Szukaj zleceń</a></li>
+                    </ul>
+                    {% if user.username %}
+                      <span class="navbar-text">
+                        <a href="{% url 'profile' user.id %}">{{ user.username}}</a> | <a href="{% url 'logout' %}">Wylogować się</a>
+                    </span>
+                    {% else %}
+                    <span class="navbar-text">
+                        <a href="{% url 'login' %}">Zaloguj się</a> | <a href="{% url 'register' %}">Zarejstruj się</a>
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+        <script src="{% static 'js/nav.js' %}"></script>

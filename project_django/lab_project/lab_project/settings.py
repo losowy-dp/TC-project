@@ -12,6 +12,17 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'cartransportations@gmail.com'
+EMAIL_HOST_PASSWORD = 'iligis14'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +36,9 @@ SECRET_KEY = 'a*w=nasovez^)$gj=r7azg*vc5vr=l93x9t5yzw@f8riptz7-#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['85fef420574f.ngrok.io', '192.168.100.11', '0.0.0.0', 'localhost', '127.0.0.1']
+HAME_HOST = '02b1358efc8d.ngrok.io'
+
+ALLOWED_HOSTS = [ HAME_HOST, '192.168.100.11', '0.0.0.0', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,10 +51,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'transportation_car.apps.TransportationCarConfig',
-    'accounts.apps.AccountsConfig',
+    'account.apps.AccountsConfig',
     'rest_framework',
     'djoser',
     'rest_framework_simplejwt',
+    'crispy_forms',
+    # 'leaflet',
+    # 'djgeojson',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +69,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
@@ -124,11 +142,19 @@ USE_L10N = True
 
 USE_TZ = True
 
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATICFILES_DIRS = [
+    # BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'st'),
+]
+
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

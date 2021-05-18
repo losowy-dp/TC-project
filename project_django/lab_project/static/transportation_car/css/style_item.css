@@ -1,0 +1,63 @@
+.col{
+   padding-top: 1rem;
+}
+
+.transportation_item {
+    display: flex;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 60%;
+    height: 100px;
+    background-color: white;
+    margin: auto;
+    margin-bottom: 10px;
+    border-radius: 20px;
+}
+
+.image {
+    width: 80px;
+    display: flex;
+    margin: auto;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+img {
+    width: 80px;
+    height: 80px;
+
+}
+
+.name {
+    height: 80px;
+    display: flex;
+    font-size: 1.3rem;
+    top:0;
+    
+}
+
+.name-text {
+    width: 200px;
+    text-align: left;
+    margin: auto;
+}
+
+.informations {
+    display: flex;
+}
+
+.informations {
+    margin: auto;
+    display: block;
+}
+
+.locations {
+    font-size: 1.3rem;
+    display: block;
+}
+
+.time {
+    font-size: 1rem;
+    display: block;
+}

@@ -1,0 +1,354 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block include %}
+
+
+<!-- <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" /> -->
+<!-- <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script> -->
+<!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet/0.0.1-beta.5/esri-leaflet.js"></script> -->
+<!-- <script src="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.js"></script> -->
+<!-- <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css"> -->
+
+
+
+<link rel="stylesheet" href="{% static 'transportation_car/css/create_tr.css' %}">
+<!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" -->
+        <!-- integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" -->
+        <!-- crossorigin=""/> -->
+<!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script> -->
+<script src="{% static 'transportation_car/js/checkbox.js' %}"></script>
+<!-- <script src="{% static 'leaflet/dist/leaflet.js' %}"></script> -->
+<!-- <script src="{% static 'leaflet-geosearch/dist/geosearch.js' %}"></script> -->
+<style>
+  /* .pointer{
+    display: flex;
+    position:absolute;
+    top:86px;
+    left:60px;
+    z-index:99999;
+} */
+</style>
+
+
+
+<!-- 1 -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+<!-- 2 -->
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
+
+
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<!-- 1 -->
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> -->
+
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+<style>
+    .geocoder {
+        /* position: absolute; */
+        /* z-index: 1; */
+        width: 80%;
+        /* left: 50%; */
+        /* margin-left: -25%; */
+        /* top: 10px; */
+    }
+
+    .geocoder1 {
+        /* position: absolute; */
+        /* z-index: 1; */
+        width: 80%;
+        /* left: 50%; */
+        /* margin-left: -25%; */
+        /* top: 50px; */
+    }
+    .mapboxgl-ctrl-geocoder {
+        min-width: 100%;
+    }
+    #map {
+        margin-top: 200px;
+    }
+
+.distance-container {
+/* position: absolute; */
+top: 10px;
+left: 10px;
+z-index: 1;
+}
+ 
+.distance-container {
+  height: fit-content;
+  margin: 7px;
+background-color: rgba(0, 0, 0, 0.5);
+color: #fff;
+font-size: 11px;
+line-height: 18px;
+display: block;
+padding: 5px 10px;
+border-radius: 3px;
+width:max-content;
+}
+  </style>
+<!-- 2 -->
+
+
+<div class="forma">
+  <form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <h4>Podaj trasę</h4>
+    <div class="block block_1">
+      <div class="location_row">
+        <div style="margin-top:5q0px" class="loc_nazwa" id="kok">Skąd </div>
+      
+      <!-- display:none; -->
+        <div style="display: none;">
+        {{ form.start_location }}
+       </div>
+        
+        <div id="geocoder" class="geocoder"></div>
+      </div>
+      <div class="location_row">
+        <div style="margin-top:5px" class="loc_nazwa">Dokąd </div>
+
+              <!-- display:none; -->
+        <div style="display: none;">
+          {{ form.delivery_location }}
+        </div>
+
+        <div id="geocoder1" class="geocoder1"></div>
+      </div> 
+        
+      </div>
+    <!-- </div> -->
+
+    <div class="block">
+      
+      <div class="block_map">
+        <!-- <div id="mapid"></div> -->
+        <div id="mapid">
+          <div id="distance" class="distance-container">Dystans: 0km</div>
+        </div>
+        <!-- <div id="geocoder" class="geocoder"></div> -->
+        <!-- <div class='pointer'></div> -->
+        
+      </div>
+      
+    </div>
+    {{ form.punktA_1 }}
+    {{ form.punktA_2 }}
+    {{ form.punktB_1 }}
+    {{ form.punktB_2 }}
+
+
+
+    <h4>Podaj terminy</h4>
+    <div class="map form-row">
+
+        <!-- <div class="form-group col-md-4 mb-0" style="width: 45%;"> -->
+         
+          <!-- <div class="block block_1">
+            <div class="location_row">
+              <div style="margin-top:5px" class="loc_nazwa" id="kok">Skąd </div> -->
+              <!-- {{ form.start_location }} -->
+              <!-- <div id="geocoder" class="geocoder"></div>
+            </div>
+            <div class="location_row">
+              <div style="margin-top:5px" class="loc_nazwa">Dokąd </div> -->
+              <!-- {{ form.delivery_location }} -->
+              <!-- <div id="geocoder1" class="geocoder1"></div>
+            </div>   
+          </div> -->
+          <div class="block block_2">
+            <div class="suwak">
+
+              <span style="margin-right: 15px;">Chcę określić daty transportu</span>
+
+              <label class="switch">
+                <input type="checkbox" id="cb" checked onchange="fun_checkbox()">
+                <span class="slider round"></span>
+              </label>
+              <label style="margin-left: 15px;" id="cb_label">Tak</label>
+             
+            </div>
+
+            <div id="block_terminy">
+              <div class="termin">
+                <div style="margin-top:5px" class="termin_text">Terminy nadania</div>{{ form.data_start_shipment }}
+              </div>
+              <div class="termin">
+                <div style="margin-top:5px" class="termin_text">Terminy dostawy</div>{{ form.data_start_deliveri }}
+              </div> 
+            </div>
+            
+          </div>
+          
+        <!-- </div> -->
+
+        <!-- <div class="block">
+          <div class="block_map">
+            <div id="mapid"></div>
+            <div id="geocoder" class="geocoder"></div>
+            <div class='pointer'></div>
+            
+          </div>
+        </div> -->
+
+      
+
+
+        <!-- <script src="{% static 'transportation_car/js/map.js' %}"></script> -->
+        <script src="{% static 'transportation_car/js/map_2.js' %}"></script>
+        <script src="{% static 'transportation_car/js/car.js' %}"></script>
+    </div>
+
+    <h4>Opisz transport, aby otrzymać dopasowane oferty</h4>
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column">
+          <div class="block_car_fields">
+            {{ form.typeCar|as_crispy_field }}
+          </div>
+          <div class="block_car_fields">
+            {{ form.model|as_crispy_field}}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column">
+          <div class="block_car_fields">
+            {{ form.description|as_crispy_field}}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column" id="con-photo">
+          <p>Zdjęcie</p>
+          <div class="button-photo">
+            Możesz przesłać zdjęcie w formacie JPG lub PNG.
+          </div>
+          <div class="button-photo">
+            <img src="" alt="" id="zdjecie" style="width: 80%;">
+          </div>
+          
+          <div class="button-photo">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('photo').click();">Wybrać zdjęcie</button>
+          </div>
+         
+          <div class="block_car_fields" >
+            {{ form.photo }}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("photo").onchange = function (evt){
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+        
+        
+
+        if (FileReader && files && files.length) {
+          var fr = new FileReader();
+          fr.onload = function () {
+            document.getElementById("zdjecie").src = fr.result;
+           
+        
+            var s = document.getElementById("zdjecie").height
+            console.log(s);
+            console.log("kostia skapets");
+            // $(".block_change_photo").height($("#zdjecie").height() + 200)
+          }
+          fr.readAsDataURL(files[0])
+          // $(".form_photo_2").css('display','none');
+          // $(".knopki").css('display','flex');
+        } else {
+
+        }
+       
+    }
+    </script>
+
+
+
+
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column">
+          <div class="block_car_fields">
+            {{ form.price|as_crispy_field }}
+
+            <!-- <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Waluta
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">USD</a></li>
+                <li><a class="dropdown-item" href="#">PLN</a></li>
+                <li><a class="dropdown-item" href="#">EUR</a></li>
+              </ul>
+            </div> -->
+
+          </div>
+
+          <div class="block_car_fields">
+            {{ form.currency|as_crispy_field }}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+    <div class="map form-row">
+      <button id="sub" type="submit" class="btn btn-primary btn_zapisac">Zapisać</button>
+    </div>
+   
+   
+
+    
+      {% else %}
+      <div id = "message">
+          <p>Ta funkcja dostępna tylko dla autoryzowanych użytkowników.</p>
+             <span class="navbar-text">
+                <a href="{% url 'login' %}">Zaloguj się</a> | <a href="{% url 'register' %}">Zarejstruj się</a>
+            </span>
+      </div>
+      {% endif %}
+  </form>
+</div>
+
+
+
+
+
+{% endblock %}
+
