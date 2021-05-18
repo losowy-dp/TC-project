@@ -16,6 +16,7 @@ class HistoryActivity : AppCompatActivity() {
     lateinit var arrayList: ArrayList<HashMap<String, String>>
     lateinit var map: HashMap<String,String>
     lateinit var apiClient: ApiClient
+    lateinit var id: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history_order)
@@ -23,7 +24,7 @@ class HistoryActivity : AppCompatActivity() {
         val buttonBacktoMenu = findViewById<Button>(R.id.but_back_to_menu2)
 
         buttonBacktoMenu.setOnClickListener(buttonBacktoMenuListener)
-        val id = intent.extras!!.getString("id").toString()
+        id = intent.extras!!.getString("id").toString()
         val listView = findViewById<ListView>(R.id.historyOrderList)
         apiClient = ApiClient()
         apiClient.getApiService().historyOrder(id).enqueue(object: Callback<List<TransportationPrimary>>{
@@ -33,7 +34,8 @@ class HistoryActivity : AppCompatActivity() {
                     arrayList = ArrayList()
                     telo.forEach{
                         map = HashMap()
-                        val nowa: String = it.start_location+ " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                        val split = it.data_created?.split("T")
+                        val nowa: String = it.start_location+ " --> " + it.delivery_location + "\n Date: " + split!![0]
                         map["citys"] = nowa
                         val  price: String  = it.id
                         map["value"] = price
@@ -65,6 +67,7 @@ class HistoryActivity : AppCompatActivity() {
 
     private fun BacktoMenu(){
         val intent = Intent(this, HomeActivity::class.java)
+        intent.putExtra("id", id)
         startActivity(intent)
     }
 

@@ -53,44 +53,62 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/from"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <Button
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
+                android:id="@+id/from"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="10dp"
+                android:text="@string/from"
+                android:backgroundTint="@color/menuText"
+                />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/from_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="15dp"
                 android:hint="@string/from">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/from_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textColor="@color/menuText" />
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/menuText"
+                    android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"></LinearLayout>
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="-180dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginTop="10dp"
+                android:id="@+id/where"
+                android:layout_marginLeft="25dp"
+                android:text="@string/where"
+                android:layout_marginTop="15dp"
+                android:backgroundTint="@color/menuText"/>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/where_text"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp"
                 android:hint="@string/where">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/where_edit_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:textColor="@color/menuText"
-                    />
+                    android:enabled="false"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

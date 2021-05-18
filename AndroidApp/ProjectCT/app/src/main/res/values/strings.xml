@@ -79,4 +79,9 @@
     <string name="data_changed">Data is changed</string>
     <string name="errorEmail">invalid Email</string>
     <string name="errorEmailInPass">Don\'t use email in password</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoidGV4bmFyaTAiLCJhIjoiY2tvcG4weWl1MG1xeDJucDl3enJ6YTlvaCJ9.7YWNWw-1YnTReZcP6Mwheg</string>
+    <string name="user_location_permission_explanation">This app needs location permissions in order to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
+    <string name="stop">Stop</string>
+    <string name="start">Start</string>
 </resources>

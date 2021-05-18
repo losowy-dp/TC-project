@@ -84,6 +84,7 @@ class Change_your_password : AppCompatActivity() {
     private fun backToEditProfileListener(){
         val intent = Intent(this, Edit::class.java)
         startActivity(intent)
+        this.finish()
     }
 
 

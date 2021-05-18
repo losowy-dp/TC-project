@@ -46,25 +46,33 @@ class Order : AppCompatActivity() {
         //TODO: Owner Info
     }
     private fun fullFields(id: String){
+
         apiClient = ApiClient()
-        apiClient.getApiService().takeTransport(id).enqueue(object: Callback<List<TransportationPrimary>>{
-            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+        apiClient.getApiService().takeTransport(id).enqueue(object :
+            Callback<TransportationPrimary> {
+            override fun onResponse(
+                call: Call<TransportationPrimary>,
+                response: Response<TransportationPrimary>
+            ) {
                 val telo = response.body()
-                if (telo != null) {
-                    telo.forEach {
-                        from = findViewById(R.id.from_oreder)
-                        where = findViewById(R.id.where_order)
-                        remuneration = findViewById(R.id.renumeration_order)
-                        description = findViewById(R.id.description_in_order)
-                        from.text = it.start_location
-                        where.text = it.delivery_location
-                        remuneration.text = it.price + " " + it.currency
-                        description.text = it.description
-                    }
+                if (response.code() == 200) {
+                    println("*************************************")
+                    println(id)
+                    println("*************************************")
+                    from = findViewById(R.id.from_oreder)
+                    from.setText(telo!!.start_location)
+                    where = findViewById(R.id.where_order)
+                    where.setText(telo!!.delivery_location)
+                    description = findViewById(R.id.description_in_order)
+                    description.setText(telo!!.description)
+                    remuneration = findViewById(R.id.renumeration_order)
+                    remuneration.setText(telo!!.price + " " + telo!!.currency)
+                } else {
+                    println("Hello" + id)
                 }
             }
 
-            override fun onFailure(call: Call<List<TransportationPrimary>>, t: Throwable) {
+            override fun onFailure(call: Call<TransportationPrimary>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 

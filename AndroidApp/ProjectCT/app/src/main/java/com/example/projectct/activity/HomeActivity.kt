@@ -15,7 +15,7 @@ class HomeActivity : AppCompatActivity(), All_order_list.OnSelectedButtonListene
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         //Hooks
-        setCurentFragment(All_order_list())
+            setCurentFragment(All_order_list())
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.itemIconTintList = null
         //OnClick

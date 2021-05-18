@@ -25,8 +25,8 @@ interface RetrofitService {
     @GET("/transportations/getTransportions/")
     fun getAll(): Call<List<TransportationPrimary>>
     //Order
-    @GET("/transportations/{id}")
-    fun takeTransport(@Path("id")id: String): Call<List<TransportationPrimary>>
+    @GET("/transportations/transport/{id}")
+    fun takeTransport(@Path("id")id: String): Call<TransportationPrimary>
 
     @GET("/auth/users/me")
     fun fetchDana(@Header("Authorization")token: String): Call<DaneUserToken>

@@ -1,5 +1,6 @@
 package com.example.projectct.fragment
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.ApiClient
 import com.example.projectct.InterfaceAPI.SessionManager
 import com.example.projectct.R
+import com.example.projectct.activity.MapActivity
 import com.example.projectct.helpClass.Transport.CreateTransportations
 import com.example.projectct.helpClass.Transport.TransportationPrimary
 import com.example.projectct.helpClass.User.DaneUserToken
@@ -26,8 +28,14 @@ import retrofit2.Response
  */
 class   Add_order : Fragment() {
     lateinit var spinner: Spinner
-    lateinit var from: EditText
-    lateinit var  where: EditText
+    lateinit var from: Button
+    lateinit var  where:Button
+    lateinit var from_edit: EditText
+    lateinit var where_edit: EditText
+    private var from_x: Int? = null
+    private var from_y: Int? = null
+    private var where_x: Int? = null
+    private var where_y: Int? = null
     lateinit var price: EditText
     lateinit var desc: EditText
     lateinit var car: EditText
@@ -49,12 +57,30 @@ class   Add_order : Fragment() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinner.adapter = adapter
         }
-
+       // checkDate()
         val button = view.findViewById<Button>(R.id.buttonAcceptAdd)
         button.setOnClickListener(buttonAcceptListener)
+        val buttonFrom = view.findViewById<Button>(R.id.from)
+        val buttonWhere = view.findViewById<Button>(R.id.where)
+        buttonFrom.setOnClickListener(buttonFromListener)
+        buttonWhere.setOnClickListener(buttonWhereListener)
     }
 
+    private fun checkDate() {
+        TODO("Not yet implemented")
+    }
+
+    private var buttonFromListener = View.OnClickListener { buttonMap("From") }
+    private var buttonWhereListener = View.OnClickListener { buttonMap("Where") }
     private var buttonAcceptListener = View.OnClickListener { buttonAccept() }
+
+
+
+    private fun buttonMap(name: String){
+        val intent = Intent(activity, MapActivity::class.java)
+        intent.putExtra("pos",name)
+        startActivity(intent)
+    }
     private fun buttonAccept(){
         if(checkAllFields()){
             apiClient = ApiClient()
@@ -100,12 +126,13 @@ class   Add_order : Fragment() {
         }
     }
     private fun checkAllFields(): Boolean{
-        from = view!!.findViewById(R.id.from_edit_text)
-        where = view!!.findViewById(R.id.where_edit_text)
+        from = view!!.findViewById(R.id.from)
+        where = view!!.findViewById(R.id.where)
         price = view!!.findViewById(R.id.renumeration_EditText)
         desc = view!!.findViewById(R.id.description_edit_text)
         car = view!!.findViewById(R.id.car_edit_text)
-        if(from.text.isNotEmpty() && where.text.isNotEmpty() && price.text.isNotEmpty() && desc.text.isNotEmpty() && car.text.isNotEmpty()){
+        //Add new text Field from and Where
+        if( price.text.isNotEmpty() && desc.text.isNotEmpty() && car.text.isNotEmpty()){
             return true
         }
         else{
@@ -115,8 +142,6 @@ class   Add_order : Fragment() {
         }
     }
     private fun clearAllFields(){
-        from.text.clear()
-        where.text.clear()
         price.text.clear()
         desc.text.clear()
         car.text.clear()
