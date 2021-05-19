@@ -1,0 +1,118 @@
+.profile {
+    margin-bottom: 20px;
+}
+
+.login {
+  display: flex;
+  width: 600px;
+  margin: auto;
+  border-bottom: solid black 1px;
+}
+.login p {
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.information_main {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  margin: auto;
+  width: 600px;
+  /* height: 200px; */
+  /* border-top: solid 1px black; */
+  border-bottom: solid 1px black;
+  /* background-color: red; */
+}
+
+/* .form_main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+} */
+
+
+
+
+.block_me {
+    display: flex;
+    justify-content: center;
+}
+
+.block_with_fields {
+    /* height: 150px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-bottom: 5px;
+}
+
+.fields {
+    display: flex;
+}
+
+.name_field {
+    width: 150px;
+}
+
+.contacts {
+    width: 100%;
+    margin-bottom: 5px;
+    color: cornflowerblue;
+}
+
+.number_of_phone {
+    display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  margin: auto;
+  width: 600px;
+  /* height: 90px; */
+  border-bottom: solid 1px black;
+  /* background-color: red; */
+}
+
+.block_number {
+    width: 100%;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+.sub_main {
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+
+
+
+
+input {
+    height: auto;
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: black
+  }
+  input:focus {
+    border-color: blue;
+  }
+
+#phone {
+    outline: 0;
+    border-width: 0 0 2px;
+    border-color: black
+}
+
+
+.password input {
+  height: 23px;
+  margin-left: 5px;
+}
+
+.er{
+  color: red;
+}

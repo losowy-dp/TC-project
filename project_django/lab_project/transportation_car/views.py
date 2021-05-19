@@ -127,7 +127,8 @@ def create_transportations(request):
             # user = authenticate(username=cd['username'], password=cd['password'])
             new_transportation = form.save(commit=False)
             new_transportation.car_owner = request.user
-            new_transportation.photo = request.FILES['photo']
+            if request.FILES:
+                new_transportation.photo = request.FILES['photo']
             new_transportation.save()
             # transportations = Transportation.objects.all()
             transportations = Transportation.objects.all().order_by('-data_created')

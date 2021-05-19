@@ -45,6 +45,7 @@ class TransportationForm(forms.ModelForm):
         fields = ['start_location', 'delivery_location', 'price', 'currency', 'model', 'typeCar', 'description', 'data_start_deliveri', 'data_start_shipment', 'photo', 'punktA_1', 'punktA_2', 'punktB_1', 'punktB_2']
         widgets = {
             'start_location': forms.TextInput(attrs={'value':'Lublin', 'id': 'start_loc'}),
+           # 'photo': forms.FileInput(attrs={'id': 'file_input'}),
             'delivery_location': forms.TextInput(attrs={'value': 'Warszawa', 'id': 'delivery_loc'}),
             'description': Textarea(attrs={'cols': 80, 'rows': 8}),
             'data_start_deliveri': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),

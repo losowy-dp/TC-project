@@ -156,7 +156,7 @@
           {% if item.photo %}
           <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
           {% else %}
-          <img src="https://lh3.googleusercontent.com/proxy/bummKuuxK52LjrVFLQTEb3R996G9Uh5VUv1sLUHyzgYos6w4dDMGRnPeRXy2nAHhPkPXxIcvPnWTKMbnJGlvzVe7sLX2SzOvJdRG"> 
+          <img src="{% static 'img/default_car.jpg'%}">
           <!-- <img src="{% static 'transportation_car/img/transport.jpg'%}">  -->
           {% endif %}
           <!-- <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt=""> -->

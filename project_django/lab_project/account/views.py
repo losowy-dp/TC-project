@@ -261,7 +261,7 @@ def reset_password(request):
                     email_template_name = 'account/reset_password/password_reset_email.txt'
                     c = {
                         'email': user.email,
-                        'domain': '016774ff1c22.ngrok.io',
+                        'domain': '6adca8826647.ngrok.io',
                         'site_name': 'CarTransportation',
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                         'user': user,

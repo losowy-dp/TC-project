@@ -1,0 +1,64 @@
+
+.data_created {
+    margin-bottom: 0;
+    font-size: 0.8rem;
+}
+
+.car {
+    font-size: 2rem;
+}
+
+.block_map {
+    position: relative;
+    width: 100%;
+    height: 400px;
+
+}
+
+
+.map {
+    display: flex;
+    z-index: auto;
+  }
+
+  #mapid{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    /* margin: 15px; */
+    /* margin-top: 15px; */
+    /* margin-bottom: 15px; */
+    /* margin-left: 60px; */
+  }
+  #message{
+    height: 100px;
+    width:600px;
+    margin: auto;
+    width: 50%;
+    border: 1px solid black;
+    /* padding: 10px; */
+    text-align:center;
+
+  }
+
+  .car-content{
+    width: 70%;
+    margin: auto;
+  }
+
+  .car-information{
+    display: flex;  
+  }
+
+  .img-car img{
+    width: 400px;
+    /* height: 400px; */
+  }
+
+  .main-infaarmation{
+    margin-left: 30px;
+  }
+
+  .adress-1{
+    border-bottom: 1px solid black;
+  }
