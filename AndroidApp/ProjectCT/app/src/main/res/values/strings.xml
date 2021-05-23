@@ -84,4 +84,11 @@
     <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="stop">Stop</string>
     <string name="start">Start</string>
+    <string name="filtr">Apply</string>
+    <string-array name="spinner_filtr">
+        <item>From the new ones</item>
+        <item>From the old ones</item>
+        <item>Falling price</item>
+        <item>Increasing price</item>
+    </string-array>
 </resources>

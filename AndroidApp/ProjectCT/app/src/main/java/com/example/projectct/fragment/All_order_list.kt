@@ -26,6 +26,8 @@ import retrofit2.Response
  */
 class All_order_list : Fragment() {
     lateinit var apiClient: ApiClient
+    lateinit var spinner: Spinner
+    lateinit var buttonFiltr: Button
     //Interface
     interface OnSelectedButtonListenerAll{
         fun onButtonSelectedAll(button: String)
@@ -45,6 +47,15 @@ class All_order_list : Fragment() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        /* SPINER FILTR */
+        spinner = view.findViewById(R.id.spinnerFiltr)
+        ArrayAdapter.createFromResource(activity!!, R.array.spinner_filtr, android.R.layout.simple_spinner_item).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinner.adapter = adapter
+        }
+        buttonFiltr = view.findViewById(R.id.buttonFiltr)
+        buttonFiltr.setOnClickListener(buttonfiltrListener)
+        //////////////////
         val button = view.findViewById<Button>(R.id.all_order_fragment)
         button.backgroundTintList = null
         val buttonMyOrder = view.findViewById<Button>(R.id.my_order_fragment)
@@ -93,7 +104,10 @@ class All_order_list : Fragment() {
         })
 
     }
-
+    private var buttonfiltrListener = View.OnClickListener { FilteApply() }
+    private fun FilteApply() {
+        //TODO refresh order list with filter
+    }
     private val MyOrderFragment = View.OnClickListener { OrderFragment() }
     private fun OrderFragment(){
         val listener = activity as OnSelectedButtonListenerAll?
