@@ -53,7 +53,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="35dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
 
             <Spinner
                 android:id="@+id/spinnerFiltr"
@@ -64,11 +65,12 @@
             <Button
                 android:id="@+id/buttonFiltr"
                 android:layout_width="200dp"
-                android:layout_height="35dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/menuText"
-                android:text="@string/filtr"
-                android:layout_marginRight="20dp"/>
+                android:text="@string/filtr" />
         </LinearLayout>
 
         <ListView

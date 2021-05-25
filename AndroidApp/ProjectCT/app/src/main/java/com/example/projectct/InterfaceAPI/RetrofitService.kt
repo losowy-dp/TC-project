@@ -24,6 +24,18 @@ interface RetrofitService {
     //All_order_list
     @GET("/transportations/getTransportions/")
     fun getAll(): Call<List<TransportationPrimary>>
+    //All_order_list sorted New
+    @GET("/transportations/getTransportionsSortNew")
+    fun getAllSortNew(): Call<List<TransportationPrimary>>
+    //All_order_list sorted Old
+    @GET("/transportations/getTransportionsSortOld")
+    fun getAllSortOld(): Call<List<TransportationPrimary>>
+    //All_order_list sorted price Fall
+    @GET("/transportations/getTransportionsPriceF")
+    fun getAllSortPriceF(): Call<List<TransportationPrimary>>
+    //All_order_list sorted price Incr
+    @GET("/transportations/getTransportionsPriceI")
+    fun getAllSortPriceI(): Call<List<TransportationPrimary>>
     //Order
     @GET("/transportations/transport/{id}")
     fun takeTransport(@Path("id")id: String): Call<TransportationPrimary>
@@ -40,6 +52,12 @@ interface RetrofitService {
 
     @GET("/transportations/ordered/{id}/")
     fun historyOrder(@Path("id")id: String): Call<List<TransportationPrimary>>
+    @GET("/transportations/orderedSort/{id}/")
+    fun historyOrderSort(@Path("id")id: String): Call<List<TransportationPrimary>>
+    @GET("/transportations/orderedSortPriceF/{id}/")
+    fun historyOrderSortPriceF(@Path("id")id: String): Call<List<TransportationPrimary>>
+    @GET("/transportations/orderedSortPriceI/{id}/")
+    fun historyOrderSortPriceI(@Path("id")id: String): Call<List<TransportationPrimary>>
 
     //PUT Request
     @PUT("/account/userDetail/{id}/")

@@ -27,6 +27,7 @@ class All_order_list : Fragment() {
     lateinit var apiClient: ApiClient
     lateinit var spinner: Spinner
     lateinit var buttonFiltr: Button
+    lateinit var listView: ListView
     //Interface
     interface OnSelectedButtonListenerAll{
         fun onButtonSelectedAll(button: String)
@@ -59,7 +60,7 @@ class All_order_list : Fragment() {
         button.backgroundTintList = null
         val buttonMyOrder = view.findViewById<Button>(R.id.my_order_fragment)
         buttonMyOrder.setOnClickListener(MyOrderFragment)
-        val listView = view.findViewById<ListView>(R.id.allOrderList)
+        listView = view.findViewById<ListView>(R.id.allOrderList)
         apiClient = ApiClient()
         apiClient.getApiService().getAll().enqueue(object : Callback<List<TransportationPrimary>> {
             override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
@@ -105,13 +106,186 @@ class All_order_list : Fragment() {
     }
     private var buttonfiltrListener = View.OnClickListener { FilteApply() }
     private fun FilteApply() {
-        //TODO refresh order list with filter
+        listView.adapter= null
         when (spinner.getSelectedItem().toString()) {
-            "From the new ones" -> print("od nowego")
-            "From the old ones" -> print("od starego")
-            "Falling price" -> print("od drogich")
-            "Increasing price" -> print("of tanszych")
+            "From the new ones" -> sortNew()
+            "From the old ones" -> sortOld()
+            "Falling price" -> sortPriceF()
+            "Increasing price" -> sortPriceI()
         }
+    }
+
+    private fun sortNew(){
+        apiClient = ApiClient()
+        apiClient.getApiService().getAllSortNew().enqueue(object : Callback<List<TransportationPrimary>> {
+            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+                if (response.code() == 500) {
+                    Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
+                } else {
+                    val telo = response.body()
+                    if (telo != null) {
+                        arrayList = ArrayList()
+                        telo.forEach {
+                            map = HashMap()
+                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            map.put("citys", nowa)
+                            val price: String = it.id
+                            map.put("value", price)
+                            arrayList.add(map)
+                        }
+                        val adapter = SimpleAdapter(
+                                activity,
+                                arrayList,
+                                android.R.layout.simple_list_item_1,
+                                arrayOf("citys"),
+                                intArrayOf(android.R.id.text1)
+                        )
+                        listView.adapter = adapter
+                        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
+                            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                                val intent = Intent(activity!!, Order::class.java)
+                                intent.putExtra("id", arrayList.get(position).get("value"))
+                                startActivity(intent)
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<TransportationPrimary>>, t: Throwable) {
+                Toast.makeText(activity!!, "Failed Connections", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun sortOld(){
+        apiClient = ApiClient()
+        apiClient.getApiService().getAllSortOld().enqueue(object : Callback<List<TransportationPrimary>> {
+            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+                if (response.code() == 500) {
+                    Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
+                } else {
+                    val telo = response.body()
+                    if (telo != null) {
+                        arrayList = ArrayList()
+                        telo.forEach {
+                            map = HashMap()
+                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            map.put("citys", nowa)
+                            val price: String = it.id
+                            map.put("value", price)
+                            arrayList.add(map)
+                        }
+                        val adapter = SimpleAdapter(
+                                activity,
+                                arrayList,
+                                android.R.layout.simple_list_item_1,
+                                arrayOf("citys"),
+                                intArrayOf(android.R.id.text1)
+                        )
+                        listView.adapter = adapter
+                        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
+                            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                                val intent = Intent(activity!!, Order::class.java)
+                                intent.putExtra("id", arrayList.get(position).get("value"))
+                                startActivity(intent)
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<TransportationPrimary>>, t: Throwable) {
+                Toast.makeText(activity!!, "Failed Connections", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun sortPriceF(){
+        apiClient = ApiClient()
+        apiClient.getApiService().getAllSortPriceF().enqueue(object : Callback<List<TransportationPrimary>> {
+            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+                if (response.code() == 500) {
+                    Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
+                } else {
+                    val telo = response.body()
+                    if (telo != null) {
+                        arrayList = ArrayList()
+                        telo.forEach {
+                            map = HashMap()
+                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            map.put("citys", nowa)
+                            val price: String = it.id
+                            map.put("value", price)
+                            arrayList.add(map)
+                        }
+                        val adapter = SimpleAdapter(
+                                activity,
+                                arrayList,
+                                android.R.layout.simple_list_item_1,
+                                arrayOf("citys"),
+                                intArrayOf(android.R.id.text1)
+                        )
+                        listView.adapter = adapter
+                        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
+                            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                                val intent = Intent(activity!!, Order::class.java)
+                                intent.putExtra("id", arrayList.get(position).get("value"))
+                                startActivity(intent)
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<TransportationPrimary>>, t: Throwable) {
+                Toast.makeText(activity!!, "Failed Connections", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun sortPriceI(){
+        apiClient = ApiClient()
+        apiClient.getApiService().getAllSortPriceI().enqueue(object : Callback<List<TransportationPrimary>> {
+            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+                if (response.code() == 500) {
+                    Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
+                } else {
+                    val telo = response.body()
+                    if (telo != null) {
+                        arrayList = ArrayList()
+                        telo.forEach {
+                            map = HashMap()
+                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            map.put("citys", nowa)
+                            val price: String = it.id
+                            map.put("value", price)
+                            arrayList.add(map)
+                        }
+                        val adapter = SimpleAdapter(
+                                activity,
+                                arrayList,
+                                android.R.layout.simple_list_item_1,
+                                arrayOf("citys"),
+                                intArrayOf(android.R.id.text1)
+                        )
+                        listView.adapter = adapter
+                        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
+                            override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
+                                val intent = Intent(activity!!, Order::class.java)
+                                intent.putExtra("id", arrayList.get(position).get("value"))
+                                startActivity(intent)
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: Call<List<TransportationPrimary>>, t: Throwable) {
+                Toast.makeText(activity!!, "Failed Connections", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
     private val MyOrderFragment = View.OnClickListener { OrderFragment() }
     private fun OrderFragment(){
