@@ -67,7 +67,8 @@
                 android:layout_height="35dp"
                 android:layout_weight="1"
                 android:backgroundTint="@color/menuText"
-                android:text="@string/filtr" />
+                android:text="@string/filtr"
+                android:layout_marginRight="20dp"/>
         </LinearLayout>
 
         <ListView

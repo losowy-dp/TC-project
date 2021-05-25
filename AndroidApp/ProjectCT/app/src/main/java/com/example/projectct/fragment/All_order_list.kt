@@ -10,7 +10,6 @@ import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.ApiClient
-import com.example.projectct.InterfaceAPI.RetrofitService
 import com.example.projectct.R
 import com.example.projectct.activity.Order
 import com.example.projectct.helpClass.Transport.TransportationPrimary
@@ -34,10 +33,10 @@ class All_order_list : Fragment() {
     }
     //Lateinit
     lateinit var arrayList: ArrayList<HashMap<String, String>>
-    lateinit var map: HashMap<String,String>
+    lateinit var map: HashMap<String, String>
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val rootView  =  inflater.inflate(R.layout.fragment_all_order_list, container, false)
 
@@ -63,7 +62,7 @@ class All_order_list : Fragment() {
         val listView = view.findViewById<ListView>(R.id.allOrderList)
         apiClient = ApiClient()
         apiClient.getApiService().getAll().enqueue(object : Callback<List<TransportationPrimary>> {
-             override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
+            override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
@@ -107,6 +106,12 @@ class All_order_list : Fragment() {
     private var buttonfiltrListener = View.OnClickListener { FilteApply() }
     private fun FilteApply() {
         //TODO refresh order list with filter
+        when (spinner.getSelectedItem().toString()) {
+            "From the new ones" -> print("od nowego")
+            "From the old ones" -> print("od starego")
+            "Falling price" -> print("od drogich")
+            "Increasing price" -> print("of tanszych")
+        }
     }
     private val MyOrderFragment = View.OnClickListener { OrderFragment() }
     private fun OrderFragment(){
