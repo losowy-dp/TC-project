@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.projectct.R
+import com.example.projectct.helpClass.Dane.DaneOrder
 import android.util.Pair as UtilPair
 
 
@@ -23,11 +24,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var image: ImageView
     lateinit var logo: TextView
     lateinit var tag: TextView
+    private lateinit var daneOrder: DaneOrder
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        daneOrder = DaneOrder(this)
+        daneOrder.clear()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //Animation
+        println("******************")
+        println("New5")
         top_animation = AnimationUtils.loadAnimation(this, R.anim.top_animation)
         bot_animation = AnimationUtils.loadAnimation(this,R.anim.botom_animation)
         //Hooks

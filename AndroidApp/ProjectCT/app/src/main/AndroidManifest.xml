@@ -13,12 +13,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.MapActivity"></activity>
+        <activity android:name=".activity.MapActivity">
+
+        </activity>
         <activity android:name=".activity.HistoryActivity" />
         <activity android:name=".activity.Edit" />
         <activity android:name=".activity.Order" />
         <activity android:name=".activity.Change_your_password" />
         <activity android:name=".activity.HomeActivity">
+
         </activity>
         <activity android:name=".activity.ForgotActivity" />
         <activity android:name=".activity.RegisterActivity" />

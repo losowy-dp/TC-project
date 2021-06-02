@@ -72,7 +72,7 @@ class All_order_list : Fragment() {
                         arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            val nowa: String = it.start_location!!.split(",")[0] + " --> " + it.delivery_location!!.split(",")[0] + "\n" + it.price + " " + it.currency
                             map.put("citys", nowa)
                             val price: String = it.id
                             map.put("value", price)

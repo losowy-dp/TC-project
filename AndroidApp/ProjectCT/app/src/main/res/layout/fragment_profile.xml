@@ -25,6 +25,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/avatar"
                 android:layout_width="204dp"
                 android:layout_height="147dp"
                 android:src="@drawable/avatar_default" />

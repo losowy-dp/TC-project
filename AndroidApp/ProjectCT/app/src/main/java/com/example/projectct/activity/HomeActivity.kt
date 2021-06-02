@@ -8,13 +8,19 @@ import com.example.projectct.fragment.Add_order
 import com.example.projectct.fragment.All_order_list
 import com.example.projectct.fragment.My_order_list
 import com.example.projectct.fragment.Profile
+import com.example.projectct.helpClass.Dane.DaneOrder
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity(), All_order_list.OnSelectedButtonListenerAll, My_order_list.OnSelectedButtonListenerMy {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         //Hooks
+        if(intent.extras?.getString("fragment").toString()=="add")
+            setCurentFragment(Add_order())
+        else
             setCurentFragment(All_order_list())
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.itemIconTintList = null
