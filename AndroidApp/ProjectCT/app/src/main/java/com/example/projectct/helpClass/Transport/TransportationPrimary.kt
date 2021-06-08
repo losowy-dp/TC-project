@@ -14,7 +14,7 @@ data class TransportationPrimary(
         var data_end_deliveri: String?= null,
         var data_start_shipment: String?= null,
         var data_end_shipment: String?= null,
-        var photo: String?=null,
+        var photo: String,
         var typeCar: String?=null,
         var punktA_1: String?=null,
         var punktA_2: String?=null,

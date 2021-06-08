@@ -14,7 +14,8 @@ data class UserInfo(
 )
 data class UserPhone(
         var id: String?=null,
-        var number_of_phone: String?=null
+        var number_of_phone: String?=null,
+        var photo: String?=null
 )
 data class Password(
         var new_password: String?=null,

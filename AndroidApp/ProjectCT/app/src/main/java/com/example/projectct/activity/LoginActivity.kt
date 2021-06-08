@@ -87,8 +87,7 @@ class LoginActivity : AppCompatActivity() {
                         } else {
                             Toast.makeText(
                                 this@LoginActivity,
-                                //R.string.errorLogin,
-                                    response.code(),
+                                R.string.errorLogin,
                                 Toast.LENGTH_SHORT
                             ).show()
                             login.text.clear()

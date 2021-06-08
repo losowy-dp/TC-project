@@ -78,7 +78,7 @@ class Profile : Fragment() {
                                 if(response.code()==200){
                                     first_name.text = dane!!.first_name+" "+dane!!.last_name
                                     email.text = dane!!.email
-                                    Picasso.get().load("https://imgur.com/gallery/SHSv6rd").resize(200,140).into(imageView)
+
                                 }
                             }
 
@@ -90,6 +90,7 @@ class Profile : Fragment() {
                             override fun onResponse(call: Call<UserPhone>, response: Response<UserPhone>) {
                                 if(response.code()==200)
                                     phone.text = response.body()!!.number_of_phone
+                                //Picasso.get().load("http://testcartransport.ddns.net:8000"+response.body()!!.photo).resize(200,140).into(imageView)
                             }
 
                             override fun onFailure(call: Call<UserPhone>, t: Throwable) {

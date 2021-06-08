@@ -110,7 +110,9 @@ class   Add_order : Fragment() {
                     val data = response.body()
                     if (response.code() != 401) {
                         id = data!!.id.toString()
-                        apiClient.getApiService().createTransport(CreateTransportations(desc.text.toString(),price.text.toString(),spinner.selectedItem.toString(),id, from_edit.hint.toString(),where_edit.hint.toString()))
+                        var from = daneOrder.fetchFrom()!!.split(";")
+                        var where  = daneOrder.fetchWhere()!!.split(";")
+                        apiClient.getApiService().createTransport(CreateTransportations(desc.text.toString(),price.text.toString(),spinner.selectedItem.toString(),id, from_edit.hint.toString(),where_edit.hint.toString(),from[1],from[2],where[1],where[2]))
                                 .enqueue(object: Callback<TransportationPrimary>{
                                     override fun onResponse(call: Call<TransportationPrimary>, response: Response<TransportationPrimary>) {
                                         if(response.code()==201){

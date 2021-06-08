@@ -19,6 +19,7 @@ class Order : AppCompatActivity() {
     lateinit var where: TextView
     lateinit var remuneration: TextView
     lateinit var description: TextView
+    lateinit var marka_model: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_order)
@@ -56,19 +57,16 @@ class Order : AppCompatActivity() {
             ) {
                 val telo = response.body()
                 if (response.code() == 200) {
-                    println("*************************************")
-                    println(id)
-                    println("*************************************")
                     from = findViewById(R.id.from_oreder)
-                    from.setText(telo!!.start_location)
+                    from.text = telo!!.start_location
                     where = findViewById(R.id.where_order)
-                    where.setText(telo!!.delivery_location)
+                    where.text = telo!!.delivery_location
                     description = findViewById(R.id.description_in_order)
-                    description.setText(telo!!.description)
+                    description.text = telo!!.description
                     remuneration = findViewById(R.id.renumeration_order)
-                    remuneration.setText(telo!!.price + " " + telo!!.currency)
-                } else {
-                    println("Hello" + id)
+                    remuneration.text = telo!!.price + " " + telo!!.currency
+                    marka_model = findViewById(R.id.marka_model_order)
+                    marka_model.text = telo!!.model
                 }
             }
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.example.projectct.InterfaceAPI.ApiClient
 import com.example.projectct.R
 import com.example.projectct.activity.Order
+import com.example.projectct.helpClass.MyListAdapter
 import com.example.projectct.helpClass.Transport.TransportationPrimary
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,6 +36,7 @@ class All_order_list : Fragment() {
     //Lateinit
     lateinit var arrayList: ArrayList<HashMap<String, String>>
     lateinit var map: HashMap<String, String>
+
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -55,7 +57,6 @@ class All_order_list : Fragment() {
         }
         buttonFiltr = view.findViewById(R.id.buttonFiltr)
         buttonFiltr.setOnClickListener(buttonfiltrListener)
-        //////////////////
         val button = view.findViewById<Button>(R.id.all_order_fragment)
         button.backgroundTintList = null
         val buttonMyOrder = view.findViewById<Button>(R.id.my_order_fragment)
@@ -67,6 +68,7 @@ class All_order_list : Fragment() {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
+                    var title = arrayOf<String>()
                     val telo = response.body()
                     if (telo != null) {
                         arrayList = ArrayList()
@@ -77,6 +79,7 @@ class All_order_list : Fragment() {
                             val price: String = it.id
                             map.put("value", price)
                             arrayList.add(map)
+                            title+=it.photo
                         }
                         val adapter = SimpleAdapter(
                                 activity,
@@ -85,7 +88,10 @@ class All_order_list : Fragment() {
                                 arrayOf("citys"),
                                 intArrayOf(android.R.id.text1)
                         )
-                        listView.adapter = adapter
+                        val myListAdapter = MyListAdapter(
+                            activity!!,arrayList,title
+                        )
+                        listView.adapter = myListAdapter
                         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
                             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                                 val intent = Intent(activity!!, Order::class.java)
@@ -117,21 +123,23 @@ class All_order_list : Fragment() {
 
     private fun sortNew(){
         apiClient = ApiClient()
-        apiClient.getApiService().getAllSortNew().enqueue(object : Callback<List<TransportationPrimary>> {
+        apiClient.getApiService().getAll().enqueue(object : Callback<List<TransportationPrimary>> {
             override fun onResponse(call: Call<List<TransportationPrimary>>, response: Response<List<TransportationPrimary>>) {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
+                    var title = arrayOf<String>()
                     val telo = response.body()
                     if (telo != null) {
                         arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            val nowa: String = it.start_location!!.split(",")[0] + " --> " + it.delivery_location!!.split(",")[0] + "\n" + it.price + " " + it.currency
                             map.put("citys", nowa)
                             val price: String = it.id
                             map.put("value", price)
                             arrayList.add(map)
+                            title += it.photo
                         }
                         val adapter = SimpleAdapter(
                                 activity,
@@ -140,7 +148,10 @@ class All_order_list : Fragment() {
                                 arrayOf("citys"),
                                 intArrayOf(android.R.id.text1)
                         )
-                        listView.adapter = adapter
+                        val myListAdapter = MyListAdapter(
+                                activity!!, arrayList, title
+                        )
+                        listView.adapter = myListAdapter
                         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
                             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                                 val intent = Intent(activity!!, Order::class.java)
@@ -165,16 +176,18 @@ class All_order_list : Fragment() {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
+                    var title = arrayOf<String>()
                     val telo = response.body()
                     if (telo != null) {
                         arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            val nowa: String = it.start_location!!.split(",")[0] + " --> " + it.delivery_location!!.split(",")[0] + "\n" + it.price + " " + it.currency
                             map.put("citys", nowa)
                             val price: String = it.id
                             map.put("value", price)
                             arrayList.add(map)
+                            title+=it.photo
                         }
                         val adapter = SimpleAdapter(
                                 activity,
@@ -183,7 +196,10 @@ class All_order_list : Fragment() {
                                 arrayOf("citys"),
                                 intArrayOf(android.R.id.text1)
                         )
-                        listView.adapter = adapter
+                        val myListAdapter = MyListAdapter(
+                                activity!!,arrayList,title
+                        )
+                        listView.adapter = myListAdapter
                         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
                             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                                 val intent = Intent(activity!!, Order::class.java)
@@ -208,16 +224,18 @@ class All_order_list : Fragment() {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
+                    var title = arrayOf<String>()
                     val telo = response.body()
                     if (telo != null) {
                         arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            val nowa: String = it.start_location!!.split(",")[0] + " --> " + it.delivery_location!!.split(",")[0] + "\n" + it.price + " " + it.currency
                             map.put("citys", nowa)
                             val price: String = it.id
                             map.put("value", price)
                             arrayList.add(map)
+                            title+=it.photo
                         }
                         val adapter = SimpleAdapter(
                                 activity,
@@ -226,7 +244,10 @@ class All_order_list : Fragment() {
                                 arrayOf("citys"),
                                 intArrayOf(android.R.id.text1)
                         )
-                        listView.adapter = adapter
+                        val myListAdapter = MyListAdapter(
+                                activity!!,arrayList,title
+                        )
+                        listView.adapter = myListAdapter
                         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
                             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                                 val intent = Intent(activity!!, Order::class.java)
@@ -251,16 +272,18 @@ class All_order_list : Fragment() {
                 if (response.code() == 500) {
                     Toast.makeText(activity!!, "Error 500", Toast.LENGTH_SHORT).show()
                 } else {
+                    var title = arrayOf<String>()
                     val telo = response.body()
                     if (telo != null) {
                         arrayList = ArrayList()
                         telo.forEach {
                             map = HashMap()
-                            val nowa: String = it.start_location + " --> " + it.delivery_location + "\n" + it.price + " " + it.currency
+                            val nowa: String = it.start_location!!.split(",")[0] + " --> " + it.delivery_location!!.split(",")[0] + "\n" + it.price + " " + it.currency
                             map.put("citys", nowa)
                             val price: String = it.id
                             map.put("value", price)
                             arrayList.add(map)
+                            title+=it.photo
                         }
                         val adapter = SimpleAdapter(
                                 activity,
@@ -269,7 +292,10 @@ class All_order_list : Fragment() {
                                 arrayOf("citys"),
                                 intArrayOf(android.R.id.text1)
                         )
-                        listView.adapter = adapter
+                        val myListAdapter = MyListAdapter(
+                                activity!!,arrayList,title
+                        )
+                        listView.adapter = myListAdapter
                         listView.onItemClickListener = object : AdapterView.OnItemClickListener {
                             override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                                 val intent = Intent(activity!!, Order::class.java)
