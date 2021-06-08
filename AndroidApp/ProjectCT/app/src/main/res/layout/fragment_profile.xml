@@ -97,13 +97,15 @@
                 android:backgroundTint="@color/menuText"
                 android:text="@string/settings"
                 android:layout_marginBottom="20dp"/>
+
             <Button
+                android:id="@+id/but_logout"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginBottom="100dp"
                 android:backgroundTint="@color/menuText"
-                android:text="@string/log_out"
-                android:layout_marginBottom="100dp"/>
+                android:text="@string/log_out" />
 
         </LinearLayout>
     </LinearLayout>

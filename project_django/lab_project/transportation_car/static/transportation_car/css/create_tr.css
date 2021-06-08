@@ -16,14 +16,14 @@
     /* margin-left: 60px; */
   }
   #message{
-    height: 100px;
+    /* height: 100px; */
     width:600px;
     margin: auto;
     width: 50%;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* padding: 10px; */
     text-align:center;
-
+    /* background-color: #b2d6f3; */
   }
 
   .forma {

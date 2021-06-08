@@ -114,6 +114,57 @@ span a:hover {
     color:#3366cc;
 }
 
+.block_log{
+    display: inline-flex;
+    background-color: white;
+    padding: 5px;
+    border-radius: 20px;
+}
+
+.block_log a {
+    text-decoration: none;
+    color:black;
+    margin-right: 5px;
+}
+
+
+
+#img_log{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+}
+
+.dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+
 
 @media only screen and (max-width: 992px) {
     .navbar-button {

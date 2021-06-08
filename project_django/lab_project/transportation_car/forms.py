@@ -47,7 +47,7 @@ class TransportationForm(forms.ModelForm):
             'start_location': forms.TextInput(attrs={'value':'Lublin', 'id': 'start_loc'}),
            # 'photo': forms.FileInput(attrs={'id': 'file_input'}),
             'delivery_location': forms.TextInput(attrs={'value': 'Warszawa', 'id': 'delivery_loc'}),
-            'description': Textarea(attrs={'cols': 80, 'rows': 8}),
+            'description': Textarea(attrs={'cols': 80, 'rows': 8, 'id': 'description'}),
             'data_start_deliveri': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
             'data_start_shipment': forms.DateInput(format=('%m/%d/%Y'),
                                                    attrs={'class': 'form-control', 'placeholder': 'Select a date',
@@ -57,6 +57,10 @@ class TransportationForm(forms.ModelForm):
             'punktA_2': forms.TextInput(attrs={'id': 'punktA_2', 'style': 'display:none', }),
             'punktB_1': forms.TextInput(attrs={'id': 'punktB_1', 'style': 'display:none', }),
             'punktB_2': forms.TextInput(attrs={'id': 'punktB_2', 'style': 'display:none', }),
+            'price': forms.TextInput(attrs={'id': 'price',}),
+            'currency': forms.TextInput(attrs={'id': 'currency', }),
+            'typeCar': forms.Select(attrs={'id': 'typeCar', }),
+            'model': forms.TextInput(attrs={'id': 'model', }),
         }
 
         def __init__(self, *args, **kwargs):
@@ -80,3 +84,18 @@ class AddTransportations(forms.ModelForm):
 class FindTransportForm(forms.Form):
     start = forms.CharField(max_length=1000)
     end = forms.CharField(max_length=1000)
+
+    def __init__(self, *args, **kwargs):
+        super(FindTransportForm, self).__init__(*args, **kwargs)
+        self.fields['start'].widget = forms.TextInput(attrs={
+            'id': 'start', 'style': 'display:none'
+        })
+        self.fields['end'].widget = forms.TextInput(attrs={
+            'id': 'end', 'style': 'display:none'
+        })
+
+
+
+class FindTransportationsDataCreatedForm(forms.Form):
+    start_date = forms.DateField(widget=forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date', 'id': 'date1'}))
+    end_date = forms.DateField(widget=forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date', 'id': 'date2'}))

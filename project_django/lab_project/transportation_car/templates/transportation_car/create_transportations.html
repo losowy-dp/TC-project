@@ -63,12 +63,7 @@
 
 <style>
     .geocoder {
-        /* position: absolute; */
-        /* z-index: 1; */
         width: 80%;
-        /* left: 50%; */
-        /* margin-left: -25%; */
-        /* top: 10px; */
     }
 
     .geocoder1 {
@@ -106,7 +101,7 @@ border-radius: 3px;
 width:max-content;
 }
   </style>
-<!-- 2 -->
+
 
 
 <div class="forma">
@@ -257,7 +252,8 @@ width:max-content;
           </div>
           
           <div class="button-photo">
-            <button type="button" class="btn btn-primary" onclick="document.getElementById('photo').click();">Wybrać zdjęcie</button>
+            <button type="button" class="btn btn-dark btn_zapisac" onclick="document.getElementById('photo').click();">Wybrać zdjęcie</button>
+            <!-- <button type="button" class="btn btn-primary" onclick="document.getElementById('photo').click();">Wybrać zdjęcie</button> -->
           </div>
          
           <div class="block_car_fields" >
@@ -329,7 +325,8 @@ width:max-content;
 
 
     <div class="map form-row">
-      <button id="sub" type="submit" class="btn btn-primary btn_zapisac">Zapisać</button>
+      <button id="sub" type="submit" class="btn btn-dark btn_zapisac">Zapisać</button>
+      <!-- <button id="sub" type="submit" class="btn btn-primary btn_zapisac">Zapisać</button> -->
     </div>
    <!--script>
      document.getElementById("sub").onclick = function (){
@@ -340,10 +337,13 @@ width:max-content;
 
     
       {% else %}
-      <div id = "message">
-          <p>Ta funkcja dostępna tylko dla autoryzowanych użytkowników.</p>
-             <span class="navbar-text">
-                <a href="{% url 'login' %}">Zaloguj się</a> | <a href="{% url 'register' %}">Zarejstruj się</a>
+      <script>
+        $('.wrapper').css('min-height','70%');
+      </script>
+      <div id = "message" style="padding-top: 20px; padding-bottom: 20px;">
+          <p style="font-size: 20px;">Przepraszamy, ta funkcja dostępna tylko dla autoryzowanych użytkowników.</p>
+             <span class="navbar-text" style="color:black">
+                <a href="{% url 'login' %}" style="color:black">Zaloguj się</a> | <a href="{% url 'register' %} " style="color:black">Zarejstruj się</a>
             </span>
       </div>
       {% endif %}

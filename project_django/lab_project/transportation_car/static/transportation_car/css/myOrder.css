@@ -1,0 +1,26 @@
+.main-my-order{
+    border-bottom: 1px solid black;
+    display: flex;
+    padding: 5px;
+}
+
+.aaaaa{
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+#kos{
+    width: fit-content;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+}
+
+#date1{
+    margin-right: 20px;
+}
+
+#date2{
+    margin-right: 20px;
+}

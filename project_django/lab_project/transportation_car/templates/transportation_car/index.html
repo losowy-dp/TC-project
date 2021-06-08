@@ -18,6 +18,11 @@
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
 
+<style>
+  .content{
+    margin-top:9rem;
+  }
+</style>
 
 
 {% endblock %}
@@ -26,10 +31,63 @@
     Transporty
 {% endblock %}
 
-{% block sidebar %}
-
+{% block slider %}
+<div class="search">
+  <form action="" class="form_search" method="post">
+    {% csrf_token %}
+    <div class="search_for_city">
+      <p style="margin-right: 10px; margin-top:5px;">Skąd </p>
+      <div id="geocoder"></div>
+      <!-- <input type="text"> -->
+    </div>
+    <div class="search_for_city">
+      <p style="margin-right: 10px; margin-top:5px;">Dokąd </p>
+      <div id="geocoder1"></div>
+      <!-- <input type="text"> -->
+    </div>
+      {{ form.start }}
+      {{ form.end }}
+      <button type="submit" class="btn btn-dark">Szukaj</button>
+    <!-- <button type="submit" class="btn btn-primary" >Szukaj</button> -->
+  </form>
+</div>
 {% endblock %}
 {% block content %}
+
+
+<script>
+//   window.addEventListener('scroll', function() {
+//   $('.navbar').css('display','none');
+//   $('.search').css('margin-top','0')
+// });
+
+
+var scrollPos = 0;
+$(window).scroll(function(){
+   var st = $(this).scrollTop();
+   if (st > scrollPos){
+     $('#result').html('Вниз');
+    //  console.log('Вниз')
+     $('.navbar').css('display','none');
+     $('.search').css('margin-top','0');
+     $('.search').css('height','80px');
+     $('.search').css('position','fixed');
+     $('.search').css('padding-top','20px');
+   } else {
+     $('#result').html('Вверх');
+    //  console.log('Вверх')
+    $('.search').css('height','140px');
+     $('.navbar').css('display','block');
+     $('.search').css('padding-top','80px');
+  // $('.search').css('margin-top','56px');
+  // $('.search').css('position','relative');
+   }
+   scrollPos = st;
+});
+
+
+</script>
+
 
 <div class="col">
 
@@ -39,22 +97,7 @@
 
     
 
-    <div class="search">
-      <form action="" class="form_search" method="post">
-        {% csrf_token %}
-        <div class="search_for_city">
-          <p style="margin-right: 10px; margin-top:5px;">Skąd </p>
-          <div id="geocoder"></div>
-          <!-- <input type="text"> -->
-        </div>
-        <div class="search_for_city">
-          <p style="margin-right: 10px; margin-top:5px;">Dokąd </p>
-          <div id="geocoder1"></div>
-          <!-- <input type="text"> -->
-        </div>
-        <button type="submit" class="btn btn-primary">Szukaj</button>
-      </form>
-    </div>
+  
 
 
     <script>
@@ -82,15 +125,47 @@
       document.getElementById('geocoder1').appendChild(geocoder1.onAdd(map));
 
 
-    </script>
+      geocoder.on('result', function(r) {
+    start = r.result.center;
+    start_location = r.result.place_name;
+    $('#punktA_1').val(r.result.center[0])
+    $('#punktA_2').val(r.result.center[1])
+    $('#start').val(start_location);
+    console.log($('#start').val());
+    // f(start,end);
 
+})
+
+geocoder1.on('result', function(r) {
+    console.log(r.result.center);
+    // console.log(ok1);
+    end = r.result.center;
+    delivery_location = r.result.place_name;
+    $('#punktB_1').val(r.result.center[0])
+    $('#punktB_2').val(r.result.center[1])
+    $('#end').val(delivery_location);
+    console.log($('#end').val());
+    // fun(ok1,ok2);
+   
+   
+      f(start,end);
+    
+   
+})
+
+
+    </script>
 
     <div class="result-search">
       
+      {% if length %}
+
       <div class="search-1">
         <p>Zlecenia: <span><span id="number">{{ number }}</span></span> z <span id="count">{{ length }}</span></p>
       </div>
       
+     
+
       <div class="search-2">
 
         <div id="pagination"></div>
@@ -113,6 +188,8 @@
           </ul>
         </nav> -->
       </div>
+
+      {% endif %}
       
     </div>
 
@@ -142,12 +219,9 @@
       </div>
     </div>
     </a> -->
-
+    {% if length %}
 
     {% for item in transportations %}
-
-
-
 
     <a class="super-link" href="{% url 'transportation' item.id %}">
       <div class="test">
@@ -180,88 +254,53 @@
 
               <div class="test-adres">
                 <p><b>Cena:</b></p>
-                <div><p>{{item.price}}{{item.currency}}</p></div>
+                <div><p>{{item.price}} {{item.currency}}</p></div>
               </div>
     
             </div>
           </div>
           <div class="test3">
-            <button type="button" class="btn btn-primary">Zobacz</button>
+            <button type="button" class="btn btn-dark">Zobacz</button>
+            <!-- <button type="button" class="btn btn-primary">Zobacz</button> -->
           </div>
         </div>
         
       </div>
       </a>
 
+   
 
 
 
 
 
-    <!-- <a href="#" style="display: block; text-decoration: none; color: black;">
-  
-      <a  class="transportation_item" href="{% url 'transportation' item.id %}" style="text-decoration: none; color: black;">
-        <div class="image">
-          {% if item.photo %}
-          <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
-          {% else %}
-          <img src="{% static 'transportation_car/img/transport.jpg'%}"> 
-          {% endif %}
-            
-        </div>
-      <div class="name">
-        <span class="name-text">Rover 200</span>
-      </div>
-      <div class="informations">
-          <div class="locations">
-            <span>{{ item.start_location}} -> {{item.delivery_location}}</span>
-          </div>
-          <div class="time">
-            <span>Dodano: {{ item.data_created}}</span>
-          </div>
-      </div>
-</a> -->
+
   {% endfor %}
 
+  {% else %}
+  
+  <div class="NotFind">
+    <p class="NotFindOrder">Przepraszamy, nie znaleźliśmy zleceń dla trasy <b><span class="m1"></span> - <span class="m2"></span></b>.</p>
+  </div>
+  <script>
+    $('.wrapper').css('min-height','100%');
+    
+    var k = " " + $('#start').val() + " - " + $('#end').val() + ".";
+    $('.m1').text($('#start').val());
+    $('.m2').text($('#end').val());
 
-  <!-- <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-  </nav> -->
+  </script>
+  {% endif%}
 
+
+  <!-- {% if length == 1 %}
+  <script>
+     $('.wrapper').css('min-height','70%');
+  </script>
+  {% endif %} -->
 
 
 </div>
 
 
-
-<!--    <div class="col">-->
-<!--        {% for item in transportations %}-->
-
-<!--        <div class="card mb-3">-->
-<!--          <div class="card-header">-->
-<!--              {{ item.start_location.city}}-{{item.delivery_location.city}}-->
-<!--          </div>-->
-<!--          <div class="card-body">-->
-<!--                <h5 class="card-title">{{ item.car_owner }}</h5>-->
-<!--                <p class="card-text">{{ item.price }}</p>-->
-<!--                <a href="#" class="btn btn-primary">Zobacz</a>-->
-<!--          </div>-->
-<!--          <div class="card-footer text-muted">-->
-<!--            {{ item.data_created|date:"Y-m-d H:i:s"}}-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        {% empty %}-->
-<!--          Opps..-->
-<!--        {% endfor %}-->
-<!--        </div>-->
 {% endblock %}

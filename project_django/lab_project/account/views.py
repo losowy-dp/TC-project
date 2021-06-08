@@ -47,7 +47,7 @@ def user_login(request):
             user = authenticate(username=cd['username'], password=cd['password'])
             if user:
                 login(request, user)
-                return redirect('/transportations')
+                return redirect('/transportations/1')
             else:
                 return render(request, 'account/sign_in.html', {
                     'error': 'Hasło lub login jest niepoprawne',
@@ -76,14 +76,6 @@ def user_login(request):
 
 def userProfile(request, user_id):
 
-
-    # transportations = Transportation.objects.filter().order_by('-data_created')
-    # context = {
-    #     'transportations': transportations[15 * (ile - 1):15 * ile],
-    #     'length': transportations.count()
-    # }
-
-
     user = User.objects.get(pk=user_id)
     profile = Profile.objects.get(user_id=user_id)
     form_change_photo = ProfileForm()
@@ -100,6 +92,7 @@ def userProfile(request, user_id):
 
 
 def editUserProfile(request, user_id):
+
     user = User.objects.get(pk=user_id)
     profile = Profile.objects.get(user_id=user_id)
     # form_change_password = ChangePassword()
@@ -121,20 +114,21 @@ def editDataProfile(request, user_id):
     user = User.objects.get(pk=user_id)
     profile = Profile.objects.get(user_id=user_id)
     # form_change_password = ChangePassword()
-    form_edit_user_data = EditUserForm(request.POST, request.FILES)
+    form_edit_user_data = EditUserForm(request.POST)
     form_edit_phone = EditNumberOfPhone()
     # form_change_password = ChangePassword()
     form_change_password = PasswordChangeForm(user=request.user)
     photo_form = ProfileForm()
     if form_edit_user_data.is_valid():
-        user.first_name =  form_edit_user_data.cleaned_data['first_name']
+        print('dddddddddddddddddddddddddddddddddddddddddddd')
+        user.first_name = form_edit_user_data.cleaned_data['first_name']
         user.last_name = form_edit_user_data.cleaned_data['last_name']
         profile.birthday = form_edit_user_data.cleaned_data['birthday']
-        profile.photo = form_edit_user_data.cleaned_data['photo']
+        # profile.photo = form_edit_user_data.cleaned_data['photo']
         user.save()
         profile.save()
     else:
-        pass
+        print('dsffffffffffffffffffffffffffffffffffffffffffff')
     context = {
         'user': user,
         'profile': profile,
@@ -261,7 +255,7 @@ def reset_password(request):
                     email_template_name = 'account/reset_password/password_reset_email.txt'
                     c = {
                         'email': user.email,
-                        'domain': '6adca8826647.ngrok.io',
+                        'domain': 'testcartransport.ddns.net:8000',
                         'site_name': 'CarTransportation',
                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                         'user': user,

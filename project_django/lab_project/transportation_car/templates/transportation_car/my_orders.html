@@ -1,0 +1,300 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block include %}
+<link rel="stylesheet" href="{% static 'transportation_car/css/style_item.css' %}">
+<link rel="stylesheet" href="{% static 'transportation_car/css/pagination.css' %}">
+<link rel="stylesheet" href="{% static 'transportation_car/css/myOrder.css' %}">
+
+<!-- 1 -->
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+
+<!-- 2 -->
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+
+
+{% endblock %}
+
+{% block title %}
+    Transporty
+{% endblock %}
+
+{% block slider %}
+
+{% endblock %}
+{% block content %}
+
+<div class="col">
+
+  
+  <div class="main-my-order">
+    <h3>Twoje zlecennia</h3>
+  </div>
+
+  <form id="kos" action="">
+    {% csrf_token %}
+    <!-- {{ form }} -->
+    <input id="date1" type="date" class="form-control">
+    <input id="date2" type="date" class="form-control">
+    <!-- <input type="date" id="date1">
+    <input type="date" > -->
+    <button id="sub" type="button" class="btn btn-primary btn_zapisac">Szukaj</button>
+  </form>
+
+  <script>
+    
+    var date1 = new Date("{{ date1 }}");
+    
+    var date2 = new Date("{{ date2 }}");
+
+    var date_1 = date1.getFullYear();
+
+    var date_2 = date2.getFullYear();
+
+    if(date1.getMonth() + 1 < 10){
+      date_1+='-0'+(date1.getMonth()+1);
+    }
+    else{
+      date_1+='-'+(date1.getMonth()+1);
+    }
+
+    if(date1.getDate()< 10){
+      date_1+='-0'+(date1.getDate());
+    }
+    else{
+      date_1+='-'+(date1.getDate());
+    }
+    
+    
+    if(date2.getMonth() + 1 < 10){
+      date_2+='-0'+(date2.getMonth()+1);
+    }
+    else{
+      date_2+='-'+(date2.getMonth()+1);
+    }
+
+    if(date2.getDate()< 10){
+      date_2+='-0'+(date2.getDate());
+    }
+    else{
+      date_2+='-'+(date2.getDate());
+    }
+    
+    $('#date1').val(date_1);
+    $('#date2').val(date_2);
+
+
+
+  </script>
+
+  <script>
+    document.getElementById('sub').onclick = function(){
+      d1 = $('#date1').val()
+      d2 = $('#date2').val()
+      document.location.href = "/transportations/my_order/"+{{ user.id }}+"/1/"+d1+"/"+d2;
+    }
+  </script>
+
+  <div class="result-search">
+      
+    <div class="search-1">
+      <p>Zlecenia: <span><span id="number">{{ number }}</span></span> z <span id="count">{{ length }}</span></p>
+    </div>
+    
+    <div class="search-2">
+
+      <div id="pagination"></div>
+
+
+      <script>
+        const ile = Number($('#count').text());
+            
+        
+
+
+            let pages = parseInt(ile / 10);
+              
+              if(ile % 10 != 0){
+                pages+=1;
+              }
+    
+    
+              let num = Number($('#number').text());
+              console.log(num);
+              console.log(pages);
+              if(num === pages){
+                $('#number').text(((num-1)*10 + 1) + '-' + ile);
+              } else{
+                $('#number').text(((num-1)*10 + 1) + '-' + num*10);
+              }
+            
+    
+              document.getElementById('pagination').innerHTML = createPagination(pages, num);
+    
+              function createPagination(pages, page) {
+                let str = '<ul>';
+                let active;
+                let pageCutLow = page - 1;
+                let pageCutHigh = page + 1;
+                d1 = $('#date1').val()
+                d2 = $('#date2').val()
+                  // document.location.href = "/transportations/my_order/"+{{ user.id }}+"/1/"+d1+"/"+d2;
+                // Show the Previous button only if you are on a page other than the first
+                if (page > 1) {
+                  str += '<li class="page-item previous no"><a href="/transportations/my_order/'+{{ user.id }}+'/'+pageCutLow+'/'+d1+'/'+d2+'" onclick="createPagination(pages, '+(page-1)+')"><</a></li>';
+                }
+                // Show all the pagination elements if there are less than 6 pages total
+                if (pages < 6) {
+                for (let p = 1; p <= pages; p++) {
+                  active = page == p ? "active" : "no";
+                  str += '<li class="'+active+'"><a href="/transportations/my_order/'+{{ user.id }}+'/'+p+'/'+d1+'/'+d2+'" onclick="createPagination(pages, '+p+')">'+ p +'</a></li>';
+                }
+              }
+              // Use "..." to collapse pages outside of a certain range
+              else {
+              // Show the very first page followed by a "..." at the beginning of the
+              // pagination section (after the Previous button)
+                if (page > 2) {
+                  str += '<li class="no page-item"><a onclick="createPagination(pages, 1) >1</a></li>';
+                  if (page > 3) {
+                    str += '<li class="out-of-range"><a onclick="createPagination(pages,'+(page-2)+')">...</a></li>';
+                  }
+                }
+                // Determine how many pages to show after the current page index
+                if (page === 1) {
+                  pageCutHigh += 2;
+                } else if (page === 2) {
+                  pageCutHigh += 1;
+                }
+                // Determine how many pages to show before the current page index
+                if (page === pages) {
+                  pageCutLow -= 2;
+                } else if (page === pages-1) {
+                  pageCutLow -= 1;
+                }
+                // Output the indexes for pages that fall inside the range of pageCutLow
+                // and pageCutHigh
+                for (let p = pageCutLow; p <= pageCutHigh; p++) {
+                  if (p === 0) {
+                    p += 1;
+                  }
+                  if (p > pages) {
+                    continue
+                  }
+                  active = page == p ? "active" : "no";
+                  str += '<li class="page-item '+active+'"><a onclick="createPagination(pages, '+p+')">'+ p +'</a></li>';
+                }
+                // Show the very last page preceded by a "..." at the end of the pagination
+                // section (before the Next button)
+                if (page < pages-1) {
+                  if (page < pages-2) {
+                    str += '<li class="out-of-range"><a onclick="createPagination(pages,'+(page+2)+')">...</a></li>';
+                  }
+                  str += '<li class="page-item no"><a onclick="createPagination(pages, pages)">'+pages+'</a></li>';
+                }
+              }
+              // Show the Next button only if you are on a page other than the last
+              if (page < pages) {
+                str += '<li class="page-item next no"><a href="/transportations/'+pageCutHigh+'" onclick="createPagination(pages, '+(page+1)+')">></a></li>';
+              }
+              str += '</ul>';
+              // Return the pagination string to be outputted in the pug templates
+              document.getElementById('pagination').innerHTML = str;
+              return str;
+            }
+      
+      </script>
+      
+
+    
+    </div>
+    
+  </div>
+  {% if length == 0 %}
+  <div style="height: 270px;">
+    Nie ma zlecen
+  </div>
+
+  {% else %}
+  
+    {% for item in transportations %}
+
+    <!-- <a class="super-link" href="{% url 'transportation' item.id %}"> -->
+      <div class="test">
+        
+        <div class="kart">
+          {% if item.photo %}
+          <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
+          {% else %}
+          <script>
+            console.log('kiril')
+          </script>
+          <img src="{% static 'img/default_car.jpg'%}">
+          <!-- <img src="{% static 'transportation_car/img/transport.jpg'%}">  -->
+          {% endif %}
+          <!-- <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Y2Fyc3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" alt=""> -->
+        </div>
+  
+        <div class="test_2">
+          <div class="test2">
+            <div>
+              <div class="test-data" style="font-size: 11px;">{{ item.data_created}}</div>
+              <h4>{{ item.model}}</h4>
+             
+              <div class="test-adres">
+                <p><b>Załadunek:</b></p>
+                <div><p>{{ item.start_location}}</p></div>
+              </div>
+    
+              <div class="test-adres">
+                <p><b>Dostawa:</b></p>
+                <div><p>{{item.delivery_location}}</p></div>
+              </div>
+
+              <div class="test-adres">
+                <p><b>Cena:</b></p>
+                <div><p>{{item.price}} {{item.currency}}</p></div>
+              </div>
+    
+            </div>
+          </div>
+          <div class="test3">
+            <a  class="aaaaa" href="{% url 'transportation' item.id %}">Zobacz</a>
+            <a class="aaaaa" href="{% url 'edit_transport' item.id %}">Edytuj</a>
+            <a class="aaaaa" href="{% url 'delete_transport' item.id %}">Usuń</a>
+            <!-- <button id="zobacz" type="button" class="btn btn-primary">Zobacz</button>
+            <button  id="edycja" type="button" class="btn btn-primary">Edytuj</button>
+            <button id="usub" type="button" class="btn btn-primary">Usuń</button> -->
+          </div>
+        </div>
+
+        <script>
+          document.getElementById('zobacz').onclick = function(){
+              document.location.href = "";
+            }
+            document.getElementById('edycja').onclick = function(){
+              document.location.href = "{";
+            }
+            document.getElementById('edycja').onclick = function(){
+              document.location.href = "{% url 'createTransportations' %}";
+            }
+        </script>
+        
+      </div>
+      <!-- </a> -->
+
+    {% endfor %}
+
+  {% endif %}
+
+
+
+</div>
+{% endblock %}

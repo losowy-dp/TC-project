@@ -48,8 +48,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'number_of_phone']
-
+        fields = '__all__'
 
     def update(self, instance, validated_data):
         instance.number_of_phone = validated_data.get('number_of_phone', instance.number_of_phone)
@@ -61,7 +60,7 @@ class ProfileSer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id', 'number_of_phone']
+        fields = '__all__'
 
     def create(self, validated_data):
         return Profile.objects.create(**validated_data)

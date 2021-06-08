@@ -48,15 +48,25 @@
     <!-- <div class='pointer'></div>        -->
 </div>
       <!-- <script src="{% static 'transportation_car/js/map.js' %}"></script> -->
-<script>        
+<script>  
+
+    var a_1 = Number({{ transportation.punktA_1 }});
+    var a_2 = Number({{ transportation.punktA_2 }});
+    var b_1 = Number({{ transportation.punktB_1 }});
+    var b_2 = Number({{ transportation.punktB_2 }});    
+
     mapboxgl.accessToken = 'pk.eyJ1Ijoia29zdGlhc2tvcGVjIiwiYSI6ImNrbzNma2VvMTE4dTYydm12OWdqYWV4ZmUifQ.Rr5Kk6gDkwHK5MervsubUg';
     var map = new mapboxgl.Map({
         container: 'mapid',
         style: 'mapbox://styles/mapbox/streets-v11',
-        // center: [80, 80],
+        center: [(a_1+b_1)/2, (a_2+b_2)/2],
+        // maxBounds: [[30.0,-85.0],[50.0,-65.0]],
         zoom: 13
-    });
-
+    }).fitBounds([
+            [a_1,a_2],
+            [b_1,b_2]
+        ],{duration: 0}
+       );
     // <p>{{ transportation.punktA_1 }}</p>
     //         <p>{{ transportation.punktA_2 }}</p>
     //         <p>{{ transportation.punktB_1 }}</p>
@@ -64,10 +74,7 @@
 
 
    
-    var a_1 = Number({{ transportation.punktA_1 }});
-    var a_2 = Number({{ transportation.punktA_2 }});
-    var b_1 = Number({{ transportation.punktB_1 }});
-    var b_2 = Number({{ transportation.punktB_2 }});
+    
 
     var marker1 = new mapboxgl.Marker({
             color: "green"
@@ -161,7 +168,7 @@ function getRoute(a_1,a_2,b_1,b_2) {
                         {% if transportation.photo %}
                         <img src="{{MEDIA_URL}}{{ transportation.photo.url }}" alt="">
                         {% else %}
-                        <img src="{% static 'transportation_car/img/transport.jpg'%}"> 
+                        <img src="{% static 'img/default_car.jpg'%}">
                         {% endif %}
                     </div>  
                     <div class="main-infaarmation">

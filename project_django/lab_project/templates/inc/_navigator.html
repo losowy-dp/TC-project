@@ -18,7 +18,78 @@
                     </ul>
                     {% if user.username %}
                       <span class="navbar-text">
-                        <a href="{% url 'profile' user.id %}">{{ user.username}}</a> | <a href="{% url 'logout' %}">Wylogować się</a>
+                        <div class="dropdown">
+                            <div class="block_log">
+                                {% if profile.photo %}
+                                <img id="img_log" src="{{MEDIA_URL}}{{ profile.photo.url }}" alt="">
+                                {% else %}
+                                <img id="img_log" src="https://prvera.ru/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png" alt="">
+                                {% endif %}
+                                <a href="{% url 'profile' user.id %}">{{ user.username}}</a>
+                            </div>
+                            <!-- <button class="dropbtn">Dropdown 
+                              <i class="fa fa-caret-down"></i>
+                            </button> -->
+                           
+
+                            <div class="dropdown-content">
+                              <a href="{% url 'profile' user.id %}">Profil</a>
+                              <a href="" id="myOr">Moje zlecenia</a>
+                              <a href="{% url 'logout' %}">Wylogować się</a>
+                            </div>
+                        </div> 
+
+                        <script>
+                            var today = new Date();
+
+                            console.log('1 - ' + "{{ user.date_joined}}")
+                            console.log('date - ' + today.getDate())
+                            
+                            var date2 = new Date("{{ user.date_joined | date:"Y-m-d"}}");
+                            // var date2 =  new Date(Date.parse("1 czerwca 2021 13:16"));
+                            var date = today.getFullYear();
+
+                            var date_joined = date2.getFullYear();
+
+                            if(today.getMonth() + 1 < 10){
+                                date+='-0'+(today.getMonth()+1);//+'-'+today.getDate();
+                            }
+                            else{
+                                date+='-'+(today.getMonth()+1);//+'-'+today.getDate();
+                            }
+
+                            if(today.getDate() < 10){
+                                date+='-1'+(today.getDate());
+                            }
+                            else{
+                                date+='-'+(today.getDate());
+
+                            }
+
+                            if(date2.getMonth() + 1 < 10){
+                                date_joined+='-0'+(date2.getMonth()+1)+'-'+date2.getDate();
+                            }
+                            else{
+                                date_joined+='-'+(date2.getMonth()+1)+'-'+date2.getDate();
+                            }
+
+                            if(date2.getDate() < 10){
+                                date_joined+='-1'+(date2.getDate());
+                            }
+                            else{
+                                date_joined+='-'+(date2.getDate());
+                            }
+
+                            console.log(today);
+                            console.log(date2);
+
+                            $('#date2').val(date);
+                            $('#date1').val(date_joined);
+                            var h="/transportations/my_order/"+{{user.id}}+"/1/"+date2.getFullYear()+"-"+(date2.getMonth()+1)+"-"+date2.getDate()+"/"+today.getFullYear()+"-"+(today.getMonth()+1)+"-"+ today.getDate()+"/"; 
+                            document.getElementById("myOr").setAttribute("href", h);
+                            
+                        </script>
+                         <!-- | <a href="{% url 'logout' %}">Wylogować się</a> -->
                     </span>
                     {% else %}
                     <span class="navbar-text">

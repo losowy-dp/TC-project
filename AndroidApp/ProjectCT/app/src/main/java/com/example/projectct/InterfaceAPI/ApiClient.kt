@@ -8,7 +8,7 @@ class ApiClient {
 
     fun getApiService(): RetrofitService{
         if(!::apiService.isInitialized){
-            val retrofit  = Retrofit.Builder().baseUrl("http://testcartransport.ddns.net:8000")
+            val retrofit  = Retrofit.Builder().baseUrl("http://192.168.1.102:80")
                 .addConverterFactory(GsonConverterFactory.create()).build()
             apiService = retrofit.create(RetrofitService::class.java)
         }

@@ -25,6 +25,7 @@
   #pagination ul li {
     /* color: #fff; */
     display: flex;
+    color: black;
   }
   #pagination ul li a {
     /* background-color: #444B6E; */
@@ -33,9 +34,10 @@
     border-radius: 45%;
     border-right: 0;
     text-decoration: none;
+    color: black;
   }
   #pagination ul li.active a {
-    background-color:deepskyblue;
+    background-color:rgb(121, 123, 124);
   }
   #pagination ul li:first-child a {
     /* border-radius: 5px 0 0 5px; */

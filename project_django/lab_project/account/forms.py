@@ -119,7 +119,7 @@ class EditUserForm(forms.Form):
     first_name = forms.CharField(label='Imie', widget=forms.TextInput)
     last_name = forms.CharField(label='Nazwisko', widget=forms.TextInput)
     birthday = forms.DateField(label='Dzien narodzenia', widget=forms.DateInput)
-    photo = forms.ImageField()
+    # photo = forms.ImageField()
 
     def __init__(self, *args, **kwargs):
         super(EditUserForm, self).__init__(*args, **kwargs)

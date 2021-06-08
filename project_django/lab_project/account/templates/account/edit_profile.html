@@ -47,10 +47,10 @@
                     {{ form_main.birthday }}
                     <!-- <input type="date"> -->
                 </div>
-                <div class="fields password">
-                    <p class="name_field">Photo:</p>
+                <!-- <div class="fields password"> -->
+                    <!-- <p class="name_field">Photo:</p> -->
                     <!-- <input type="date"> -->
-                </div>
+                <!-- </div> -->
             </div>
             </div>
             <div class="sub_main">
@@ -92,7 +92,7 @@
        
 
         <div class="sub_main">
-            <button type="submit" class="btn btn-primary">Zmień</button>
+            <button id="sub_number" type="submit" class="btn btn-primary">Zmień</button>
             <!-- <button id="sub_number" type="submit">Zmień</button> -->
         </div>
     </form>
@@ -179,9 +179,9 @@
             // if($('#id_old_password').val() == $('#id_new_password1').val()){
             //     console.log("nie nie nie nie nie nie nnie nnie")
             // }
-            $('#first_name').val("{{ user.first_name }}");
-            $('#last_name').val("{{ user.last_name }}");
-            $('#birthday').val("{{ profile.birthday | date:"Y-m-d" }}");
+            // $('#first_name').val("{{ user.first_name }}");
+            // $('#last_name').val("{{ user.last_name }}");
+            // $('#birthday').val("{{ profile.birthday | date:"Y-m-d" }}");
 
             // document.getElementById("old_password").oninput = checkE;
             // document.getElementById("new_password").oninput = checkPassword;

@@ -103,7 +103,7 @@
 
 
 
-    <div class="profile_2">
+  <div class="profile_2">
       <div class="block_photo">
         <div class="photo_2">
           {% if profile.photo %}
@@ -176,15 +176,15 @@
    
     </div>
 
-    <div class="moje_zlecenia">
+    <!-- <div class="moje_zlecenia">
       <p>Moje zlecenia({{ count }})</p>
-    </div>
+    </div> -->
 
-    <div>
+    <!-- <div>
       {% for item in transportations %}
-      <!-- <a href="#" style="display: block; text-decoration: none; color: black;"> -->
+      
       <div class="transportation_item">
-        <!-- <a  class="transportation_item" href="{% url 'transportation' item.id %}" style="text-decoration: none; color: black;"> -->
+        
           <div class="image">
             {% if item.photo %}
             <img src="{{MEDIA_URL}}{{ item.photo.url }}" alt="">
@@ -205,21 +205,21 @@
               <p style="margin-bottom: 3px;">{{ item.delivery_location}}</p>
             </div>
             <div  class="settings">
-              <!-- <button type="button" class="btn btn-primary">Zobacz</button>
-              <button type="button" class="btn btn-primary">Edytuj</button>
-              <button type="button" class="btn btn-primary">Usuń</button> -->
+             
               <a href="{% url 'transportation' item.id %}" style="text-decoration: none;">Zobacz</a>
               <a href="{% url 'edit_transport' item.id %}" style="text-decoration: none;">Edytuj</a>
               <a href="{% url 'delete_transport' item.id %}" style="text-decoration: none;">Usuń</a>
             </div>
           </div>
 
-  <!-- </a> -->
+
         </div>
     {% endfor %}
-    </div>
+    </div> -->
 
   </div>
+
+  <div style="height: 120px;"></div>
 
   <form action="{% url 'edit_photo' user.id %}" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
@@ -262,7 +262,7 @@
     
     
   </div>
-</form>
+  </form>
 
 
   <script>

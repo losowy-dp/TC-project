@@ -38,7 +38,7 @@ DEBUG = True
 
 HAME_HOST = '6adca8826647.ngrok.io'
 
-ALLOWED_HOSTS = [ HAME_HOST, '192.168.100.11', '0.0.0.0', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [ HAME_HOST, '192.168.100.11', '0.0.0.0', 'localhost', '127.0.0.1', '192.168.1.102', '94.230.205.75', 'testcartransport.ddns.net', 'transportyourcar.ddns.net']
 
 
 # Application definition

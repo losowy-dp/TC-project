@@ -1,0 +1,516 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block include %}
+
+
+<link rel="stylesheet" href="{% static 'transportation_car/css/create_tr.css' %}">
+<script src="{% static 'transportation_car/js/checkbox.js' %}"></script>
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+<script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+
+<style>
+    .geocoder {
+        width: 80%;
+    }
+
+    .geocoder1 {
+        width: 80%;
+    }
+    .mapboxgl-ctrl-geocoder {
+        min-width: 100%;
+    }
+    #map {
+        margin-top: 200px;
+    }
+
+  .distance-container { 
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+  }
+ 
+  .distance-container {
+    height: fit-content;
+    margin: 7px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    font-size: 11px;
+    line-height: 18px;
+    display: block;
+    padding: 5px 10px;
+    border-radius: 3px;
+    width:max-content;
+  }
+</style>
+
+
+<div class="forma">
+  <form method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    <h4>Podaj trasę</h4>
+    <div class="block block_1">
+      <div class="location_row">
+        <div style="margin-top:5q0px" class="loc_nazwa" id="kok">Skąd </div>
+      
+      <!-- display:none; -->
+        <div style="display: none;">
+        {{ form.start_location }}
+       </div>
+        
+        <div id="geocoder" class="geocoder"></div>
+        </div>
+        <div class="location_row">
+        <div style="margin-top:5px" class="loc_nazwa">Dokąd </div>
+
+              <!-- display:none; -->
+        <div style="display: none;">
+          {{ form.delivery_location }}
+        </div>
+
+        <div id="geocoder1" class="geocoder1"></div>
+        </div> 
+        
+      </div>
+    <!-- </div> -->
+
+    <div class="block">
+      
+      <div class="block_map">
+        <!-- <div id="mapid"></div> -->
+        <div id="mapid">
+          <div id="distance" class="distance-container">Dystans: 0km</div>
+        </div>
+        <!-- <div id="geocoder" class="geocoder"></div> -->
+        <!-- <div class='pointer'></div> -->
+        
+      </div>
+      
+    </div>
+
+
+
+    {{ form.punktA_1 }}
+    {{ form.punktA_2 }}
+    {{ form.punktB_1 }}
+    {{ form.punktB_2 }}
+
+
+    
+    <script>
+      
+      var A_1 = {{ transportations.punktA_1 }};
+      var A_2 = {{ transportations.punktA_2 }};
+      var B_1 = {{ transportations.punktB_1 }};
+      var B_2 = {{ transportations.punktB_2 }};
+
+mapboxgl.accessToken = 'pk.eyJ1Ijoia29zdGlhc2tvcGVjIiwiYSI6ImNrbzNma2VvMTE4dTYydm12OWdqYWV4ZmUifQ.Rr5Kk6gDkwHK5MervsubUg';
+  var map = new mapboxgl.Map({
+      container: 'mapid',
+      style: 'mapbox://styles/mapbox/streets-v11',
+      center: [(A_1+B_1)/2, (A_2+B_2)/2],
+      zoom: 13
+}).fitBounds([
+            [A_1,A_2],
+            [B_1,B_2]
+        ],{duration: 0}
+       );
+  
+var start_location = document.getElementById('start_loc');
+var delivery_location = document.getElementById('delivery_loc');
+var distance = "0";
+
+var punktA_1 = document.getElementById('punktA_1');
+var punktB_1 = document.getElementById('punktB_1');
+var punktA_2 = document.getElementById('punktA_2');
+var punktB_2 = document.getElementById('punktB_2');
+
+var distanceContainer = document.getElementById('distance');
+
+var marker2 = new mapboxgl.Marker();
+var marker1 = new mapboxgl.Marker();
+
+var canvas = map.getCanvasContainer();
+var geocoder = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    marker:{
+        color:'green'
+    },
+    language: 'pl-PL',
+    mapboxgl: mapboxgl,
+});
+
+var geocoder1 = new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken,
+    marker: {
+        color: 'red'
+    },
+    language: 'pl-PL',
+    mapboxgl: mapboxgl
+});
+
+
+
+var start = null;
+var end = null;
+
+geocoder.on('result', function(r) {
+    start = r.result.center;
+    start_location = r.result.place_name;
+    $('#punktA_1').val(r.result.center[0])
+    $('#punktA_2').val(r.result.center[1])
+    $('#start_loc').val(start_location);
+    f(start,end);
+
+})
+
+geocoder1.on('result', function(r) {
+    console.log(r.result.center);
+    end = r.result.center;
+    delivery_location = r.result.place_name;
+    $('#punktB_1').val(r.result.center[0])
+    $('#punktB_2').val(r.result.center[1])
+    $('#delivery_loc').val(delivery_location);
+    f(start,end);
+    
+   
+})
+
+function fun(start,end) {
+  var coordsObj = end;
+  canvas.style.cursor = '';
+  var coords = Object.keys(coordsObj).map(function(key) {
+    return coordsObj[key];
+  });
+  getRoute(start,coords);
+  getRoute(start,coords);
+}
+
+function f(start1,end1){
+  if(start1 != null && end1 !=null){
+    fun(start1,end1);
+       
+    if(start != null || end !=null){
+    map.fitBounds([start,end],{
+        padding: 50
+    }); 
+  }
+  }
+}
+ 
+
+document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+document.getElementById('geocoder1').appendChild(geocoder1.onAdd(map));
+
+
+
+function getRoute(start,end) {
+   
+    console.log("yes");
+
+    var url = 'https://api.mapbox.com/directions/v5/mapbox/driving-traffic/' + start[0] + ',' + start[1] + ';' + end[0] + ',' + end[1] + '?steps=true&geometries=geojson&access_token=' + mapboxgl.accessToken;
+  
+    var req = new XMLHttpRequest();
+    req.open('GET', url, true);
+    req.onload = function() {
+      var json = JSON.parse(req.response);
+      var data = json.routes[0];
+      var route = data.geometry.coordinates;
+      var geojson = {
+        type: 'Feature',
+        properties: {},
+        geometry: {
+          type: 'LineString',
+          coordinates: route
+        }
+      };
+
+      distance = turf.length(geojson).toLocaleString();
+      console.log(distance);
+      $("#distance").text("Dystans: " + distance + "km");
+
+      if (map.getSource('route')) {
+        map.getSource('route').setData(geojson);
+      } else {
+        map.addLayer({
+          id: 'route',
+          type: 'line',
+          source: {
+            type: 'geojson',
+            data: {
+              type: 'Feature',
+              properties: {},
+              geometry: {
+                type: 'LineString',
+                coordinates: geojson
+              }
+            }
+          },
+          layout: {
+            'line-join': 'round',
+            'line-cap': 'round'
+          },
+          paint: {
+            'line-color': '#3887be',
+            'line-width': 5,
+            'line-opacity': 0.75
+          }
+        });
+      }
+    };
+    req.send();
+  
+  }
+
+$(".mapboxgl-ctrl-geocoder--button").click(function(){
+  if(geocoder1.lastSelected == null){
+    f(start,start);
+    end = null;
+  }
+  if(geocoder.lastSelected == null){
+    f(end,end);
+    start = null;
+  }
+});
+
+$("#sub").click(function(){
+  console.log("spacex");
+  $('#start_loc').val(start_location);
+  $('#delivery_loc').val(delivery_location);
+});
+
+ f([A_1, A_2],[B_1, B_2]);
+
+
+
+var marker1 = new mapboxgl.Marker({
+            color: "green"
+        }).setLngLat([A_1, A_2])
+        .addTo(map);
+
+    var marker2 = new mapboxgl.Marker({
+            color: "red"
+        }).setLngLat([B_1, B_2])
+        .addTo(map);
+
+        map.fitBounds([
+            [A_1,A_2],
+            [B_1,B_2]
+        ],{
+        padding: 50
+    }); 
+
+
+    $('#punktA_1').val(A_1);
+    $('#punktA_2').val(A_2);
+    $('#punktB_1').val(B_1);
+    $('#punktB_2').val(B_2);
+ 
+// getRoute(A_1,A_2,B_1,B_2);
+// getRoute(A_1,A_2,B_1,B_2);
+
+
+
+    </script>
+
+    <h4>Podaj terminy</h4>
+    <div class="map form-row">
+
+          <div class="block block_2">
+            <div class="suwak">
+
+              <span style="margin-right: 15px;">Chcę określić daty transportu</span>
+
+              <label class="switch">
+                <input type="checkbox" id="cb" checked onchange="fun_checkbox()">
+                <span class="slider round"></span>
+              </label>
+              <label style="margin-left: 15px;" id="cb_label">Tak</label>
+             
+            </div>
+
+            <div id="block_terminy">
+              <div class="termin">
+                <div style="margin-top:5px" class="termin_text">Terminy nadania</div>{{ form.data_start_shipment }}
+              </div>
+              <div class="termin">
+                <div style="margin-top:5px" class="termin_text">Terminy dostawy</div>{{ form.data_start_deliveri }}
+              </div> 
+            </div>
+            
+          </div>
+
+        <!-- <script src="{% static 'transportation_car/js/map.js' %}"></script> -->
+        <!-- <script src="{% static 'transportation_car/js/map_3.js' %}"></script> -->
+        <script src="{% static 'transportation_car/js/car.js' %}"></script>
+    </div>
+
+    <h4>Opisz transport, aby otrzymać dopasowane oferty</h4>
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column">
+          <div class="block_car_fields">
+            {{ form.typeCar|as_crispy_field }}
+          </div>
+          <div class="block_car_fields">
+            {{ form.model|as_crispy_field}}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column">
+          <div class="block_car_fields">
+            {{ form.description|as_crispy_field}}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column" id="con-photo">
+          <p>Zdjęcie</p>
+          <div class="button-photo">
+            Możesz przesłać zdjęcie w formacie JPG lub PNG.
+          </div>
+          <div class="button-photo">
+            <img src="" alt="" id="zdjecie" style="width: 80%;">
+          </div>
+          
+          <div class="button-photo">
+            <button type="button" class="btn btn-primary" onclick="document.getElementById('photo').click();">Wybrać zdjęcie</button>
+          </div>
+         
+          <div class="block_car_fields" >
+            {{ form.photo }}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("photo").onchange = function (evt){
+        var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+        
+        
+
+        if (FileReader && files && files.length) {
+          var fr = new FileReader();
+          fr.onload = function () {
+            document.getElementById("zdjecie").src = fr.result;
+           
+        
+            var s = document.getElementById("zdjecie").height
+            console.log(s);
+            console.log("kostia skapets");
+            // $(".block_change_photo").height($("#zdjecie").height() + 200)
+          }
+          fr.readAsDataURL(files[0])
+          // $(".form_photo_2").css('display','none');
+          // $(".knopki").css('display','flex');
+        } else {
+
+        }
+       
+    }
+    </script>
+
+
+
+
+    <div class="map form-row">
+      <div class="block_car">
+        <div class="top-vertical-column">
+          <div class="block_car_fields">
+            {{ form.price|as_crispy_field }}
+
+            <!-- <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Waluta
+              </a>
+            
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="#">USD</a></li>
+                <li><a class="dropdown-item" href="#">PLN</a></li>
+                <li><a class="dropdown-item" href="#">EUR</a></li>
+              </ul>
+            </div> -->
+
+          </div>
+
+          <div class="block_car_fields">
+            {{ form.currency|as_crispy_field }}
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+
+    <div class="map form-row">
+      <button id="sub" type="submit" class="btn btn-primary btn_zapisac">Zapisać</button>
+    </div>
+  
+   
+
+  
+      {% else %}
+      <div id = "message">
+          <p>Ta funkcja dostępna tylko dla autoryzowanych użytkowników.</p>
+             <span class="navbar-text">
+                <a href="{% url 'login' %}">Zaloguj się</a> | <a href="{% url 'register' %}">Zarejstruj się</a>
+            </span>
+      </div>
+      {% endif %}
+  </form>
+</div>
+
+<script>
+    $('#currency').val('{{ transportations.currency }}');
+    $('#price').val({{ transportations.price }});
+    $('#description').text('{{ transportations.description }}');
+    $('#geocoder input').val('{{ transportations.start_location }}');
+    $('#geocoder1 input').val('{{ transportations.delivery_location }}');
+    $('#typeCar').val(1);
+    $('#model').val('{{ transportations.model }}');
+    {% if transportations.photo %}
+    document.getElementById("zdjecie").src = "{{MEDIA_URL}}{{ transportations.photo.url }}";
+    {% endif %}
+    $('#start_loc').val($('#geocoder input').val());
+    $('#delivery_loc').val($('#geocoder1 input').val());
+    console.log('------------------------------------------')
+    console.log($('#start_loc').val())
+    console.log($('#delivery_loc').val())
+    console.log($('#typeCar').val())
+    console.log($('#model').val())
+    console.log($('#description').val())
+    console.log($('#price').val())
+    console.log($('#currency').val())
+    console.log('------------------------------------------')
+</script>
+
+
+
+{% endblock %}
+
